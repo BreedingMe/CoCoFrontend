@@ -28,7 +28,6 @@ module.exports = {
         'no-self-compare': 'warn',
         'no-useless-concat': 'error',
         'no-unused-vars': 'error',
-        'no-use-before-define': 'error',
         'array-bracket-spacing': ['error', 'never'],
         'block-spacing': 'error',
         'brace-style': ['error', 'stroustrup'],
