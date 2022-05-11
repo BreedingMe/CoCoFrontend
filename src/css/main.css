@@ -1,0 +1,21 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    border-right: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
+}
+
+@media screen and (max-width: 1263px) {
+    .container {
+        max-width: 100%;
+        border: none;
+    }
+}
