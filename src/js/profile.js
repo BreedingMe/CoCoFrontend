@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 import BACKEND_CONFIG from './authority/backend.js';
 
-// $('#login-modal-open-btn').on('click', openLoginModal);
+import SCREEN from './constants/screen.js';
 
 $(document).ready(() => {
     resizeProfileHeight();
@@ -158,6 +158,7 @@ function editProfile() {
         success: function () {
             alert('수정이 완료되었습니다.');
             window.location.reload();
+            changeScreen(SCREEN['HOME']);
         },
         error: function (response) {
             console.log(response);
@@ -174,4 +175,11 @@ function editProfileContentDelete() {
     $('#github-url').val('');
     $('#portfolio-url').val('');
     $('#introduction').val('');
+}
+
+function changeScreen(currentScreen) {
+    for (let screen in SCREEN) {
+        $(`#${SCREEN[screen]}`).hide();
+    }
+    $(`#${currentScreen}`).show();
 }

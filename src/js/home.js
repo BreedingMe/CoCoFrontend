@@ -145,7 +145,8 @@ function openLoginModal() {
     // 쿠키가 있으면 프로필 화면으로 이동
     if (getCookie('token')) {
         // 프로필 화면
-        console.log('프로필 화면으로 이동');
+        $('#profile').show();
+        // console.log('프로필 화면으로 이동');
     }
     // 쿠키가 없으면 로그인 화면으로 이동
     else {
@@ -207,7 +208,6 @@ function login() {
         }
     });
 }
-
 
 function getPost(currentPostId) {
     $('#post-box').empty();
@@ -402,7 +402,7 @@ function getComment() {
                                     </div>
                                 </article>`;
                 $('#comment-box').append(tempHtml);
-                $(document).on('click', `#deleteComment${i}`, {'id_comment': commentId}, deleteComment);
+                $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
         },
         error: function (response) {
@@ -625,8 +625,7 @@ function getCookie(cookieName) {
     return cookieValue;
 }
 
-
-    function time2str(date) {
+function time2str(date) {
     let today = new Date();
     let time = (today - date) / 1000 / 60;
     console.log(today, date);
@@ -653,7 +652,7 @@ function deleteComment(e) {
         },
         data: {},
         success: function (response) {
-            alert('댓글삭제성공!');
+            alert('댓글삭제 성공!');
             getComment();
         },
         error: function (response) {
