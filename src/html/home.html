@@ -8,5 +8,201 @@
         </section>
 
         <section id="card-section" class="section"></section>
+        <!-- 로그인 모달 -->
+        <div class="modal" id="login-modal">
+            <div id="login-modal-background" class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="modal-header">
+                                <h1 class="title">CoCo</h1>
+                            </div>
+                            <div class="login-field">
+                                <input id="login-id" class="input" type="text" placeholder="이메일">
+                                <p id="help-id-login" class="help is-danger"></p>
+                                <input id="login-pwd" class="input" type="password" placeholder="비밀번호">
+                                <p id="help-password-login" class="help is-danger"></p>
+                            </div>
+                            <div class="login-buttons">
+                                <button id="login-btn" class="button is-rounded" >로그인</button>
+                                <button id="register-btn" class="button is-rounded">회원가입</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button id="login-modal-close-btn" class="modal-close is-large" aria-label="close"></button>
+        </div>
+        <!-- 회원가입 모달 -->
+        <!-- 아이디(이메일) 모달 -->
+        <div class="modal" id="register-id-modal">
+            <div id="id-modal-background" class="modal-background" ></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="modal-header">
+                                <h1 class="title">CoCo</h1>
+                                <h3>이메일 입력</h3>
+                            </div>
+                            <div class="email-field">
+                                <div class="field has-addons">
+                                    <div class="control" style="width:100%">
+                                        <input id="id" class="input" type="text" placeholder="이메일">
+                                    </div>
+                                    <div id="btn-check-dup" class="control">
+                                        <button id="access-code-btn" class="button is-sparta">인증번호 전송</button>
+                                    </div>
+                                </div>
+                                <input id="access-code" class="input" type="text" placeholder="인증번호">
+                            </div>
+                            <div class="access-buttons">
+                                <button id="verification-btn" class="button is-rounded">확인</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button id="id-modal-close-btn" class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <!-- 비밀번호 모달 -->
+        <div class="modal" id="register-passwored-modal">
+            <div id="password-modal-background" class="modal-background" ></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="modal-header">
+                                <h1 class="title">CoCo</h1>
+                                <h3>비밀번호 입력</h3>
+                            </div>
+                            <div class="password-field">
+                                <input id="password1" class="input" type="password" placeholder="비밀번호">
+                                <input id="password2" class="input" type="password" placeholder="비밀번호 확인">
+                            </div>
+                            <div class="access-buttons">
+                                <button id="password-check-btn" class="button is-rounded" >확인</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button id="password-modal-close-btn" class="modal-close is-large" aria-label="close"
+                    ></button>
+        </div>
+
+        <!-- 기타정보 모달 -->
+        <div class="modal" id="register-others-modal">
+            <div id="others-modal-background" class="modal-background" ></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="modal-header">
+                                <h1 class="title">CoCo</h1>
+                                <h3>기타 정보 입력</h3>
+                            </div>
+                            <div class="others-field">
+                                <input id="nickname" class="input" type="text" placeholder="닉네임 (필수)">
+                                <input id="github-url" class="input" type="text" placeholder="GitHub 주소 (선택)">
+                                <input id="portfolio-url" class="input" type="text" placeholder="포트폴리오 주소 (선택)">
+                            </div>
+                            <div class="access-buttons">
+                                <button id="others-check-btn" class="button is-rounded" >확인</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button id="others-modal-background" class="modal-close is-large" aria-label="close"
+                    ></button>
+        </div>
+
+        <!-- 기술 스택 모달 -->
+        <div class="modal" id="register-tech-modal">
+            <div id="tech-stacks-modal-background" class="modal-background" ></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="modal-header">
+                                <h1 class="title">CoCo</h1>
+                                <h3>기술 스택 선택</h3>
+                            </div>
+                            <div class="tech-menu">
+                                <button id="frontend" class="button is-light" >프론트엔드</button>
+                                <button id="backend" class="button is-light" >백엔드</button>
+                                <button id="android" class="button is-light" >안드로이드</button>
+                                <button id="ios" class="button is-light" >IOS</button>
+                                <button id="design" class="button is-light" >디자인</button>
+                            </div>
+                            <div class="tech-field">
+                                <div id="tech-frontend-list">
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="React">
+                                        React
+                                    </label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Vue.js">
+                                        Vue.js
+                                    </label>
+                                </div>
+                                <div id="tech-backend-list">
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Spring">
+                                        Spring
+                                    </label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Django">
+                                        Django
+                                    </label >
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Flask">
+                                        Flask
+                                    </label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="NodeJS">
+                                        Node.js
+                                    </label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Express">
+                                        Express
+                                    </label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Fast API">
+                                        Fast API
+                                    </label>
+                                </div>
+                                <div id="tech-android-list">
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Kotlin">
+                                        Kotiln
+                                    </label>
+                                </div>
+                                <div id="tech-ios-list">
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Swift">
+                                        Swift
+                                    </label>
+                                </div>
+                                <div id="tech-design-list">
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="tech-stack" value="Design">
+                                        Design
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="access-buttons">
+                                <!-- 회원가입 하기 위해 입력한 정보들을 서버로 보냄 -->
+                                <button id="tech-stacks-check-btn" class="button is-rounded">완료</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button id="tech-stacks-modal-close-btn" class="modal-close is-large" aria-label="close"></button>
+        </div>
     </div>
 </div>
