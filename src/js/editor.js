@@ -36,8 +36,20 @@ function resizeEditorContainerHeight() {
 
 function resisterPost() {
     let title = $('#title-input').val();
-    let techstacks = $('#tech_stacks-input').val();
-    let recruitmentfields = $('#recruitment_fields-input').val();
+    let techStacks = [];
+    $('input[name="tech-stack"]:checked').each(function () {
+        let tech = $(this).val();
+        techStacks.push(tech);
+    });
+
+    let recruitmentFields = [];
+    $('input[name="recruitment-fields"]:checked').each(function () {
+        let recruitment = $(this).val();
+        recruitmentFields.push(recruitment);
+    });
+    console.log(techStacks);
+    console.log(recruitmentFields);
+
     let region = $('#region-input').val();
     let period = $('#period-input').val();
     let contact = $('#contact-input').val();
@@ -49,13 +61,13 @@ function resisterPost() {
         return;
     }
 
-    if (techstacks == '') {
-        alert('기술 스택이 입력되지 않았습니다!');
+    if (techStacks.length == '') {
+        alert('기술 스택이 선택되지 않았습니다!');
 
         return;
     }
-    if (recruitmentfields == '') {
-        alert('모집 분야가 입력되지 않았습니다!');
+    if (recruitmentFields.length == '') {
+        alert('모집 분야가 선택되지 않았습니다!');
 
         return;
     }
@@ -86,8 +98,8 @@ function resisterPost() {
     let formData = new FormData();
 
     formData.append('title', title);
-    formData.append('tech_stacks[]', techstacks);
-    formData.append('recruitment_fields[]', recruitmentfields);
+    formData.append('tech_stacks[]', techStacks);
+    formData.append('recruitment_fields[]', recruitmentFields);
     formData.append('region', region);
     formData.append('period', period);
     formData.append('contact', contact);
@@ -100,15 +112,17 @@ function resisterPost() {
             withCredentials: true },
         data: {
             'title': title,
-            'tech_stacks[]': techstacks,
-            'recruitment_fields[]': recruitmentfields,
+            'tech_stacks[]': techStacks,
+            'recruitment_fields[]': recruitmentFields,
             'region': region,
             'period': period,
             'contact': contact,
             'content': content },
         success: function () {
             alert('글 저장이 완료되었습니다!');
+            window.location.reload();
             changeScreen(SCREEN['HOME']);
+            registerPostContentDelete();
         },
         error: function (response) {
             console.log(response);
@@ -120,12 +134,22 @@ function resisterPost() {
 function canclePost() {
     $('#home').show();
     window.location.reload();
+    registerPostContentDelete();
 }
 
 function changeScreen(currentScreen) {
     for (let screen in SCREEN) {
         $(`#${SCREEN[screen]}`).hide();
     }
-
     $(`#${currentScreen}`).show();
+}
+
+function registerPostContentDelete() {
+    $('#title-input').val('');
+    $('input:checkbox[name="tech-stack"]').prop('checked', false);
+    $('input:checkbox[name="recruitment-fields"]').prop('checked', false);
+    $('#region-input').val('');
+    $('#period-input').val('');
+    $('#contact-input').val('');
+    $('#content-input').val('');
 }
