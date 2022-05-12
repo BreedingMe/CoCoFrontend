@@ -1,0 +1,129 @@
+<div id="profile">
+    <div class="container is-max-desktop">
+        <section>
+            <div class="hero-body" style="padding-bottom:1rem; margin-top: 10%; min-width: 400px">
+                <div id="profile_box">
+                    <article class="media">
+                        <figure class="media-left" style="align-self: center;">
+                            <a class="image is-128x128" href="#">
+                                <img class="is-rounded" style="border-radius: 12px;"
+                                    src="https://user-images.githubusercontent.com/103922744/167591851-9e4bc588-64f7-4846-8f99-c1fe38ad21e0.jpg">
+                            </a>
+                        </figure>
+                    </article>
+                    <a class="button has-text-centered is-rounded" aria-label="edit" style="float: right;"
+                        onclick="$('#modal-edit').addClass('is-active')">
+                        <span>프로필 수정</span>
+                    </a>
+                    <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
+                        <div class="media-content content">
+                            <p>
+                                <strong style="font-weight: bold; font-size: x-large">@닉네임</strong><br><br>
+                                <a href="#"><i class="fa fa-github" style="font-size: xxx-large"
+                                        aria-hidden="ture"></i></a><br>
+                                <span style="font-size: medium;">이메일</span><br>
+                                <span style="font-size: medium;">기술스택</span><br>
+                                <span style="font-size: medium;">자기소개</span>
+                            </p>
+                        </div>
+                    </nav>
+                <div class="tabs is-large is-centered is-fullwidth" style="margin-top: 80px;">
+                    <ul>
+                        <li class="is-active" style="font-size: large;"><a>게시글</a></li>
+                        <li style="font-size: large;"><a>댓글</a></li>
+                        <li style="font-size: large;"><a>북마크</a></li>
+                        <li style="font-size: large;"><a>좋아요</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <div class="modal" id="modal-post">
+            <div id="edit-profile-modal-background" class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="edit-profile-field">
+                            <div class="password-field">
+                                <input id="password" class="input" type="password" placeholder="기존 비밀번호">
+                                <input id="new_password" class="input" type="password" placeholder="새로운 비밀번호">
+                            </div>
+                            <div class="image-field">
+                                <label class="custom-file-label" for="image">프로필 사진 선택하기</label>
+                                <input type="file" class="custom-file-input" id="image">
+                            </div>
+                            <div class="tech-field">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="React">
+                                    React
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Vue.js">
+                                    Vue.js
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Spring">
+                                    Spring
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Django">
+                                    Django
+                                </label >
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Flask">
+                                    Flask
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="NodeJS">
+                                    Node.js
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Express">
+                                    Express
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Fast API">
+                                    Fast API
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Kotlin">
+                                    Kotiln
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Swift">
+                                    Swift
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="tech-stack" value="Design">
+                                    Design
+                                </label>
+                            </div>
+                            <div class="others-field">
+                                <input id="nickname" class="input" type="text" placeholder="닉네임">
+                                <input id="github-url" class="input" type="text" placeholder="GitHub 주소">
+                                <input id="portfolio-url" class="input" type="text" placeholder="포트폴리오 주소">
+                                <textarea id="introduction" class="textarea" placeholder="자기소개"></textarea>
+                            </div>
+
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                </div>
+                                <div class="level-right">
+                                    <div class="level-item">
+                                        <a id="edit-profile-btn" class="button is-sparta">수정</a>
+                                    </div>
+                                    <div class="level-item">
+                                        <a id="edit-profile-modal-close-btn" class="button is-sparta is-outlined">취소</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="modal-close is-large" aria-label="close"
+                                onclick='$("#modal-post").removeClass("is-active")'></button>
+                        </div>
+                            </nav>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
