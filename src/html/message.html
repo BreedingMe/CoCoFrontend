@@ -1,0 +1,35 @@
+<div id="message" style="display:none">
+    <div class="container is-max-desktop">
+        <button id="createMessageButton" class="button is-ghost createMessage">쪽지쓰기</button>
+        <section id="message-list" class="section"></section>
+        <id="message-modal" class="section">
+        <section class="section">
+            <div id="createMessage">
+                <div class="modal is-active">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <div class="field" style="width:90%;">
+                                <input class="input" type="text" id="messagetitle-input" placeholder="제목을 적어주세요">
+                            </div>
+                            <p class="modal-card-title" style="float:left">
+                            </p>
+                            <button id="closeCreateMessageButton" class="delete"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <div class="field" style="width:100%;">
+                                <input id="messagereceiver-input" class="input" type="email" placeholder="받는 사람 이메일주소 e.g. coco@example.com">
+                            </div>
+                            <div class="field-body">
+                                <textarea id="messagecontent-input" class="textarea" placeholder="쪽지 내용을 적어주세요."></textarea>
+                            </div>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <button id="resisterMessageButton" class="button is-success">보내기</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

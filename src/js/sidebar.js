@@ -17,12 +17,20 @@ $('#mobile-sidebar-menu-home-btn').on('click', () => {
     changeScreen(SCREEN['HOME']);
 });
 
-$('#desktop-sidebar-post-btn').on('click', () => {
-    changeScreen(SCREEN['POST']);
+$('#desktop-sidebar-profile-btn').on('click', () => {
+    changeScreen(SCREEN['PROFILE']);
 });
 
-$('#mobile-sidebar-menu-post-btn').on('click', () => {
-    changeScreen(SCREEN['POST']);
+$('#mobile-sidebar-menu-profile-btn').on('click', () => {
+    changeScreen(SCREEN['PROFILE']);
+});
+
+$('#desktop-sidebar-message-btn').on('click', () => {
+    changeScreen(SCREEN['MESSAGE']);
+});
+
+$('#mobile-sidebar-menu-message-btn').on('click', () => {
+    changeScreen(SCREEN['MESSAGE']);
 });
 
 $('#desktop-sidebar-editor-btn').on('click', () => {

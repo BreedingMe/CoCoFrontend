@@ -57,9 +57,6 @@ function writeComment() {
                 alert('댓글이 작성되었습니다');
                 getComment1();
             },
-            // error: function () {
-            //     alert('댓글 저장에 실패하였습니다');
-            // }
         });
     }
 }

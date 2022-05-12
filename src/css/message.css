@@ -1,0 +1,52 @@
+#message .card {
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 90%;
+    transform: translate(5.5%, 8%);
+    }
+
+#message .card:hover {
+    background : #FDF6EC
+}
+
+#message .card-content {
+    margin: 4px 4px 4px 4px;
+    padding: 4px 4px;
+    display: inline-block;
+    }
+
+#message .card-content-box {
+    float:left;
+}
+
+#message .getmessage{
+    width: auto;
+    font-size: 15px;
+    float:left;
+    margin-left: 8px;
+}
+
+#message .tag{
+    float:left;
+}
+
+#message .read{
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    font-size: 12px;
+    size: 15px;
+    text-align: center;
+}
+
+#message .modal{
+    background-color: #ffffff;
+}
+
+#message .createMessage {
+    float:right;
+    margin: 1% 8% 0% 0%;
+    font-size: 12px;
+}
