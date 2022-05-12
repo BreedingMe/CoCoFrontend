@@ -17,6 +17,14 @@ $('#mobile-sidebar-menu-home-btn').on('click', () => {
     changeScreen(SCREEN['HOME']);
 });
 
+$('#desktop-sidebar-post-btn').on('click', () => {
+    changeScreen(SCREEN['POST']);
+});
+
+$('#mobile-sidebar-menu-post-btn').on('click', () => {
+    changeScreen(SCREEN['POST']);
+});
+
 function changeScreen(currentScreen) {
     for (let screen in SCREEN) {
         $(`#${SCREEN[screen]}`).hide();
