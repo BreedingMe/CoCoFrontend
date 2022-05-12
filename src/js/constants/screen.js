@@ -1,5 +1,7 @@
 const SCREEN = {
-    'HOME': 'home'
+    'HOME': 'home',
+    'POST': 'post',
+    'EDITOR': 'editor'
 };
 
 module.exports = SCREEN;
