@@ -36,6 +36,10 @@ const config = {
                 }
             },
             {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
+            },
+            {
                 test: /\.js$/,
                 loader: 'eslint-loader',
                 enforce: 'pre',
