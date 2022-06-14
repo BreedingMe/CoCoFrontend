@@ -17,3 +17,6 @@ yarn-error.log*
 *.ntvs*
 *.sln
 *.suo
+
+# Enviorment Variables
+.env/
