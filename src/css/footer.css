@@ -1,0 +1,17 @@
+/* Common */
+
+#footer {
+    position: fixed;
+    right: 4px;
+    bottom: 4px;
+    float: right;
+    font-size: 12px;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1263px) {
+    #footer {
+        display: none;
+    }
+}
