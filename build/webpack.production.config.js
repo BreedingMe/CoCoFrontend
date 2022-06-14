@@ -5,6 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const ExtractTextPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -73,6 +74,9 @@ const config = {
                 ignore: ['.*']
             }
         ]),
+        new Dotenv({
+            path: './.env/production.env'
+        }),
         new ExtractTextPlugin({
             filename: '[name].[contenthash].css',
             allChunks: true

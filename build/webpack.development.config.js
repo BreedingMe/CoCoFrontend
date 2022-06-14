@@ -6,6 +6,7 @@ const portfinder = require('portfinder');
 const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -78,6 +79,9 @@ const config = {
                 ignore: ['.*']
             }
         ]),
+        new Dotenv({
+            path: './.env/development.env'
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
