@@ -30,7 +30,7 @@ function resizeHomeContainer() {
 /* AJAX */
 
 function getPosts() {
-    $('#card-section').empty();
+    $('#home-section-post').empty();
 
     $.ajax({
         type: 'GET',
@@ -98,7 +98,7 @@ function getPosts() {
                                     </div>
                                 </div>`;
 
-                $('#card-section').append(cardHTML);
+                $('#home-section-post').append(cardHTML);
             }
 
             resizeHomeContainer();

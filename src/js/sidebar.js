@@ -5,6 +5,6 @@ import $ from 'jquery';
 /* Event Listener */
 
 window.toggleMobileSidebarMenu = () => {
-    $('#mobile-sidebar').toggleClass('is-active');
-    $('#mobile-sidebar-menu').toggleClass('is-active');
+    $('#sidebar-mobile').toggleClass('is-active');
+    $('#sidebar-menu-mobile').toggleClass('is-active');
 };

@@ -22,46 +22,46 @@
         right: 0px;
     }
 
-    #sidebar #desktop-sidebar {
+    #sidebar #sidebar-desktop {
         display: none;
     }
 
-    #sidebar #mobile-sidebar {
+    #sidebar #sidebar-mobile {
         display: block;
     }
 
-    #sidebar #mobile-sidebar-menu {
+    #sidebar #sidebar-menu-mobile {
         display: none;
     }
 
-    #sidebar #mobile-sidebar-menu.is-active {
+    #sidebar #sidebar-menu-mobile.is-active {
         display: block;
         padding: 16px 96px 16px 24px;
         border: 1px solid #E0E0E0;
         box-shadow: none;
     }
 
-    #sidebar #mobile-sidebar-menu .navbar-end {
+    #sidebar #sidebar-menu-mobile .navbar-end {
         display: block;
     }
 
-    #sidebar #mobile-sidebar-menu .nav-item {
+    #sidebar #sidebar-menu-mobile .nav-item {
         margin-bottom: 16px;
     }
 
-    #sidebar #mobile-sidebar-menu .nav-item:last-child {
+    #sidebar #sidebar-menu-mobile .nav-item:last-child {
         margin-bottom: 0px;
     }
 
-    #sidebar #mobile-sidebar-menu .nav-item:hover {
+    #sidebar #sidebar-menu-mobile .nav-item:hover {
         color: #808080;
     }
 
-    #sidebar #mobile-sidebar-menu .nav-item:active {
+    #sidebar #sidebar-menu-mobile .nav-item:active {
         color: #606060;
     }
 
-    #sidebar #mobile-sidebar-menu .navbar-footer {
+    #sidebar #sidebar-menu-mobile .navbar-footer {
         margin-top: 16px;
         font-size: 12px;
     }
@@ -75,12 +75,12 @@
         right: calc(50% - 584px);
     }
 
-    #sidebar #desktop-sidebar {
+    #sidebar #sidebar-desktop {
         display: flex;
         flex-direction: column;
     }
 
-    #sidebar #desktop-sidebar .nav-item {
+    #sidebar #sidebar-desktop .nav-item {
         display: flex;
         width: 56px;
         height: 56px;
@@ -92,24 +92,24 @@
         justify-content: center;
     }
 
-    #sidebar #desktop-sidebar .nav-item:last-child {
+    #sidebar #sidebar-desktop .nav-item:last-child {
         margin-bottom: 0px;
     }
 
-    #sidebar #desktop-sidebar .nav-item:hover {
+    #sidebar #sidebar-desktop .nav-item:hover {
         background-color: #E0E0E0;
     }
 
-    #sidebar #desktop-sidebar .nav-item:active {
+    #sidebar #sidebar-desktop .nav-item:active {
         border: 1px solid #D0D0D0;
         background-color: #D0D0D0;
     }
 
-    #sidebar #mobile-sidebar {
+    #sidebar #sidebar-mobile {
         display: none;
     }
 
-    #sidebar #mobile-sidebar-menu {
+    #sidebar #sidebar-menu-mobile {
         display: none;
     }
 }
