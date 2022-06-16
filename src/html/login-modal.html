@@ -1,0 +1,41 @@
+<div id="login-modal" class="modal">
+    <div class="modal-background" onclick="closeLoginModal()"></div>
+
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">로그인</p>
+            <button class="delete" aria-label="close" onclick="closeLoginModal()"></button>
+        </header>
+
+        <section class="modal-card-body">
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input type="email" placeholder="이메일" id="login-modal-input-id" class="input"/>
+
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input type="password" placeholder="비밀번호" id="login-modal-input-password" class="input"/>
+
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+
+            <p id="login-modal-help" class="help is-danger"></p>
+        </section>
+
+        <footer class="modal-card-foot">
+            <button class="button is-info is-fullwidth" onclick="requestLogin()">로그인</button>
+
+            <h4>아직 회원이 아니라면</h4>
+            <button class="button is-link is-outlined is-fullwidth">회원가입</button>
+        </footer>
+    </div>
+</div>

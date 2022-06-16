@@ -1,6 +1,7 @@
 /* Third Party JS */
 
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* JS */
 
@@ -54,7 +55,7 @@ function getPosts() {
                     recruitmentFieldsHTML += `<span class="bubble-item">${recruitmentField}</span>`;
                 }
 
-                let cardHTML = `<div id=${id} class="card">
+                let cardHTML = `<div id=${id} class="card" onclick="openPost()">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
 
@@ -104,3 +105,11 @@ function getPosts() {
         }
     });
 }
+
+/* Event Listener */
+
+window.openPost = () => {
+    if (Cookies.get('token') == undefined) {
+        window.openLoginModal();
+    }
+};
