@@ -91,7 +91,7 @@ const config = {
 };
 
 module.exports = new Promise((resolve, reject) => {
-    portfinder.basePort = 8080;
+    portfinder.basePort = 5000;
 
     portfinder.getPort((error, port) => {
         if (error == null) {
