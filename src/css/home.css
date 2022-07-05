@@ -1,18 +1,115 @@
 /* Common */
-
+/* 배너추가 - 성언 */
 #home {
     width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul, li {
+    list-style: none;
 }
 
-#home .hero-body .title {
-    margin-bottom: 36px;
-    font-family: 'Itim', cursive;
+#home [name="slide"] {
+    display: none;
 }
 
-#home .hero-body .subtitle {
-    font-family: 'Gamja Flower', cursive;
+/* 슬라이드 - 성언
+만약 슬라이드 빠르게 or 느리게 넘기고 싶으면 animation 숫자 작게 or 크게 바꿔주면 됨 */
+#home [id="slide01"]:checked ~ .slidelist .slideitem {
+    transform: translateX(0);
+    animation: slide01 5s infinite;
 }
 
+#home [id="slide02"]:checked ~ .slidelist .slideitem {
+    transform: translateX(-100%);
+    animation: slide01 5s infinite;
+}
+
+#home [id="slide03"]:checked ~ .slidelist .slideitem {
+    transform: translateX(-200%);
+    animation: slide01 5s infinite;
+}
+
+@keyframes slide01 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+@keyframes slide02 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+@keyframes slide03 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+#home .container .slidebox {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#home .container .slidebox img {
+    max-width: 100%;
+}
+
+#home .container .slidebox .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+}
+
+#home .container .slidebox .slideitem {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .35s;
+}
+
+#home .container .slidebox .slideitem label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+label.left {
+    left: 20px;
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+label.right {
+    right: 20px;
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+/* 기존에있던 코드들 */
 #home .card {
     margin-bottom: 16px;
     border: 1px solid #E0E0E0;
@@ -86,6 +183,10 @@
 /* Mobile */
 
 @media screen and (max-width: 1263px) {
+    #home {
+        margin-top: 52px;
+    }
+
     #home .card-content {
         flex-direction: column;
     }
