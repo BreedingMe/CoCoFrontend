@@ -1,16 +1,9 @@
 import $ from 'jquery';
 
 // 게시글 상세 읽기
-window.getPost = () => {
+window.initializePost = () => {
     getPost();
 };
-
-window.openPost = () => {
-}
-
-$(document).ready( function() {
-    getPost();
-});
 
 // 게시글 상세 읽기
 function getPost() {
@@ -62,4 +55,3 @@ function getPost() {
         }
     });
 }
-
