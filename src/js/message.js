@@ -1,15 +1,20 @@
 import $ from 'jquery';
 
 /* JS */
+// 쪽지 리스트 호출
+window.initializeMessage = () => {
+    getMessageList();
+};
+
 // 쪽지 보내는 모달
 window.openCreateMessageModal = () => {
     $('#message-create-modal').css('display', 'flex');
 };
 
 window.closeCreateMessageModal = () => {
-    $('#receiver_create').val('');
-    $('#title_create').val('');
-    $('#content_create').val('');
+    $('#receiver_createMessage').val('');
+    $('#title_createMessage').val('');
+    $('#content_createMessage').val('');
     $('#message-create-modal').css('display', 'none');
     window.initializeMessage();
 };
@@ -29,11 +34,6 @@ window.createMessageButton = () => {
     createMessage();
 };
 
-// 쪽지 리스트 호출
-window.initializeMessage = () => {
-    getMessageList();
-};
-
 // 쪽지 상세 읽기
 window.getMessage = (messageId) => {
     getMessage(messageId);
@@ -50,9 +50,9 @@ window.deleteMessage = (messageId) => {
 // 쪽지 보내기
 function createMessage() {
 
-    let receiver = $('#receiver_create').val();
-    let title = $('#title_create').val();
-    let content = $('#content_create').val();
+    let receiver = $('#receiver_createMessage').val();
+    let title = $('#title_createMessage').val();
+    let content = $('#content_createMessage').val();
 
     if (receiver == '') {
         alert('받는 사람 이메일 주소를 입력해주세요!');
@@ -99,10 +99,9 @@ function getMessageList() {
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/message/list',
-
         xhrFields: {
-            withCredentials: true },
-
+            withCredentials: true
+        },
         contentType: 'application/json',
         data: {},
         success: function (response) {
@@ -168,7 +167,6 @@ function getMessage(messageId) {
             $('#content').html(content);
 
             window.openDetailMessageModal();
-
         }
     });
 }

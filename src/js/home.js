@@ -39,60 +39,29 @@ function getPosts() {
             withCredentials: true
         },
         success: function (response) {
-            let posts = response['posts'];
+            let posts = response;
 
             for (let index = 0; index < posts.length; index++) {
-                let id = posts[index]['_id'];
+                let id = posts[index]['id'];
                 let title = posts[index]['title'];
-                let recruitmentFields = posts[index]['recruitment_fields'];
-                let region = posts[index]['region'];
-                let hits = posts[index]['hits'];
-                let likes = posts[index]['likes'];
+                let meetingType = posts[index]['meetingType'];
+                let period = posts[index]['period'];
 
-                let recruitmentFieldsHTML = '';
-
-                for (let recruitmentField in recruitmentFields) {
-                    recruitmentFieldsHTML += `<span class="bubble-item">${recruitmentField}</span>`;
-                }
-
-                let cardHTML = `<div id=${id} class="card" onclick="openPost()">
+                let cardHTML = `<div id=${id} class="card" onclick="openPost(${id})">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
-
-                                        <p class="card-header-icon">
-                                            <img src="./static/icon/React.svg" width="16" height="16" class="tech-stack-icon"/>
-                                            <img src="./static/icon/Spring.svg" width="16" height="16" class="tech-stack-icon"/>
-                                        </p>
                                     </div>
 
                                     <div class="card-content">
                                         <div class="card-content-box">
                                             <div class="content">
-                                                <span>모집 분야</span>
-                                                ${recruitmentFieldsHTML}
+                                                <span>기간</span>
+                                                <span class="bubble-item">${period}</span>
                                             </div>
 
                                             <div class="content">
-                                                <span>지역</span>
-                                                <span class="bubble-item">${region}</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-content-box">
-                                            <div>
-                                                <div class="content">
-                                                    <i class="fa-regular fa-eye"></i>
-                                                    <span>${hits}</span>
-                                                </div>
-
-                                                <div class="content">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                    <span>${likes}</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="content">
-                                                <i class="fa-regular fa-bookmark"></i>
+                                                <span>모임 방식</span>
+                                                <span class="bubble-item">${meetingType}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -108,8 +77,11 @@ function getPosts() {
 
 /* Event Listener */
 
-window.openPost = () => {
+window.openPost = (id) => {
     if (Cookies.get('token') == undefined) {
         window.openLoginModal();
+    }
+    else {
+        window.location.href = '/post?id=' + id;
     }
 };
