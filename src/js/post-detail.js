@@ -8,11 +8,8 @@ window.initializePost = () => {
 // 게시글 상세 읽기
 function getPost() {
 
-    console.log();
-
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-
 
     $.ajax({
         type: 'GET',
@@ -33,13 +30,10 @@ function getPost() {
             let contact = post['contact'];
             let period = post['period'];
             let recruitmentState = post['state'] ? '모집마감' : '모집중';
-            let date = post['createDate'];
+            let date = post['postDate'];
             const day = new Date(date + '+0900').toISOString().split("T")[0];
             const time = new Date(date + '+0900').toTimeString().split(" ")[0];
             const datestr = day + ' ' + time;
-
-            console.log(response);
-
 
             $('#nickname_openPost').html(nickname);
             $('#title_openPost').html(title);
@@ -49,9 +43,6 @@ function getPost() {
             $('#period_openPost').html(period);
             $('#recruitmentState_openPost').html(recruitmentState);
             $('#datestr_openPost').html(datestr);
-
-            // window.openPost();
-
         }
     });
 }

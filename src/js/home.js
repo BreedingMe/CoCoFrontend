@@ -1,7 +1,7 @@
 /* Third Party JS */
 
 import $ from 'jquery';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 /* JS */
 
@@ -60,7 +60,7 @@ function getPosts() {
                                             </div>
 
                                             <div class="content">
-                                                <span>지역</span>
+                                                <span>모임 방식</span>
                                                 <span class="bubble-item">${meetingType}</span>
                                             </div>
                                         </div>
@@ -78,9 +78,10 @@ function getPosts() {
 /* Event Listener */
 
 window.openPost = (id) => {
-    // if (Cookies.get('token') == undefined) {
-    //     window.openLoginModal();
-    // }
-
-    window.location.href = '/post?id=' + id;
+    if (Cookies.get('token') == undefined) {
+        window.openLoginModal();
+    }
+    else {
+        window.location.href = '/post?id=' + id;
+    }
 };
