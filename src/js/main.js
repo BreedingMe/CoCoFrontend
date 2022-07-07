@@ -6,6 +6,7 @@ import 'bulma/css/bulma.css';
 
 import '../css/main.css';
 import '../css/home.css';
+import '../css/editor.css';
 import '../css/message.css';
 import '../css/login-modal.css';
 import '../css/sidebar.css';
@@ -22,6 +23,7 @@ import { initializeRouter, changeRouter } from './common/router';
 /* View JS */
 
 import './home.js';
+import './editor.js';
 import './message.js';
 import './login-modal.js';
 import './sidebar.js';

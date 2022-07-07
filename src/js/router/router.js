@@ -1,6 +1,7 @@
 /* View HBS */
 
 import home from '../../hbs/home.hbs';
+import editor from '../../hbs/editor.hbs';
 import message from '../../hbs/message.hbs';
 
 /* JS */
@@ -8,5 +9,6 @@ import message from '../../hbs/message.hbs';
 export const router = {
     '/': home(),
     '/home': home(),
+    '/editor': editor(),
     '/message': message()
 };
