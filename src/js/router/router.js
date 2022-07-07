@@ -12,9 +12,7 @@ export const router = {
     '/': home(),
     '/home': home(),
     '/message': message(),
-    '/post': post()
+    '/post': post(),
     '/editor': editor(),
-    '/profile': profile(),
-    '/message': message()
-
+    '/profile': profile()
 };
