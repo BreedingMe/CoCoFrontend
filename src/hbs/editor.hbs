@@ -1,0 +1,68 @@
+<div id="editor" class="page">
+    <div class="container is-max-desktop">
+        <div class="wrapper">
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">제목</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" id="title-input" placeholder="제목">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">모임 방식</label>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="ONLINE" value="ONLINE" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">ONLINE</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="OFFLINE" value="OFFLINE" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">OFFLINE</label>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">문의 방법</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" id="contact-input" placeholder="문의 방법">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">예상 기간</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" id="period-input" placeholder="예상 기간">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">본문</label>
+                </div>
+                <div class="field-body">
+                    <textarea class="textarea" id="content-input" placeholder="본문을 적어주세요."></textarea>
+                </div>
+            </div>
+            <div class="has-text-right">
+                <button id="resister" class="button is-rounded is-warning is-small" onclick="registerPost()">저장</button>
+                <button id="cancel" class="button is-rounded is-small" onclick="cancelPost()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
