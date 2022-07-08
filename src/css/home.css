@@ -186,9 +186,17 @@ label.right {
     font-size: 12px;
 }
 
-#home [id="recruitmentState"] {
+#home .is-white {
+    background-color : #ffffff;
+}
+
+#home .is-pink {
     background-color : #FF869E;
     color: #ffffff;
+}
+
+#home .is-gray {
+    background-color : #f9f8f8a7
 }
 
 /* Mobile */

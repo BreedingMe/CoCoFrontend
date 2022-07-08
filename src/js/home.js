@@ -6,16 +6,26 @@ import Cookies from 'js-cookie';
 /* JS */
 
 window.initializeHome = () => {
-    getRecrutingPosts();
-};
-
-window.recruitmentStateCheckbox = () => {
-    if ($('input:checkbox[id="recruitmentStateCheckbox"]').is(":checked")) {
-        getPosts(); }
-    else { getRecrutingPosts();
+    let check = localStorage.getItem('check');
+    $('#recruitmentStateCheckbox').prop('checked', JSON.parse(check));
+    if ($('input:checkbox[id="recruitmentStateCheckbox"]').is(':checked')) {
+        getPosts();
+    }
+    else {
+        getRecrutingPosts();
     }
 };
 
+window.recruitmentStateCheckbox = () => {
+    localStorage.setItem('check', $('#recruitmentStateCheckbox').is(':checked'));
+
+    if ($('input:checkbox[id="recruitmentStateCheckbox"]').is(':checked')) {
+        getPosts();
+    }
+    else {
+        getRecrutingPosts();
+    }
+};
 
 function resizeHomeContainer() {
     let body = $('body');
@@ -57,7 +67,10 @@ function getRecrutingPosts() {
                 let hits = posts[index]['hits'];
                 let recruitmentState = posts[index]['recruitmentState'] ? '모집 완료' : '모집 중';
 
-                let cardHTML = `<div id=${id} class="card" onclick="openPost(${id})">
+                let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
+                let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
+
+                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}" onclick="openPost(${id})">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
                                     </div>
@@ -66,17 +79,17 @@ function getRecrutingPosts() {
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>
-                                                <span class="bubble-item">${period}</span>
+                                                <span class="bubble-item is-white">${period}</span>
                                             </div>
 
                                             <div class="content">
                                                 <span>모임 방식</span>
-                                                <span class="bubble-item">${meetingType}</span>
+                                                <span class="bubble-item is-white">${meetingType}</span>
                                             </div>
 
                                             <div class="content">
                                             <span>모집 현황</span>
-                                            <span class="bubble-item">${recruitmentState}</span>
+                                            <span class="bubble-item ${recruitmentStateColor}">${recruitmentState}</span>
                                         </div>
 
                                         </div>
@@ -120,7 +133,10 @@ function getPosts() {
                 let hits = posts[index]['hits'];
                 let recruitmentState = posts[index]['recruitmentState'] ? '모집 완료' : '모집 중';
 
-                let cardHTML = `<div id=${id} class="card" onclick="openPost(${id})">
+                let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
+                let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
+
+                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}" onclick="openPost(${id})">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
                                     </div>
@@ -129,17 +145,17 @@ function getPosts() {
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>
-                                                <span class="bubble-item">${period}</span>
+                                                <span class="bubble-item is-white">${period}</span>
                                             </div>
 
                                             <div class="content">
                                                 <span>모임 방식</span>
-                                                <span class="bubble-item">${meetingType}</span>
+                                                <span class="bubble-item is-white">${meetingType}</span>
                                             </div>
 
                                             <div class="content">
                                             <span>모집 현황</span>
-                                            <span id="recruitmentState" class="bubble-item">${recruitmentState}</span>
+                                            <span id="recruitmentState" class="bubble-item ${recruitmentStateColor}">${recruitmentState}</span>
                                         </div>
 
                                         </div>
@@ -156,7 +172,6 @@ function getPosts() {
 
                 $('#home-section-post').append(cardHTML);
             }
-
             resizeHomeContainer();
         }
     });
@@ -165,7 +180,7 @@ function getPosts() {
 /* Event Listener */
 
 window.openPost = (id) => {
-    if (Cookies.get('token') == undefined) {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
     else {
