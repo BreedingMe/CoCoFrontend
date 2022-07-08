@@ -46,10 +46,12 @@ function getPost() {
             $('#recruitmentState_openPost').html(recruitmentState);
             $('#datestr_openPost').html(datestr);
 
-            // 게시글을 작성한 회원이 아니면 수정/삭제 버튼을 볼 수 없다
-            if (enableUpdate == false && enableDelete == false) {
-                $('#deletebtn').attr('class', 'button none');
+            if (enableUpdate == false) {
                 $('#updatebtn').attr('class', 'button none');
+            }
+
+            if (enableDelete == false) {
+                $('#deletebtn').attr('class', 'button none');
             }
         }
     });
@@ -63,10 +65,16 @@ window.showPostUpdatePage = () => {
 // 게시글 삭제
 window.deletePost = () => {
     let post = JSON.parse(localStorage.getItem('post'));
+    let memberRole = post.memberRole;
+    let isAdmin = false;
+
+    if (memberRole == 'ADMIN') {
+        isAdmin = true;
+    }
 
     $.ajax({
         type: 'DELETE',
-        url: process.env.BACKEND_HOST + '/post/' + post.id,
+        url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
 
         xhrFields: {
             withCredentials: true },
