@@ -4,8 +4,11 @@ import $ from 'jquery';
 $(document).ready(() => {
     resizeProfileHeight();
     resizeProfileContainerHeight();
-    getProfile();
 });
+
+window.initializeProfile = () => {
+    getProfile();
+};
 
 /* JS */
 // 회원 정보 수정 열기 모달

@@ -46,6 +46,7 @@ function getPosts() {
                 let title = posts[index]['title'];
                 let meetingType = posts[index]['meetingType'];
                 let period = posts[index]['period'];
+                let hits = posts[index]['hits'];
 
                 let cardHTML = `<div id=${id} class="card" onclick="openPost(${id})">
                                     <div class="card-header">
@@ -63,6 +64,20 @@ function getPosts() {
                                                 <span>모임 방식</span>
                                                 <span class="bubble-item">${meetingType}</span>
                                             </div>
+
+                                            <div class="content">
+                                            <span>모집 현황</span>
+                                            <span id="recruitmentState" class="bubble-item">${recruitmentState}</span>
+                                        </div>
+
+                                        </div>
+                                        <div class="card-content-box">
+                                        <div>
+                                            <div class="content">
+                                                <i class="fa-regular fa-eye"></i>
+                                                <span>${hits}</span>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>`;
