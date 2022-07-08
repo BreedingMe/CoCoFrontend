@@ -9,7 +9,7 @@ function register(id, password, nickname, githubURL, portfolioURL, admin, adminT
 
     $.ajax({
         type: 'POST',
-        url: process.env.BACKEND_HOST + '/user',
+        url: process.env.BACKEND_HOST + '/register',
         contentType: 'application/json',
         data: JSON.stringify({
             email: id,
