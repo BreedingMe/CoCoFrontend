@@ -6,6 +6,11 @@ import 'bulma/css/bulma.css';
 
 import '../css/main.css';
 import '../css/home.css';
+import '../css/post-detail.css';
+import '../css/post_update.css';
+import '../css/editor.css';
+import '../css/profile.css';
+import '../css/message.css';
 import '../css/login-modal.css';
 import '../css/register-modal.css';
 import '../css/sidebar.css';
@@ -22,6 +27,11 @@ import { initializeRouter, changeRouter } from './common/router';
 /* View JS */
 
 import './home.js';
+import './post-detail.js';
+import './post_update';
+import './editor.js';
+import './profile.js';
+import './message.js';
 import './login-modal.js';
 import './register-modal.js';
 import './sidebar.js';
