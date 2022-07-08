@@ -5,6 +5,7 @@ import editor from '../../hbs/editor.hbs';
 import profile from '../../hbs/profile.hbs';
 import message from '../../hbs/message.hbs';
 import post from '../../hbs/post.hbs';
+import postUpdate from '../../hbs/post_update.hbs';
 
 /* JS */
 
@@ -14,5 +15,6 @@ export const router = {
     '/message': message(),
     '/post': post(),
     '/editor': editor(),
-    '/profile': profile()
+    '/profile': profile(),
+    '/postupdate': postUpdate()
 };
