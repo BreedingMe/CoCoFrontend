@@ -56,6 +56,14 @@ window.requestRegister = () => {
     let admin = $('#register-modal-checkbox-admin').prop('checked');
     let adminToken = $('#register-modal-input-admin-token').val();
 
+    if (githubURL == '') {
+        githubURL = null;
+    }
+
+    if (portfolioURL == '') {
+        portfolioURL = null;
+    }
+
     // 이메일 입력 여부 검증
 
     if (id == '') {
