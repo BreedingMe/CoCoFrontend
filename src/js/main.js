@@ -12,7 +12,7 @@ import '../css/editor.css';
 import '../css/profile.css';
 import '../css/message.css';
 import '../css/login-modal.css';
-import '../css/message.css';
+import '../css/register-modal.css';
 import '../css/sidebar.css';
 import '../css/footer.css';
 
@@ -33,7 +33,7 @@ import './editor.js';
 import './profile.js';
 import './message.js';
 import './login-modal.js';
-import './message.js';
+import './register-modal.js';
 import './sidebar.js';
 
 /* JS */
