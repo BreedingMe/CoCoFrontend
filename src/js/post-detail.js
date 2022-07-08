@@ -59,3 +59,26 @@ function getPost() {
 window.showPostUpdatePage = () => {
     window.location.href = '/postupdate';
 };
+
+// 게시글 삭제
+window.deletePost = () => {
+    let post = JSON.parse(localStorage.getItem('post'));
+
+    $.ajax({
+        type: 'DELETE',
+        url: process.env.BACKEND_HOST + '/post/' + post.id,
+
+        xhrFields: {
+            withCredentials: true },
+        data: {},
+
+        success: function () {
+            alert('글 삭제가 완료되었습니다.');
+            window.location.href = '/home';
+        },
+        error: function (response) {
+            console.log(response);
+            alert('글 삭제에 실패하였습니다!');
+        }
+    });
+};
