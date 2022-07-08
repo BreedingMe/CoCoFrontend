@@ -79,12 +79,12 @@ function getRecrutingPosts() {
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>
-                                                <span class="bubble-item is-white">${period}</span>
+                                                <span class="bubble-item bubble">${period}</span>
                                             </div>
 
                                             <div class="content">
                                                 <span>모임 방식</span>
-                                                <span class="bubble-item is-white">${meetingType}</span>
+                                                <span class="bubble-item bubble">${meetingType}</span>
                                             </div>
 
                                             <div class="content">
@@ -145,12 +145,12 @@ function getPosts() {
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>
-                                                <span class="bubble-item is-white">${period}</span>
+                                                <span class="bubble-item bubble">${period}</span>
                                             </div>
 
                                             <div class="content">
                                                 <span>모임 방식</span>
-                                                <span class="bubble-item is-white">${meetingType}</span>
+                                                <span class="bubble-item bubble">${meetingType}</span>
                                             </div>
 
                                             <div class="content">

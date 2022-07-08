@@ -20,7 +20,7 @@
     }
 
 #message .card:hover {
-    background : #DEEDF0
+    background : #F6F6F6;
 }
 
 #message .card-header-title {
@@ -35,6 +35,7 @@
 #message .tag{
     float:left;
     margin: 0px 12px 0px 0px;
+    background-color: #F6F6F6;
 }
 
 #message .read{
@@ -44,8 +45,8 @@
     font-size: 12px;
     size: 15px;
     text-align: center;
+    background-color: #FFEEEE;
 }
-
 
 /* 쪽지 보내기 모달 CSS */
 #message-create-modal {
