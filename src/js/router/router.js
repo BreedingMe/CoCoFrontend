@@ -2,6 +2,7 @@
 
 import home from '../../hbs/home.hbs';
 import editor from '../../hbs/editor.hbs';
+// import comment from '../../hbs/commnet.hbs';
 import profile from '../../hbs/profile.hbs';
 import message from '../../hbs/message.hbs';
 import post from '../../hbs/post.hbs';
@@ -14,5 +15,6 @@ export const router = {
     '/message': message(),
     '/post': post(),
     '/editor': editor(),
+    // '/comment': comment(),
     '/profile': profile()
 };
