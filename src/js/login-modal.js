@@ -11,10 +11,11 @@ function login(id, password) {
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/login',
-        data: {
-            id: id,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            email: id,
             password: password
-        },
+        }),
         success: function (response) {
             Cookies.set('token', response['token'], { expires: 1 });
             window.closeLoginModal();

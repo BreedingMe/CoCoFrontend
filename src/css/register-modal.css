@@ -1,0 +1,45 @@
+/* Common */
+
+#register-modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#register-modal .modal-card-head {
+    background-color: #FFFFFF;
+}
+
+#register-modal .modal-card-title {
+    font-size: 20px;
+}
+
+#register-modal .modal-card-foot {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+#register-modal .modal-card-foot .checkbox {
+    margin-bottom: 12px;
+}
+
+#register-modal .modal-card-foot .field {
+    width: 100%;
+}
+
+#register-modal .modal-card-foot .control {
+    width: 100%;;
+}
+
+#register-modal .modal-card-foot .button:not(:last-child) {
+    margin-right: 0px;
+    margin-bottom: 16px;
+}
