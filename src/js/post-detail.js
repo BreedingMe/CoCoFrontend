@@ -4,7 +4,6 @@ import $ from 'jquery';
 window.initializePost = () => {
     getPost();
     window.getCommentList();
-    // window.deleteComment();
     //다른 js에서(코멘트) 불러오는 거라 넣어줌!
 };
 

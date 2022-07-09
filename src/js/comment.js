@@ -62,7 +62,8 @@ window.writeComment = () => {
         data: JSON.stringify(data),
         success: function () {
             alert('댓글이 작성되었습니다');
-            window.getCommentList();
+            // window.getCommentList();
+            window.location.reload();
         },
         error: function (response) {
             console.log(response);
@@ -172,7 +173,8 @@ window.deleteComment = (id) => {
         success: function (response) {
             console.log(response);
             alert('댓글이 삭제되었습니다.');
-            window.getCommentList();
+            // window.getCommentList();
+            window.location.reload();
         },
         error: function (response) {
             console.log(response);
