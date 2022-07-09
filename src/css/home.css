@@ -179,26 +179,41 @@ label.right {
     margin-right: 0px;
 }
 
-#home .card-content-box .bubble-item {
+#home .card-content-box .is-default{
     padding: 4px 8px;
     border: 1px solid #E0E0E0;
     border-radius: 16px;
     font-size: 12px;
 }
 
-#home .is-white {
+#home .card-content-box .bubble{
+    padding: 4px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    font-size: 12px;
     background-color : #ffffff;
 }
+
+/* #home .is-white {
+    background-color : #ffffff;
+} */
 
 #home .is-pink {
     background-color : #FF869E;
     color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 #home .is-gray {
-    background-color : #f9f8f8a7
+    background-color : #f9f8f8a7;
 }
 
+#home .is-gray:hover {
+    background-color : #ffffff;
+}
 /* Mobile */
 
 @media screen and (max-width: 1263px) {

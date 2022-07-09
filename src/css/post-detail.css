@@ -33,8 +33,17 @@
     float: right;
 }
 
-#post-detail .button:hover {
-    background-color: #e7e7e7;
+#post-detail .updatebtn:hover {
+    background-color:#e7e7e7;
+    font-weight: bold;
+    border: solid #ffffff;
+}
+
+#post-detail .deletebtn:hover {
+    background-color: #ff1500da;
+    color:#ffffff;
+    font-weight: bold;
+    border: solid #ffffff;
 }
 
 #post-detail .none {
