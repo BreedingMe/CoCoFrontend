@@ -40,3 +40,85 @@
         </div>
     </div>
 </div>
+{{!-- 댓글박스 --}}
+<div id="post" style="display: flex">
+    <div class="container is-max-desktop">
+        <div style="margin: 0px 60px 0px 60px;" class="posting">
+            <div id="post-box">
+            </div>
+
+        </div style="margin: 0px 60px 0px 60px;">
+        <div style="margin: 0px 60px 0px 60px;">
+            <div id="comment-box" style="margin-top: 30px; margin-bottom: 20px;"></div>
+            <article class="media" style="margin-top: 40px;">
+                <figure class="media-left">
+                    <p class="image is-24x24">
+                        <img src="./static/profile/basicProfile3.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <textarea rows="2" id="comment" class="textarea" placeholder="댓글을 입력하세요"></textarea>
+                        </p>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <a id="writeComment" class="button has-text-centered is-rounded is-small" onclick="writeComment()"><b>댓글작성</b></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+</div>
+{{!-- 수정도전했다가 망해서 주석처리 중 --}}
+{{!-- comment modal --}}
+{{!-- <div class="modal fade" id="replyModal" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn btn-default pull-right" data-dismiss="modal">닫기</button>
+					<h4 class="modal-title">댓글수정</h4>
+				</div>
+				<div class="modal-body">
+					<!-- 수정폼 id값을 확인하세요-->
+					<div class="reply-content">
+					<textarea class="form-control" rows="4" id="modalReply" placeholder="내용입력"></textarea>
+					<div class="reply-group">
+						<div class="reply-input">
+                            <input type="hidden" id="modalRno">
+							<input type="password" class="form-control" placeholder="비밀번호" id="modalPw">
+						</div>
+						<button class="right btn btn-info" id="modalModBtn">수정하기</button>
+						<button class="right btn btn-info" id="modalDelBtn">삭제하기</button>
+					</div>
+					</div>
+					<!-- 수정폼끝 -->
+				</div>
+			</div>
+		</div>
+	</div> --}}
+{{!-- <div style="margin: 0px 60px 0px 60px;" style="margin-top: 200px;">
+    <div id="comment-box" style="margin-top: 30px; margin-bottom: 20px;"></div>
+    <article class="media" style="margin-top: 40px;">
+        <figure class="media-left">
+            <p class="image is-24x24">
+                <img src="./static/profile/basicProfile3.png">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="field">
+                <p class="control">
+                    <textarea rows="2" id="comment-content" class="form-control textarea"></textarea>
+                </p>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <a id="writeComment" class="button has-text-centered is-rounded is-small" onclick="writeComment()"><b>댓글작성</b></a>
+                </div>
+            </div>
+        </div>
+    </article>
+</div> --}}
