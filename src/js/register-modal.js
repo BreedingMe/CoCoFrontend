@@ -20,11 +20,13 @@ function register(id, password, nickname, githubURL, portfolioURL, admin, adminT
             admin: admin,
             adminToken: adminToken
         }),
-        success: function () {
+        success: function (response) {
+            console.log(response)
             alert('회원 가입을 완료했습니다.');
             window.closeRegisterModal();
         },
-        error: function () {
+        error: function (response) {
+            console.log(response)
             alert('회원 가입을 실패했습니다.');
         }
     });
@@ -74,6 +76,21 @@ window.requestRegister = () => {
         return;
     }
 
+    if (!isEmail(id)) {
+        $('#register-modal-input-id').addClass('is-danger');
+        $('#register-modal-input-id').focus();
+        $('#register-modal-help').text('정확한 이메일 형식으로 입력해 주세요.');
+        return;
+    }
+
+    // 이메일이 중복이면
+    if (!isEmail(id)) {
+        $('#register-modal-input-id').addClass('is-danger');
+        $('#register-modal-input-id').focus();
+        $('#register-modal-help').text('중복된 이메일이 존재합니다.');
+        return;
+    }
+
     $('#register-modal-input-id').removeClass('is-danger');
     $('#register-modal-help').text('');
 
@@ -114,6 +131,14 @@ window.requestRegister = () => {
         return;
     }
 
+    if (!isPassword(password)) {
+        $('#register-modal-input-password').addClass('is-danger');
+        $('#register-modal-input-password').focus();
+        $('#register-modal-help').text('영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.');
+
+        return;
+    }
+
     $('#register-modal-input-password').removeClass('is-danger');
     $('#register-modal-input-confirm-password').removeClass('is-danger');
     $('#register-modal-help').text('');
@@ -124,6 +149,15 @@ window.requestRegister = () => {
         $('#register-modal-input-nickname').addClass('is-danger');
         $('#register-modal-input-nickname').focus();
         $('#register-modal-help').text('닉네임을 입력해 주세요.');
+
+        return;
+    }
+
+    // 닉네임이 중복이면
+    if (nickname == '') {
+        $('#register-modal-input-nickname').addClass('is-danger');
+        $('#register-modal-input-nickname').focus();
+        $('#register-modal-help').text('중복된 닉네임이 존재합니다.');
 
         return;
     }
@@ -158,3 +192,16 @@ window.requestRegister = () => {
 
     register(id, password, nickname, githubURL, portfolioURL, admin, adminToken);
 };
+
+//이메일 규칙
+function isEmail(asValue) {
+    const regExp = /^(?=.*[a-zA-Z0-9]*@[a-zA-Z0-9]*.[a-zA-Z0-9])[0-9a-zA-Z@.]{10,30}$/;
+    return regExp.test(asValue);
+}
+
+// 비밀번호 규칙
+// a~z 특수문자, 8~20자
+function isPassword(asValue) {
+    const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+    return regExp.test(asValue);
+}
