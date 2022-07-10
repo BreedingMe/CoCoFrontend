@@ -94,10 +94,10 @@ window.getCommentList = () => {
                 let id = response[i]['id'];
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
+                let timeComment = new Date(response[i]['createDate'] + '+0900');
                 let nickname = response[i]['nickname'];
-                let timeComment = new Date(response[i]['date'] + '+0900');
-                // console.log(response[i]['date']);
                 let timeBefore = time2str(timeComment);
+                // console.log(response[i]['date']);
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-24x24">
@@ -112,7 +112,6 @@ window.getCommentList = () => {
                                                 <br>
                                                 ${comment}
                                                 <a id="deleteComment${i}" class="button has-text-centered is-rounded is-small")" onclick="deleteComment(${id})">삭제</a>
-                                                // <a id="deleteComment${i}" class="button has-text-centered is-rounded is-small")" onclick="updateComment(${id})">수정</a>
                                             </p>
                                         </div>
                                     </div>
@@ -186,6 +185,9 @@ function time2str(date) {
     let today = new Date();
     let time = (today - date) / 1000 / 60;
     console.log(today, date);
+    if (time < 1) {
+        return '방금전';
+    }
     if (time < 60) {
         return parseInt(time) + '분 전';
     }
