@@ -44,7 +44,7 @@ function getPost() {
             <button id="updatebtn" class="button has-text-centered is-rounded updatebtn" onclick="showPostUpdatePage()">수정</button>
             <p><div style="font-size: xx-large; font-weight: bold;" id="title_openPost">${title}</div></p>
                     <br>
-                        <span style="float: left; margin-left: 8px;" id="nickname_openPost">${nickname}</span>
+                        <span style="float: left; margin-left: 8px;" id="nickname_openPost">@${nickname}</span>
                         <div style="float: right">
                             <small id="datestr_openPost">${datestr}</small>
                         </div>
