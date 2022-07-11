@@ -35,8 +35,8 @@ function getPost() {
             let date = post['postDate'];
             let enableUpdate = post['enableUpdate'];
             let enableDelete = post['enableDelete'];
-            const day = new Date(date + '+0900').toISOString().split("T")[0];
-            const time = new Date(date + '+0900').toTimeString().split(" ")[0];
+            const day = new Date(date + '+0900').toISOString().split('T')[0];
+            const time = new Date(date + '+0900').toTimeString().split(' ')[0];
             const datestr = day + ' ' + time;
 
             $('#nickname_openPost').html(nickname);

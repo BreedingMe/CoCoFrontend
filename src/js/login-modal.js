@@ -18,7 +18,7 @@ function login(id, password) {
         }),
         success: function (response) {
             Cookies.set('token', response['token'], { expires: 1 });
-            window.closeLoginModal();
+            window.location.reload();
         },
         error: function () {
             $('#login-modal-help').text('이메일 또는 비밀번호를 잘못 입력했습니다.');
@@ -37,6 +37,7 @@ window.closeLoginModal = () => {
     $('#login-modal-input-id').removeClass('is-danger');
     $('#login-modal-input-password').removeClass('is-danger');
     $('#login-modal-help').text('');
+    location.href = 'home';
 };
 
 window.requestLogin = () => {
