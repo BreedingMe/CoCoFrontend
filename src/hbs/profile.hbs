@@ -1,6 +1,7 @@
 <div id="profile" class="page" style="display:flex">
     <div class="container is-max-desktop">
         <section>
+            <button id="withdrawalbtn" class="button withdrawalbtn has-text-centered is-rounded" onclick="withdrawal()">회원 탈퇴</button>
             <div class="hero-body" style="padding-bottom:1rem; margin-top: 10%; min-width: 400px">
                 <div id="profile_box">
                     <article class="media">
@@ -16,8 +17,8 @@
                         onclick="$('#modal-post').addClass('is-active')">
                         <span>프로필 수정</span>
                     </a> --}}
-                    <button id="logoutbtn" class="button has-text-centered is-rounded deletebtn" onclick="logout()">로그아웃</button>
-                    <a class="button has-text-centered is-rounded" aria-label="edit" style="float: right;"
+                    <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
+                    <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;"
                         onclick="openEditProfileModal()">
                         <span>프로필 수정</span>
                     </a>
