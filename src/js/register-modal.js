@@ -35,8 +35,10 @@ function register(id, password, nickname, githubURL, portfolioURL, admin, adminT
 /* Event Listener */
 
 window.openRegisterModal = () => {
-    window.closeLoginModal();
-
+    $('#login-modal').css('display', 'none');
+    $('#login-modal-input-id').removeClass('is-danger');
+    $('#login-modal-input-password').removeClass('is-danger');
+    $('#login-modal-help').text('');
     $('#register-modal').css('display', 'flex');
 };
 
