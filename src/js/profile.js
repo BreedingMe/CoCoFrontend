@@ -19,7 +19,7 @@ window.openEditProfileModal = () => {
 //회원 정보 수정 취소 모달
 window.closeEditProfileModal = () => {
     $('#modal-post').css('display', 'none');
-    // window.initializeProfile(); 이거 넣는거 맞나...?
+    window.location.reload();
 };
 
 function resizeProfileHeight() {
