@@ -8,14 +8,17 @@
         </header>
 
         <section class="modal-card-body">
-            <div class="field">
-                <p class="control has-icons-left">
+            <div class="field has-addons">
+                <div class="control has-icons-left" style="width: 100%;">
                     <input type="email" placeholder="이메일 (필수)" id="register-modal-input-id" class="input"/>
 
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                </p>
+                </div>
+                <div id="btn-check-dup" class="control">
+                    <button class="button is-sparta" onclick="checkEmailDup()">중복확인</button>
+                </div>
             </div>
 
             <div class="field">
@@ -38,14 +41,17 @@
                 </p>
             </div>
 
-            <div class="field">
-                <p class="control has-icons-left">
+            <div class="field has-addons">
+                <div class="control has-icons-left" style="width: 100%">
                     <input type="text" placeholder="닉네임 (필수)" id="register-modal-input-nickname" class="input"/>
 
                     <span class="icon is-small is-left">
                         <i class="fa-solid fa-user"></i>
                     </span>
-                </p>
+                </div>
+                <div id="btn-check-dup" class="control">
+                    <button class="button is-sparta" onclick="checkNicknameDup()">중복확인</button>
+                </div>
             </div>
 
             <div class="field">
