@@ -44,8 +44,6 @@ window.deleteMessage = (messageId) => {
     deleteMessage(messageId);
 };
 
-
-
 /* Ajax */
 // 쪽지 보내기
 function createMessage() {
@@ -112,8 +110,8 @@ function getMessageList() {
                 let senderUserEmail = messages[index]['sender'];
                 let title = messages[index]['title'];
                 let date = messages[index]['createDate'];
-                const day = new Date(date + '+0900').toISOString().split("T")[0];
-                const time = new Date(date + '+0900').toTimeString().split(" ")[0];
+                const day = new Date(date + '+0900').toISOString().split('T')[0];
+                const time = new Date(date + '+0900').toTimeString().split(' ')[0];
                 const datestr = day + ' ' + time;
 
                 let read = messages[index]['readState'] ? '읽음' : '읽지않음';
@@ -144,6 +142,7 @@ function getMessageList() {
         }
     });
 }
+
 
 // 쪽지 상세 읽기
 function getMessage(messageId) {

@@ -187,3 +187,30 @@ window.openPost = (id) => {
         window.location.href = '/post?id=' + id;
     }
 };
+
+/* 사이드바 권한 제한 */
+window.authorizationProfile = () => {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+        // location.href = 'home';
+        // alert('로그인 후 이용가능합니다.');
+        window.openLoginModal();
+    }
+};
+
+window.authorizationMessage = () => {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+        window.openLoginModal();
+    }
+};
+
+window.authorizationBookmark = () => {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+        window.openLoginModal();
+    }
+};
+
+window.authorizationEditor = () => {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+        window.openLoginModal();
+    }
+};
