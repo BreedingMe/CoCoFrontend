@@ -26,10 +26,20 @@
     font-weight: bold;
 }
 
-#post-detail .button {
+
+#post-detail .updatebtn {
     transition-duration: 0.2s;
     border: 2px solid #e7e7e7;
     padding: 10px 10px 10px 10px;
+    margin: 4% 0% 0% 0%;
+    float: right;
+}
+
+#post-detail .deletebtn {
+    transition-duration: 0.2s;
+    border: 2px solid #e7e7e7;
+    padding: 10px 10px 10px 10px;
+    margin: 4% 6% 0% 0%;
     float: right;
 }
 
@@ -44,6 +54,14 @@
     color:#ffffff;
     font-weight: bold;
     border: solid #ffffff;
+}
+
+#post-detail .postbtn {
+    margin-left: 2%;
+    padding : 1% 1% 1% 1%;
+    display: flex;
+    float:left;
+    font-size: 12px;
 }
 
 #post-detail .none {

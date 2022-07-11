@@ -34,6 +34,11 @@ window.createMessageButton = () => {
     createMessage();
 };
 
+// 글 상세페이지에서 쪽지 보내기 버튼
+window.openMessageModal = () => {
+    $('#message-create-modal').css('display', 'flex');
+};
+
 // 쪽지 상세 읽기
 window.getMessage = (messageId) => {
     getMessage(messageId);
@@ -53,7 +58,7 @@ function createMessage() {
     let content = $('#content_createMessage').val();
 
     if (receiver == '') {
-        alert('받는 사람 이메일 주소를 입력해주세요!');
+        alert('받는 사람 닉네임을 입력해주세요!');
         return;
     }
 
@@ -107,7 +112,7 @@ function getMessageList() {
 
             for (let index = 0; index < messages.length; index++) {
                 let messageId = messages[index]['id'];
-                let senderUserEmail = messages[index]['sender'];
+                let senderNickname = messages[index]['senderNickname'];
                 let title = messages[index]['title'];
                 let date = messages[index]['createDate'];
                 const day = new Date(date + '+0900').toISOString().split('T')[0];
@@ -128,7 +133,7 @@ function getMessageList() {
                                             <div class="card-content-box">
                                                 <div class="content">
                                                     <div class="tag">보낸 사람</div>
-                                                    <div class="getMessage">${senderUserEmail}</div>
+                                                    <div class="getMessage">${senderNickname}</div>
                                                 </div>
                                                 <div class="content">
                                                     <div class="tag">받은 시간</div>
