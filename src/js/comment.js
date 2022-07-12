@@ -1,36 +1,26 @@
 import $ from 'jquery';
 
-// 댓글 작성 버튼
-// window.writeComment = () => {
-//     writeComment();
-// };
+// function resizePostHeight() {
+//     let post = $('#post');
 
-// window.deleteComment = (commentId) => {
-//     deleteComment(commentId);
-//     console.log(commentId);
-// };
+//     if (post.height() < $('body').height()) {
+//         post.css('height', '100%');
+//     }
+//     else {
+//         post.css('height', '');
+//     }
+// }
 
-function resizePostHeight() {
-    let post = $('#post');
+// function resizePostContainerHeight() {
+//     let postContainer = $('#post .container');
 
-    if (post.height() < $('body').height()) {
-        post.css('height', '100%');
-    }
-    else {
-        post.css('height', '');
-    }
-}
-
-function resizePostContainerHeight() {
-    let postContainer = $('#post .container');
-
-    if (postContainer.height() < $('body').height()) {
-        postContainer.css('height', '100%');
-    }
-    else {
-        postContainer.css('height', '');
-    }
-}
+//     if (postContainer.height() < $('body').height()) {
+//         postContainer.css('height', '100%');
+//     }
+//     else {
+//         postContainer.css('height', '');
+//     }
+// }
 
 // 댓글 작성
 window.writeComment = () => {
