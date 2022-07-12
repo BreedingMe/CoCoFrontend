@@ -230,7 +230,7 @@ window.checkEmailDup = () => {
             }
         }
     });
-}
+};
 
 // 닉네임 중복 확인
 window.checkNicknameDup = () => {
@@ -266,4 +266,4 @@ window.checkNicknameDup = () => {
             }
         }
     });
-}
+};

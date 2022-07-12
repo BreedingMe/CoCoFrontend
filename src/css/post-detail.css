@@ -31,7 +31,7 @@
     transition-duration: 0.2s;
     border: 2px solid #e7e7e7;
     padding: 10px 10px 10px 10px;
-    margin: 4% 0% 0% 0%;
+    margin: 3% 1% 0% 0%;
     float: right;
 }
 
@@ -39,7 +39,7 @@
     transition-duration: 0.2s;
     border: 2px solid #e7e7e7;
     padding: 10px 10px 10px 10px;
-    margin: 4% 6% 0% 0%;
+    margin: 3% 0% 0% 0%;
     float: right;
 }
 
@@ -50,7 +50,7 @@
 }
 
 #post-detail .deletebtn:hover {
-    background-color: #ff1500da;
+    background-color: #ff1500cb;
     color:#ffffff;
     font-weight: bold;
     border: solid #ffffff;
