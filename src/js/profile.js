@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // user 아이콘 누르면 profile 뜸
 $(document).ready(() => {
@@ -44,6 +45,50 @@ function resizeProfileContainerHeight() {
     }
 }
 
+/* 회원 탈퇴 */
+window.withdrawal = () => {
+    withdrawal();
+};
+
+/* 창이 닫히면 자동으로 로그아웃 */
+let closingWindow = false;
+$(window).on('focus', function () {
+    closingWindow = false;
+    //if the user interacts with the window, then the window is not being
+    //closed
+});
+
+// $(window).on('blur', function () {
+//     closingWindow = true;
+//     if (!document.hidden) { //when the window is being minimized
+//         closingWindow = false;
+//     }
+//     $(window).on('resize', function (e) { //when the window is being maximized
+//         closingWindow = false;
+//     });
+//     $(window).off('resize'); //avoid multiple listening
+// });
+
+$('html').on('mouseleave', function () {
+    closingWindow = true;
+    //if the user is leaving html, we have more reasons to believe that he's
+    //leaving or thinking about closing the window
+});
+
+$('html').on('mouseenter', function () {
+    closingWindow = false;
+    //if the user's mouse its on the page, it means you don't need to logout
+    //them, didn't it?
+});
+
+// 웹 브러우저 윈도우 창 종료 직전 발생하는 이벤트
+window.addEventListener('beforeunload', function () {
+    if (closingWindow) {
+        Cookies.remove('token');
+        window.location.href = '/home';
+    }
+});
+
 /* AJAX */
 // /{post_id} -> /post_id
 // 회원 정보 받아서 그리기
@@ -72,7 +117,8 @@ function getProfile() {
                                     </a>
                                 </figure>
                             </article>
-                            <a id="edit-profile-modal-open-btn" class="button has-text-centered is-rounded" aria-label="edit" style="float: right;">
+                            <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
+                            <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
                                 <span>프로필 수정</span>
                             </a>
                             <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
@@ -202,6 +248,37 @@ function editProfileContentDelete() {
 }
 
 // 회원 탈퇴
+
+function withdrawal() {
+
+    $.ajax({
+        type: 'DELETE',
+        url: process.env.BACKEND_HOST + '/user',
+
+        xhrFields: {
+            withCredentials: true },
+        contentType: 'application/json',
+
+        success: function (response) {
+            console.log(response);
+            Cookies.remove('token');
+            alert('회원탈퇴에 성공했습니다.');
+            window.location.href = '/home';
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+
+
+// 로그아웃
+window.logout = () => {
+    alert('로그아웃 되었습니다.');
+    Cookies.remove('token');
+    window.location.href = '/home';
+};
 
 // function changeScreen(currentScreen) {
 //     for (let screen in SCREEN) {

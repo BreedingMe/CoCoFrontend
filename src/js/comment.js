@@ -97,6 +97,7 @@ window.getCommentList = () => {
                 let timeComment = new Date(response[i]['createDate'] + '+0900');
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
+                let enableDelete = response[i]['enableDelete'];
                 // console.log(response[i]['date']);
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
@@ -111,7 +112,7 @@ window.getCommentList = () => {
                                                 <small>· ${timeBefore}</small>
                                                 <br>
                                                 ${comment}
-                                                <a id="deleteComment${i}" class="button has-text-centered is-rounded is-small")" onclick="deleteComment(${id})">삭제</a>
+                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" onclick="deleteComment(${id})">삭제</a>
                                             </p>
                                         </div>
                                     </div>
