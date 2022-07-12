@@ -44,6 +44,7 @@ window.openRegisterModal = () => {
 
 window.closeRegisterModal = () => {
     $('#register-modal').css('display', 'none');
+    $('#login-modal').css('display', 'flex');
 };
 
 window.toggleRegisterModalFieldAdminPassword = () => {

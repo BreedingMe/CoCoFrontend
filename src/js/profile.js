@@ -45,6 +45,11 @@ function resizeProfileContainerHeight() {
     }
 }
 
+/* 회원 탈퇴 */
+window.withdrawal = () => {
+    withdrawal();
+};
+
 /* 창이 닫히면 자동으로 로그아웃 */
 let closingWindow = false;
 $(window).on('focus', function () {
@@ -112,8 +117,8 @@ function getProfile() {
                                     </a>
                                 </figure>
                             </article>
-                            <button id="logoutbtn" class="button has-text-centered is-rounded deletebtn" onclick="logout()">로그아웃</button>
-                            <a id="edit-profile-modal-open-btn" class="button has-text-centered is-rounded" aria-label="edit" style="float: right;">
+                            <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
+                            <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
                                 <span>프로필 수정</span>
                             </a>
                             <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
@@ -243,6 +248,30 @@ function editProfileContentDelete() {
 }
 
 // 회원 탈퇴
+
+function withdrawal() {
+
+    $.ajax({
+        type: 'DELETE',
+        url: process.env.BACKEND_HOST + '/user',
+
+        xhrFields: {
+            withCredentials: true },
+        contentType: 'application/json',
+
+        success: function (response) {
+            console.log(response);
+            Cookies.remove('token');
+            alert('회원탈퇴에 성공했습니다.');
+            window.location.href = '/home';
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+
 
 // 로그아웃
 window.logout = () => {
