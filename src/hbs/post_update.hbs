@@ -38,26 +38,41 @@
                     <label class="btn btn-outline-primary" for="btnradio2">OFFLINE</label>
                 </div>
             </div>
-            <div class="field is-vertical">
-                <div class="field-label is-normal has-text-left m-1">
-                    <label class="label">문의 방법</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control">
-                            <input class="input" type="text" id="contact-update-input" placeholder="문의 방법">
+            <div class="field is-vertical" >
+                    <div class="field-label is-normal has-text-left m-1">
+                        <label class="label">문의 방법</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control select is-info">
+                                <select id="contact" name="contact" class="contact">
+                                    <option value="카카오톡">카카오톡</option>
+                                    <option value="이메일">이메일</option>
+                                    <option value="쪽지">쪽지</option>
+                                    <option value="기타">기타(본문에 기재)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <div class="field is-vertical">
                 <div class="field-label is-normal has-text-left m-1">
                     <label class="label">예상 기간</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
-                        <div class="control">
-                            <input class="input" type="text" id="period-update-input" placeholder="예상 기간">
+                        <div class="control select is-info">
+                            <select id="period" name="period" class="period">
+                                {{!-- name.value 가 되는건데 value 값이 넘어감 select에 넣어줘도 되고,--}}
+                                <option value="진행기간">진행 기간</option>
+                                <option value="1개월">1개월</option>
+                                <option value="2개월">2개월</option>
+                                <option value="3개월">3개월</option>
+                                <option value="4개월">4개월</option>
+                                <option value="5개월">5개월</option>
+                                <option value="6개월">6개월</option>
+                                <option value="6개월이상">6개월 이상</option>
+                            </select>
                         </div>
                     </div>
                 </div>

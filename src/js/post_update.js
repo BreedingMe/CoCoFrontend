@@ -16,8 +16,8 @@ function showPostInfo() {
     $('#title-update-input').val(`${post.title}`);
     $(`input:radio[name="btnradio-recruitment"]:input[value=${post.recruitmentState}]`).attr('checked', true);
     $(`input:radio[name="btnradio-update"]:input[value=${post.meetingType}]`).attr('checked', true);
-    $('#period-update-input').val(`${post.period}`);
-    $('#contact-update-input').val(`${post.contact}`);
+    $('#period').val(`${post.period}`);
+    $('#contact').val(`${post.contact}`);
     $('#content-update-input').val(`${post.content}`);
 }
 
@@ -30,8 +30,8 @@ window.updatePost = () => {
     let title = $('#title-update-input').val();
     let recruitmentState = $('input[name=btnradio-recruitment]:checked').val();
     let meetingType = $('input[name=btnradio-update]:checked').val();
-    let contact = $('#contact-update-input').val();
-    let period = $('#period-update-input').val();
+    let contact = $('#contact').val();
+    let period = $('#period').val();
     let content = $('#content-update-input').val();
 
     if (title == '') {

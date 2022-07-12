@@ -4,8 +4,8 @@ import $ from 'jquery';
 window.registerPost = () => {
     let title = $('#title-input').val();
     let meetingType = $('input[name=btnradio]:checked').val();
-    let contact = $('#contact-input').val();
-    let period = $('#period-input').val();
+    let contact = $('#contact').val();
+    let period = $('#period').val();
     let content = $('#content-input').val();
 
     if (title == '') {
