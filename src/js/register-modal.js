@@ -4,9 +4,9 @@ import $ from 'jquery';
 
 /* AJAX */
 
-function register(id, password, nickname, githubURL, portfolioURL, admin, adminToken) {
+function register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken) {
     $('#register-modal-help').text('');
-
+    console.log(introduction);
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/register',
@@ -17,16 +17,17 @@ function register(id, password, nickname, githubURL, portfolioURL, admin, adminT
             nickname: nickname,
             githubUrl: githubURL,
             portfolioUrl: portfolioURL,
+            introduction: introduction,
             admin: admin,
             adminToken: adminToken
         }),
         success: function (response) {
-            console.log(response)
+            console.log(response);
             alert('회원 가입을 완료했습니다.');
             window.closeRegisterModal();
         },
         error: function (response) {
-            console.log(response)
+            console.log(response);
             alert('회원 가입을 실패했습니다.');
         }
     });
@@ -58,16 +59,17 @@ window.requestRegister = () => {
     let nickname = $('#register-modal-input-nickname').val();
     let githubURL = $('#register-modal-input-github-url').val();
     let portfolioURL = $('#register-modal-input-portfolio-url').val();
+    let introduction = '';
     let admin = $('#register-modal-checkbox-admin').prop('checked');
     let adminToken = $('#register-modal-input-admin-token').val();
 
-    if (githubURL == '') {
-        githubURL = null;
-    }
+    // if (githubURL == '') {
+    //     githubURL = null;
+    // }
 
-    if (portfolioURL == '') {
-        portfolioURL = null;
-    }
+    // if (portfolioURL == '') {
+    //     portfolioURL = null;
+    // }
 
     // 이메일 입력 여부 검증
 
@@ -175,7 +177,7 @@ window.requestRegister = () => {
     $('#register-modal-input-admin-token').val('');
     $('#register-modal-field-admin-token').addClass('is-hidden');
 
-    register(id, password, nickname, githubURL, portfolioURL, admin, adminToken);
+    register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken);
 };
 
 //이메일 규칙
