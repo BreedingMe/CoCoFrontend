@@ -150,12 +150,14 @@ function getProfile() {
 // 회원 정보 수정 모달
 function openEditProfileModal() {
     // alert('되나요~');
+    let token = localStorage.getItem('token');
     $('#modal-post').addClass('is-active');
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type','application/json');
+            xhr.setRequestHeader('Authorization','Bearer ' + token);
         },
         data: {},
         contentType: 'application/json',
@@ -218,12 +220,13 @@ window.editProfile = () => {
         'portfolioUrl': portfolioUrl,
         'introduction': introduction
     };
-
+    let token = localStorage.getItem('token');
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type','application/json');
+            xhr.setRequestHeader('Authorization','Bearer ' + token);
         },
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -253,18 +256,19 @@ function editProfileContentDelete() {
 // 회원 탈퇴
 
 function withdrawal() {
-
+    let token = localStorage.getItem('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/user',
-
-        xhrFields: {
-            withCredentials: true },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type','application/json');
+            xhr.setRequestHeader('Authorization','Bearer ' + token);
+        },
         contentType: 'application/json',
 
         success: function (response) {
             console.log(response);
-            Cookies.remove('token');
+            localStorage.removeItem('token');
             alert('회원탈퇴에 성공했습니다.');
             window.location.href = '/home';
         },
@@ -274,12 +278,10 @@ function withdrawal() {
     });
 }
 
-
-
 // 로그아웃
 window.logout = () => {
     alert('로그아웃 되었습니다.');
-    Cookies.remove('token');
+    localStorage.removeItem('token');
     window.location.href = '/home';
 };
 

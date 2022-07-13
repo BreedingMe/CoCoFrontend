@@ -10,7 +10,7 @@ function login(id, password) {
 
     $.ajax({
         type: 'POST',
-        url: 'https://api.cocoding.xyz/login',
+        url: process.env.BACKEND_HOST + '/login',
         contentType: 'application/json',
         data: JSON.stringify({
             email: id,
