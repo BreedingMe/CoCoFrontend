@@ -60,6 +60,7 @@ window.getCommentList = () => {
         },
         date: {},
         success: function (response) {
+            // localStorage.setItem('comments', JSON.stringify(response));
             console.log(response);
             for (let i = 0; i < response.length; i++) {
                 let id = response[i]['id'];
@@ -69,7 +70,12 @@ window.getCommentList = () => {
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
                 let enableDelete = response[i]['enableDelete'];
-                // console.log(response[i]['date']);
+                let memberRole = response[i]['memberRole'];
+                let isAdmin = false;
+
+                if (memberRole == 'ADMIN') {
+                    isAdmin = true;
+                }
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-24x24">
@@ -83,7 +89,7 @@ window.getCommentList = () => {
                                                 <small>· ${timeBefore}</small>
                                                 <br>
                                                 ${comment}
-                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" onclick="deleteComment(${id})">삭제</a>
+                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
                                             </p>
                                         </div>
                                     </div>
@@ -132,12 +138,12 @@ window.getCommentList = () => {
 // };
 
 // 댓글 삭제
-window.deleteComment = (id) => {
+window.deleteComment = (id, isAdmin) => {
     let token = localStorage.getItem('token');
 
     $.ajax({
         type: 'DELETE',
-        url: process.env.BACKEND_HOST + '/comment/' + id,
+        url: isAdmin ? process.env.BACKEND_HOST + '/admin/comment/' + id : process.env.BACKEND_HOST + '/comment/' + id,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
