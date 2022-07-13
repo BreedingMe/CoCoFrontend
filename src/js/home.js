@@ -1,7 +1,6 @@
 /* Third Party JS */
 
 import $ from 'jquery';
-import Cookies from 'js-cookie';
 
 /* JS */
 
@@ -53,9 +52,6 @@ function getRecrutingPosts() {
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/recruit/list',
-        xhrFields: {
-            withCredentials: true
-        },
         success: function (response) {
             let posts = response;
 
@@ -119,9 +115,6 @@ function getPosts() {
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/list',
-        xhrFields: {
-            withCredentials: true
-        },
         success: function (response) {
             let posts = response;
 
@@ -180,7 +173,7 @@ function getPosts() {
 /* Event Listener */
 
 window.openPost = (id) => {
-    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
         window.openLoginModal();
     }
     else {
@@ -189,26 +182,26 @@ window.openPost = (id) => {
 };
 
 /* 사이드바 권한 제한 */
-// window.authorizationProfile = () => {
-//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-//         window.openLoginModal();
-//     }
-// };
+window.authorizationProfile = () => {
+    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+        window.openLoginModal();
+    }
+};
 
-// window.authorizationMessage = () => {
-//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-//         window.openLoginModal();
-//     }
-// };
+window.authorizationMessage = () => {
+    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+        window.openLoginModal();
+    }
+};
 
-// window.authorizationBookmark = () => {
-//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-//         window.openLoginModal();
-//     }
-// };
+window.authorizationBookmark = () => {
+    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+        window.openLoginModal();
+    }
+};
 
-// window.authorizationEditor = () => {
-//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-//         window.openLoginModal();
-//     }
-// };
+window.authorizationEditor = () => {
+    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+        window.openLoginModal();
+    }
+};
