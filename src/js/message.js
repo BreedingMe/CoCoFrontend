@@ -74,13 +74,16 @@ function createMessage() {
 
     let data = { 'receiver': receiver, 'title': title, 'content': content };
 
+    let token = localStorage.getItem('token');
+
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/message',
 
-        xhrFields: {
-            withCredentials: true },
-        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
         data: JSON.stringify(data),
 
         success: function () {
@@ -99,20 +102,22 @@ function createMessage() {
 function getMessageList() {
     $('#message-list').empty();
 
+    let token = localStorage.getItem('token');
+
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/message/list',
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         data: {},
         success: function (response) {
             let messages = response;
 
             for (let index = 0; index < messages.length; index++) {
                 let messageId = messages[index]['id'];
-                let senderNickname = messages[index]['senderNickname'];
+                let senderNickname = messages[index]['sender'];
                 let title = messages[index]['title'];
                 let date = messages[index]['createDate'];
                 const day = new Date(date + '+0900').toISOString().split('T')[0];
@@ -151,15 +156,17 @@ function getMessageList() {
 
 // 쪽지 상세 읽기
 function getMessage(messageId) {
+    let token = localStorage.getItem('token');
 
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/message/' + messageId,
 
-        xhrFields: {
-            withCredentials: true },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
         data: {},
-        contentType: 'application/json',
 
         success: function (response) {
             let message = response;
@@ -178,14 +185,15 @@ function getMessage(messageId) {
 
 // 쪽지 삭제
 function deleteMessage(messageId) {
-
+    let token = localStorage.getItem('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/message/' + messageId,
 
-        xhrFields: {
-            withCredentials: true },
-        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
 
         success: function (response) {
             console.log(response);
@@ -197,3 +205,5 @@ function deleteMessage(messageId) {
         }
     });
 }
+
+
