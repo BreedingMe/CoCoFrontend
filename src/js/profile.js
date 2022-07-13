@@ -109,7 +109,6 @@ function getProfile() {
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
-            console.log(nickname, github, portfolio, introduction);
             let tempHtml = `<article class="media">
                                 <figure class="media-left" style="align-self: center;">
                                     <a class="image is-128x128" href="#">
