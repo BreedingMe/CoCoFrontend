@@ -112,14 +112,13 @@ function getProfile() {
                 portfolio = '포트폴리오 주소';
             }
             let introduction = user['introduction'];
-<<<<<<< HEAD
-=======
+
             console.log(introduction);
             if (introduction == '') {
                 introduction = '자기소개를 입력해주세요';
             }
             console.log(nickname, github, portfolio, introduction);
->>>>>>> develop
+
             let tempHtml = `<article class="media">
                                 <figure class="media-left" style="align-self: center;">
                                     <a class="image is-128x128" href="#">
