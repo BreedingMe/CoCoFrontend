@@ -1,27 +1,5 @@
 import $ from 'jquery';
 
-// function resizePostHeight() {
-//     let post = $('#post');
-
-//     if (post.height() < $('body').height()) {
-//         post.css('height', '100%');
-//     }
-//     else {
-//         post.css('height', '');
-//     }
-// }
-
-// function resizePostContainerHeight() {
-//     let postContainer = $('#post .container');
-
-//     if (postContainer.height() < $('body').height()) {
-//         postContainer.css('height', '100%');
-//     }
-//     else {
-//         postContainer.css('height', '');
-//     }
-// }
-
 // 댓글 작성
 window.writeComment = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -42,17 +20,18 @@ window.writeComment = () => {
         // 'date_give': today
     };
 
+    let token = localStorage.getItem('token');
+
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/comment/' + params.id,
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         data: JSON.stringify(data),
         success: function () {
             alert('댓글이 작성되었습니다');
-            // window.getCommentList();
             window.location.reload();
         },
         error: function (response) {
@@ -70,13 +49,15 @@ window.getCommentList = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
+    let token = localStorage.getItem('token');
+
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/comment/list/' + params.id,
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         date: {},
         success: function (response) {
             console.log(response);
@@ -152,13 +133,15 @@ window.getCommentList = () => {
 
 // 댓글 삭제
 window.deleteComment = (id) => {
+    let token = localStorage.getItem('token');
+
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/comment/' + id,
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         data: {},
         success: function (response) {
             console.log(response);

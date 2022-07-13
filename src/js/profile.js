@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import Cookies from 'js-cookie';
 
 // user 아이콘 누르면 profile 뜸
 $(document).ready(() => {
@@ -99,14 +98,13 @@ function getProfile() {
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type','application/json');
-            xhr.setRequestHeader('Authorization','Bearer ' + token);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         // date: {},
         success: function (response) {
             $('#profile_box').empty();
             let user = response;
-
             let nickname = user['nickname'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
@@ -128,7 +126,7 @@ function getProfile() {
                                 <div class="media-content content">
                                     <p>
                                         <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
-                                        <a href="${github}"><i class="fa-brands fa-github" style="font-size: xxx-large"
+                                        <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
                                                 aria-hidden="ture"></i></a><br>
                                         <a href="${portfolio}">${portfolio}</a><br>
                                         <span style="font-size: large;">${introduction}</span>
@@ -156,12 +154,11 @@ function openEditProfileModal() {
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type','application/json');
-            xhr.setRequestHeader('Authorization','Bearer ' + token);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         data: {},
         contentType: 'application/json',
-
         success: function (response) {
             let user = response;
             console.log();
@@ -225,14 +222,11 @@ window.editProfile = () => {
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type','application/json');
-            xhr.setRequestHeader('Authorization','Bearer ' + token);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         contentType: 'application/json',
         data: JSON.stringify(data),
-        // cache: false,
-        // contentType: false,
-        // processData: false,
         success: function () {
             alert('수정이 완료되었습니다.');
             window.location.reload();
@@ -254,18 +248,16 @@ function editProfileContentDelete() {
 }
 
 // 회원 탈퇴
-
 function withdrawal() {
     let token = localStorage.getItem('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type','application/json');
-            xhr.setRequestHeader('Authorization','Bearer ' + token);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         contentType: 'application/json',
-
         success: function (response) {
             console.log(response);
             localStorage.removeItem('token');
@@ -291,3 +283,8 @@ window.logout = () => {
 //     }
 //     $(`#${currentScreen}`).show();
 // }
+
+// 유저 프로필 보기 하는거 보류!
+// window.openMessageModal = () => {
+//     $('#message-create-modal').css('display', 'flex');
+// };
