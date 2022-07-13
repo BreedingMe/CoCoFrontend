@@ -45,14 +45,16 @@ window.registerPost = () => {
         'period': period,
         'content': content
     };
+    let token = localStorage.getItem('token');
+    console.log(token);
 
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/post',
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         data: JSON.stringify(data),
         success: function () {
             alert('글 저장이 완료되었습니다!');

@@ -189,26 +189,26 @@ window.openPost = (id) => {
 };
 
 /* 사이드바 권한 제한 */
-window.authorizationProfile = () => {
-    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-        window.openLoginModal();
-    }
-};
+// window.authorizationProfile = () => {
+//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+//         window.openLoginModal();
+//     }
+// };
 
-window.authorizationMessage = () => {
-    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-        window.openLoginModal();
-    }
-};
+// window.authorizationMessage = () => {
+//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+//         window.openLoginModal();
+//     }
+// };
 
-window.authorizationBookmark = () => {
-    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-        window.openLoginModal();
-    }
-};
+// window.authorizationBookmark = () => {
+//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+//         window.openLoginModal();
+//     }
+// };
 
-window.authorizationEditor = () => {
-    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
-        window.openLoginModal();
-    }
-};
+// window.authorizationEditor = () => {
+//     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
+//         window.openLoginModal();
+//     }
+// };
