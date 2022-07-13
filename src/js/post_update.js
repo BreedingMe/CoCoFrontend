@@ -25,7 +25,6 @@ function showPostInfo() {
 window.updatePost = () => {
     // 게시글 정보 가져오기
     let post = JSON.parse(localStorage.getItem('post'));
-    console.log(post);
 
     let title = $('#title-update-input').val();
     let recruitmentState = $('input[name=btnradio-recruitment]:checked').val();
@@ -81,15 +80,18 @@ window.updatePost = () => {
     };
     console.log(data);
 
+    let token = localStorage.getItem('token');
+    console.log(token);
+
     // 게시글 수정 요청
     $.ajax({
         type: 'PUT',
         // 게시글 ID는 어떻게 얻어오나?
         url: process.env.BACKEND_HOST + '/post/' + post.id,
-        xhrFields: {
-            withCredentials: true
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         data: JSON.stringify(data),
         success: function () {
             alert('글 수정이 완료되었습니다!');

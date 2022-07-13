@@ -11,16 +11,15 @@ window.initializePost = () => {
 function getPost() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-
+    let token = localStorage.getItem('token');
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/' + params['id'],
-
-        xhrFields: {
-            withCredentials: true },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
         data: {},
-        contentType: 'application/json',
-
         success: function (response) {
             let post = response;
             localStorage.setItem('post', JSON.stringify(post));
@@ -69,19 +68,18 @@ window.deletePost = () => {
     let post = JSON.parse(localStorage.getItem('post'));
     let memberRole = post.memberRole;
     let isAdmin = false;
-
     if (memberRole == 'ADMIN') {
         isAdmin = true;
     }
-
+    let token = localStorage.getItem('token');
     $.ajax({
         type: 'DELETE',
         url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
-
-        xhrFields: {
-            withCredentials: true },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
         data: {},
-
         success: function () {
             alert('글 삭제가 완료되었습니다.');
             window.location.href = '/home';

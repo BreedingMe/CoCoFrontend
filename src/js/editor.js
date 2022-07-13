@@ -46,7 +46,6 @@ window.registerPost = () => {
         'content': content
     };
     let token = localStorage.getItem('token');
-    console.log(token);
 
     $.ajax({
         type: 'POST',

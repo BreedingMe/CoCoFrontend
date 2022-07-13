@@ -79,13 +79,11 @@ function createMessage() {
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/message',
-
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         data: JSON.stringify(data),
-
         success: function () {
             alert('쪽지 보내기 완료!');
             window.closeCreateMessageModal();
@@ -96,7 +94,6 @@ function createMessage() {
         }
     });
 }
-
 
 // 쪽지 리스트 불러오기
 function getMessageList() {
@@ -153,7 +150,6 @@ function getMessageList() {
     });
 }
 
-
 // 쪽지 상세 읽기
 function getMessage(messageId) {
     let token = localStorage.getItem('token');
@@ -182,7 +178,6 @@ function getMessage(messageId) {
     });
 }
 
-
 // 쪽지 삭제
 function deleteMessage(messageId) {
     let token = localStorage.getItem('token');
@@ -205,5 +200,3 @@ function deleteMessage(messageId) {
         }
     });
 }
-
-
