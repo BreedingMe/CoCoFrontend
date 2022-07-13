@@ -108,7 +108,14 @@ function getProfile() {
             let nickname = user['nickname'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
+            if (portfolio == '') {
+                portfolio = '포트폴리오 주소';
+            }
             let introduction = user['introduction'];
+            console.log(introduction);
+            if (introduction == '') {
+                introduction = '자기소개를 입력해주세요';
+            }
             console.log(nickname, github, portfolio, introduction);
             let tempHtml = `<article class="media">
                                 <figure class="media-left" style="align-self: center;">
