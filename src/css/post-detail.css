@@ -56,14 +56,38 @@
     border: solid #ffffff;
 }
 
-#post-detail .postbtn {
+/* #post-detail .postbtn {
     margin-left: 2%;
     padding : 1% 1% 1% 1%;
     display: flex;
     float:left;
     font-size: 12px;
+} */
+
+#post-detail .nickname {
+    font-size: large;
+}
+
+#post-detail .icon {
+    margin-left: 1%;
 }
 
 #post-detail .none {
     display: none;
+}
+
+#post-profile-modal .modal-card-head {
+background-color: #ffffff;
+}
+
+#post-profile-modal .modal-card-body {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+}
+
+#post-profile-modal .modal-card-foot {
+    display: flex;
+    flex-direction:row-reverse;
+    background-color: #ffffff;
 }
