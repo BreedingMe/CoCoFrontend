@@ -1,3 +1,4 @@
+import { parse } from 'handlebars';
 import $ from 'jquery';
 
 // user 아이콘 누르면 profile 뜸
@@ -17,6 +18,7 @@ window.openEditProfileModal = () => {
 };
 
 //회원 정보 수정 취소 모달
+//이부분이 꼭 필요한지에 대해서 예기해보기(프로필 모달을 받으면 어차피 reload해주면 되니까)
 window.closeEditProfileModal = () => {
     $('#modal-post').css('display', 'none');
     window.location.reload();
@@ -93,7 +95,7 @@ window.withdrawal = () => {
 // 회원 정보 받아서 그리기
 function getProfile() {
     let token = localStorage.getItem('token');
-    console.log(token);
+
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
@@ -101,27 +103,26 @@ function getProfile() {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        // date: {},
         success: function (response) {
             $('#profile_box').empty();
             let user = response;
+            let profileImage = user['profileImageUrl'];
             let nickname = user['nickname'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
-            if (portfolio == '') {
+            if (portfolio == '' || portfolio == null) {
                 portfolio = '포트폴리오 주소';
             }
             let introduction = user['introduction'];
-            console.log(introduction);
-            if (introduction == '') {
+            if (introduction == '' || introduction == null) {
                 introduction = '자기소개를 입력해주세요';
             }
-            console.log(nickname, github, portfolio, introduction);
+            console.log(profileImage, nickname, github, portfolio, introduction);
             let tempHtml = `<article class="media">
                                 <figure class="media-left" style="align-self: center;">
                                     <a class="image is-128x128" href="#">
                                         <img class="is-rounded" style="border-radius: 50%;"
-                                            src="./static/profile/basicProfile3.png">
+                                        src="${profileImage}">
                                     </a>
                                 </figure>
                             </article>
@@ -154,7 +155,6 @@ function getProfile() {
 
 // 회원 정보 수정 모달
 function openEditProfileModal() {
-    // alert('되나요~');
     let token = localStorage.getItem('token');
     $('#modal-post').addClass('is-active');
     $.ajax({
@@ -165,18 +165,26 @@ function openEditProfileModal() {
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         data: {},
-        contentType: 'application/json',
         success: function (response) {
             let user = response;
-            console.log();
             let nickname = user['nickname'];
+            let profileImage = user['profileImageUrl'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
-
-            console.log(nickname, github, portfolio, introduction);
+            if (github == '' || github == null) {
+                github = '';
+            }
+            if (portfolio == '' || portfolio == null) {
+                portfolio = '포트폴리오 주소';
+            }
+            if (introduction == '' || introduction == null) {
+                introduction = '자기소개를 입력해주세요';
+            }
+            console.log(nickname, profileImage, github, portfolio, introduction);
 
             $('#nickname').val(`${nickname}`);
+            $('#profileImage').val(`${profileImage}`);
             $('#githubUrl').val(`${github}`);
             $('#portfolioUrl').val(`${portfolio}`);
             $('#introduction').val(`${introduction}`);
@@ -194,46 +202,54 @@ function closeEditProfileModal() {
 // function editProfile() {
 window.editProfile = () => {
     let nickname = $('#nickname').val();
+    // let profileImage = new FormData($('#upload')[0]);
+    // console.log(profileImage);
     let githubUrl = $('#githubUrl').val();
     let portfolioUrl = $('#portfolioUrl').val();
     let introduction = $('#introduction').val();
-
-    console.log(nickname, githubUrl, portfolioUrl, introduction);
-
+    let profileImage = $('input[name="image"]').get(0).files[0];
     let formData = new FormData();
+    console.log(nickname, githubUrl, portfolioUrl, introduction, profileImage);
 
     if (!nickname == '') {
         formData.append('nickname', nickname);
     }
 
+    if (!profileImage == '') {
+        formData.append('file', profileImage);
+    }
+
     if (!githubUrl == '') {
-        formData.append('github_url', githubUrl);
+        formData.append('githubUrl', githubUrl);
     }
 
     if (!portfolioUrl == '') {
-        formData.append('portfolio_url', portfolioUrl);
+        formData.append('portfolioUrl', portfolioUrl);
     }
 
     if (!introduction == '') {
         formData.append('introduction', introduction);
     }
 
-    let data = {
-        'nickname': nickname,
-        'githubUrl': githubUrl,
-        'portfolioUrl': portfolioUrl,
-        'introduction': introduction
-    };
+    // let data = {
+    //     'nickname': nickname,
+    //     'profileImageUrl': profileImage,
+    //     'githubUrl': githubUrl,
+    //     'portfolioUrl': portfolioUrl,
+    //     'introduction': introduction
+    // };
+
     let token = localStorage.getItem('token');
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data',
+        data: formData,
         success: function () {
             alert('수정이 완료되었습니다.');
             window.location.reload();
@@ -247,10 +263,44 @@ window.editProfile = () => {
     // window.location.href = '/profile';
 };
 
+// window.editProfileImage = () => {
+//     let profileImage = $('input[name="image"]').get(0).files[0];
+//     let formData = new FormData();
+//     console.log(profileImage);
+
+//     if (!profileImage == '') {
+//         formData.append('file', profileImage);
+//     }
+
+//     let token = localStorage.getItem('token');
+//     $.ajax({
+//         type: 'POST',
+//         url: process.env.BACKEND_HOST + '/user',
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+//         },
+//         contentType: false,
+//         processData: false,
+//         enctype: 'multipart/form-data',
+//         data: formData,
+//         success: function () {
+//             alert('수정이 완료되었습니다.');
+//             window.location.reload();
+//             changeScreen(SCREEN['HOME']);
+//         },
+//         error: function (response) {
+//             console.log(response);
+//             alert('프로필 수정에 실패하였습니다.');
+//         }
+//     });
+//     // window.location.href = '/profile';
+// };
+
 function editProfileContentDelete() {
     $('#nickname').val('');
-    $('#github-url').val('');
-    $('#portfolio-url').val('');
+    $('#image').val(`${profileImage}`);
+    $('#githubUrl').val('');
+    $('#portfolioUrl').val('');
     $('#introduction').val('');
 }
 
@@ -264,7 +314,6 @@ function withdrawal() {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         success: function (response) {
             console.log(response);
             localStorage.removeItem('token');

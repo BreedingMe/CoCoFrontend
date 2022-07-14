@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 /* AJAX */
 
-function register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken) {
+function register(id, password, nickname, profileImageUrl, githubURL, portfolioURL, introduction, admin, adminToken) {
     $('#register-modal-help').text('');
     console.log(introduction);
     $.ajax({
@@ -15,6 +15,7 @@ function register(id, password, nickname, githubURL, portfolioURL, introduction,
             email: id,
             password: password,
             nickname: nickname,
+            profileImageUrl: profileImageUrl,
             githubUrl: githubURL,
             portfolioUrl: portfolioURL,
             introduction: introduction,
@@ -57,6 +58,7 @@ window.requestRegister = () => {
     let password = $('#register-modal-input-password').val();
     let confirmPassword = $('#register-modal-input-confirm-password').val();
     let nickname = $('#register-modal-input-nickname').val();
+    let profileImageUrl = './static/profile/basicProfile3.png';
     let githubURL = $('#register-modal-input-github-url').val();
     let portfolioURL = $('#register-modal-input-portfolio-url').val();
     let introduction = '';
@@ -177,7 +179,7 @@ window.requestRegister = () => {
     $('#register-modal-input-admin-token').val('');
     $('#register-modal-field-admin-token').addClass('is-hidden');
 
-    register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken);
+    register(id, password, nickname, profileImageUrl, githubURL, portfolioURL, introduction, admin, adminToken);
 };
 
 //이메일 규칙
