@@ -56,6 +56,16 @@
     border: solid #ffffff;
 }
 
+#post-detail .bookmark {
+    float: right;
+    margin-right: 4%;
+    font-size: 150%;
+}
+
+#post-detail .bookmark:hover {
+    color: coral;
+}
+
 /* #post-detail .postbtn {
     margin-left: 2%;
     padding : 1% 1% 1% 1%;

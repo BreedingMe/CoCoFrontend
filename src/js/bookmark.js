@@ -17,7 +17,6 @@ window.deleteBookmark = (id) => {
 function registerBookmark(id) {
 
     console.log(id);
-
     let token = localStorage.getItem('token');
 
     let data = { 'id' : id };

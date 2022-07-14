@@ -151,7 +151,6 @@ function getPostingUserProfile() {
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
-            console.log(nickname);
             $('#nickname_post').html(nickname);
             $('#github_post').html(github);
             $('#portfolio_post').html(portfolio);

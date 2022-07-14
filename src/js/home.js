@@ -132,7 +132,7 @@ function getPosts() {
                 let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
                 let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
 
-                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}" onclick="openPost(${id})">
+                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
                                         <div class="content bookmark" onclick="registerBookmark(${id})">
