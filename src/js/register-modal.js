@@ -52,6 +52,10 @@ window.toggleRegisterModalFieldAdminPassword = () => {
     $('#register-modal-field-admin-token').toggleClass('is-hidden');
 };
 
+// 이메일/닉네임 중복 확인 여부
+let isEmailChecked = false;
+let isNicknameChecked = false;
+
 window.requestRegister = () => {
     let id = $('#register-modal-input-id').val();
     let password = $('#register-modal-input-password').val();
@@ -85,6 +89,14 @@ window.requestRegister = () => {
         $('#register-modal-input-id').addClass('is-danger');
         $('#register-modal-input-id').focus();
         $('#register-modal-help').text('정확한 이메일 형식으로 입력해 주세요.');
+        return;
+    }
+
+    // 중복확인 했는지?
+    if (isEmailChecked == false) {
+        $('#register-modal-input-id').addClass('is-danger');
+        $('#register-modal-input-id').focus();
+        $('#register-modal-help').text('이메일 중복확인을 해주세요.');
         return;
     }
 
@@ -140,12 +152,19 @@ window.requestRegister = () => {
     $('#register-modal-help').text('');
 
     // 닉네임 입력 여부 검증
-
     if (nickname == '') {
         $('#register-modal-input-nickname').addClass('is-danger');
         $('#register-modal-input-nickname').focus();
-        $('#register-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
 
+        return;
+    }
+
+    // 닉네임 중복확인 여부 확인
+    if (isNicknameChecked == false) {
+        $('#register-modal-input-nickname').addClass('is-danger');
+        $('#register-modal-input-nickname').focus();
+        $('#register-modal-help').text('닉네임 중복확인을 해주세요.').removeClass('is-success').addClass('is-danger');
         return;
     }
 
@@ -229,10 +248,20 @@ window.checkEmailDup = () => {
                 $('#register-modal-input-id').removeClass('is-danger').addClass('is-safe');
                 $("#input-username").focus();
                 $('#register-modal-help').text('사용 가능한 이메일입니다.').removeClass('is-danger').addClass('is-success');
+                isEmailChecked = true;
             }
         }
     });
 };
+
+// function isCheckEmailDup() {
+//     // 이메일 중복확인 버튼을 클릭했으면 true / 아니면 false
+
+//     if (checkEmailDup) {
+//         isChecked = true;
+//     }
+//     return isChecked;
+// }
 
 // 닉네임 중복 확인
 window.checkNicknameDup = () => {
@@ -242,7 +271,7 @@ window.checkNicknameDup = () => {
     if (nickname == '') {
         $('#register-modal-input-nickname').addClass('is-danger');
         $('#register-modal-input-nickname').focus();
-        $('#register-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -265,6 +294,7 @@ window.checkNicknameDup = () => {
                 $('#register-modal-input-nickname').removeClass('is-danger').addClass('is-safe');
                 $("#register-modal-input-nickname").focus();
                 $('#register-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
+                isNicknameChecked = true;
             }
         }
     });
