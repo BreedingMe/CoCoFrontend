@@ -1,4 +1,4 @@
-import { parse } from 'handlebars';
+
 import $ from 'jquery';
 
 // user 아이콘 누르면 profile 뜸
@@ -115,32 +115,32 @@ function getProfile() {
             }
             let introduction = user['introduction'];
             if (introduction == '' || introduction == null) {
-                introduction = '자기소개를 입력해주세요';
+                introduction = '자기소개';
             }
             console.log(profileImage, nickname, github, portfolio, introduction);
             let tempHtml = `<article class="media">
-                                <figure class="media-left" style="align-self: center;">
-                                    <a class="image is-128x128" href="#">
-                                        <img class="is-rounded" style="border-radius: 50%;"
-                                        src="${profileImage}">
-                                    </a>
-                                </figure>
-                            </article>
-                            <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
-                            <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
-                                <span>프로필 수정</span>
-                            </a>
-                            <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
-                                <div class="media-content content">
-                                    <p>
-                                        <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
-                                        <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
-                                                aria-hidden="ture"></i></a><br>
-                                        <a href="${portfolio}">${portfolio}</a><br>
-                                        <span style="font-size: large;">${introduction}</span>
-                                    </p>
-                                </div>
-                            </nav>`;
+                            <figure class="media-left" style="align-self: center;">
+                                <a class="image is-128x128" href="#">
+                                    <img class="is-rounded" style="border-radius: 50%;"
+                                    src="${profileImage}">
+                                </a>
+                            </figure>
+                        </article>
+                        <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
+                        <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
+                            <span>프로필 수정</span>
+                        </a>
+                        <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
+                            <div class="media-content content">
+                                <p>
+                                    <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
+                                    <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
+                                            aria-hidden="ture"></i></a><br>
+                                    <a href="${portfolio}">${portfolio}</a><br>
+                                    <span style="font-size: large;">${introduction}</span>
+                                </p>
+                            </div>
+                        </nav>`;
             $('#profile_box').append(tempHtml);
             $('#edit-profile-modal-open-btn').on('click', openEditProfileModal);
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
@@ -173,13 +173,13 @@ function openEditProfileModal() {
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
             if (github == '' || github == null) {
-                github = '';
+                github = '깃허브 주소';
             }
             if (portfolio == '' || portfolio == null) {
                 portfolio = '포트폴리오 주소';
             }
             if (introduction == '' || introduction == null) {
-                introduction = '자기소개를 입력해주세요';
+                introduction = '자기소개';
             }
             console.log(nickname, profileImage, github, portfolio, introduction);
 
@@ -202,8 +202,6 @@ function closeEditProfileModal() {
 // function editProfile() {
 window.editProfile = () => {
     let nickname = $('#nickname').val();
-    // let profileImage = new FormData($('#upload')[0]);
-    // console.log(profileImage);
     let githubUrl = $('#githubUrl').val();
     let portfolioUrl = $('#portfolioUrl').val();
     let introduction = $('#introduction').val();
@@ -211,6 +209,7 @@ window.editProfile = () => {
     let formData = new FormData();
     console.log(nickname, githubUrl, portfolioUrl, introduction, profileImage);
 
+    // formData로 바꿔주는 부분.
     if (!nickname == '') {
         formData.append('nickname', nickname);
     }
@@ -262,39 +261,6 @@ window.editProfile = () => {
     });
     // window.location.href = '/profile';
 };
-
-// window.editProfileImage = () => {
-//     let profileImage = $('input[name="image"]').get(0).files[0];
-//     let formData = new FormData();
-//     console.log(profileImage);
-
-//     if (!profileImage == '') {
-//         formData.append('file', profileImage);
-//     }
-
-//     let token = localStorage.getItem('token');
-//     $.ajax({
-//         type: 'POST',
-//         url: process.env.BACKEND_HOST + '/user',
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-//         },
-//         contentType: false,
-//         processData: false,
-//         enctype: 'multipart/form-data',
-//         data: formData,
-//         success: function () {
-//             alert('수정이 완료되었습니다.');
-//             window.location.reload();
-//             changeScreen(SCREEN['HOME']);
-//         },
-//         error: function (response) {
-//             console.log(response);
-//             alert('프로필 수정에 실패하였습니다.');
-//         }
-//     });
-//     // window.location.href = '/profile';
-// };
 
 function editProfileContentDelete() {
     $('#nickname').val('');
