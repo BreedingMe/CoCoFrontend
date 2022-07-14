@@ -66,12 +66,15 @@ function getRecrutingPosts() {
                 let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
                 let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
 
-                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}" onclick="openPost(${id})">
+                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
+                                        <div class="content bookmark">
+                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        </div>
                                     </div>
 
-                                    <div class="card-content">
+                                    <div class="card-content" onclick="openPost(${id})">
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>
@@ -129,9 +132,12 @@ function getPosts() {
                 let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
                 let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
 
-                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}" onclick="openPost(${id})">
+                let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title">${title}</p>
+                                        <div class="content bookmark" onclick="registerBookmark(${id})">
+                                            <i class="fa-regular fa-bookmark"></i>
+                                        </div>
                                     </div>
 
                                     <div class="card-content">
