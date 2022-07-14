@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // 게시글 상세 읽기
 window.initializePost = () => {
@@ -23,7 +24,7 @@ window.closePostingUserProfile = () => {
 function getPost() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/' + params['id'],
@@ -83,7 +84,7 @@ window.deletePost = () => {
     if (memberRole == 'ADMIN') {
         isAdmin = true;
     }
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
@@ -108,7 +109,7 @@ function getPostingUserNickname() {
 
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',
@@ -134,7 +135,7 @@ function getPostingUserProfile() {
 
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',

@@ -1,6 +1,7 @@
 /* Third Party JS */
 
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* AJAX */
 

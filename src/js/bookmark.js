@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* JS */
 window.initializeBookmark = () => {
@@ -17,7 +18,7 @@ window.deleteBookmark = (id) => {
 function registerBookmark(id) {
 
     console.log(id);
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     let data = { 'id' : id };
 
@@ -45,7 +46,7 @@ function registerBookmark(id) {
 function getBookmarkList() {
     $('#bookmark-list').empty();
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',
@@ -114,7 +115,7 @@ function getBookmarkList() {
 
 // 북마크 삭제
 function deleteBookmark(id) {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/bookmark/' + id,

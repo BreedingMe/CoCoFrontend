@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* 게시글 저장 */
 window.registerPost = () => {
@@ -45,7 +46,7 @@ window.registerPost = () => {
         'period': period,
         'content': content
     };
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'POST',

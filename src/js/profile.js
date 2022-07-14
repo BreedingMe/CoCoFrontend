@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // user 아이콘 누르면 profile 뜸
 $(document).ready(() => {
@@ -92,7 +93,7 @@ window.withdrawal = () => {
 // /{post_id} -> /post_id
 // 회원 정보 받아서 그리기
 function getProfile() {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     console.log(token);
     $.ajax({
         type: 'GET',
@@ -157,7 +158,7 @@ function getProfile() {
 // 회원 정보 수정 모달
 function openEditProfileModal() {
     // alert('되나요~');
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $('#modal-post').addClass('is-active');
     $.ajax({
         type: 'GET',
@@ -226,7 +227,7 @@ window.editProfile = () => {
         'portfolioUrl': portfolioUrl,
         'introduction': introduction
     };
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
@@ -258,7 +259,7 @@ function editProfileContentDelete() {
 
 // 회원 탈퇴
 function withdrawal() {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/user',
@@ -269,7 +270,7 @@ function withdrawal() {
         contentType: 'application/json',
         success: function (response) {
             console.log(response);
-            localStorage.removeItem('token');
+            Cookies.remove('token');
             alert('회원탈퇴에 성공했습니다.');
             window.location.href = '/home';
         },
@@ -282,7 +283,7 @@ function withdrawal() {
 // 로그아웃
 window.logout = () => {
     alert('로그아웃 되었습니다.');
-    localStorage.removeItem('token');
+    Cookies.remove('token');
     window.location.href = '/home';
 };
 

@@ -18,9 +18,8 @@ function login(id, password) {
         }),
         success: function (response) {
             let date = new Date();
-            // 1분
+            // 3시간
             date.setTime(date.getTime() + 3600000 * 3);
-            // localStorage.setItem('token', response['token']);
             Cookies.set('token', response['token'], { expires: date });
 
             window.location.reload();
