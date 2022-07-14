@@ -1,6 +1,7 @@
 /* Third Party JS */
 
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* JS */
 
@@ -179,7 +180,7 @@ function getPosts() {
 /* Event Listener */
 
 window.openPost = (id) => {
-    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
     else {
@@ -189,25 +190,25 @@ window.openPost = (id) => {
 
 /* 사이드바 권한 제한 */
 window.authorizationProfile = () => {
-    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
 };
 
 window.authorizationMessage = () => {
-    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
 };
 
 window.authorizationBookmark = () => {
-    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
 };
 
 window.authorizationEditor = () => {
-    if (localStorage.getItem('token') == undefined || localStorage.getItem('token') == '') {
+    if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
 };

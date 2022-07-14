@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 /* JS */
 // 쪽지 리스트 호출
@@ -74,7 +75,7 @@ function createMessage() {
 
     let data = { 'receiver': receiver, 'title': title, 'content': content };
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'POST',
@@ -99,7 +100,7 @@ function createMessage() {
 function getMessageList() {
     $('#message-list').empty();
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',
@@ -152,7 +153,7 @@ function getMessageList() {
 
 // 쪽지 상세 읽기
 function getMessage(messageId) {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',
@@ -180,7 +181,7 @@ function getMessage(messageId) {
 
 // 쪽지 삭제
 function deleteMessage(messageId) {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/message/' + messageId,
