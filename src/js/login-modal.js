@@ -1,7 +1,7 @@
 /* Third Party JS */
 
 import $ from 'jquery';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 /* AJAX */
 
@@ -17,11 +17,12 @@ function login(id, password) {
             password: password
         }),
         success: function (response) {
-            localStorage.setItem('token', response['token']);
+            let date = new Date();
+            // 1분
+            date.setTime(date.getTime() + 3600000 * 3);
+            // localStorage.setItem('token', response['token']);
+            Cookies.set('token', response['token'], { expires: date });
 
-            console.log(response.token);
-            console.log(response['token']);
-            // Cookies.set('token', response['token'], { expires: 1 });
             window.location.reload();
         },
         error: function () {
