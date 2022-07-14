@@ -72,6 +72,10 @@
     margin-left: 1%;
 }
 
+#post-detail .icon:hover {
+    color:coral;
+}
+
 #post-detail .none {
     display: none;
 }
