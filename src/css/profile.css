@@ -221,3 +221,37 @@
         margin-bottom: 8px;
     }
 }
+
+#profile .post-page {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+#profile .area {
+    display: table;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    line-height: 40px;
+}
+
+#profile .component {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+#profile .button {
+    transition-duration: 0.2s;
+    border: 2px solid #e7e7e7;
+    padding: 10px 10px 10px 10px;
+    float: right;
+}
+
+#profile .button:hover {
+    background-color: #e7e7e7;
+}
+
+#profile .media{
+    cursor: pointer;
+}

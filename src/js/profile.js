@@ -460,67 +460,67 @@ window.readMyComments = () => {
     $('#profile-section').empty();
 
     let token = Cookies.get('token');
+
     $.ajax({
         type: 'GET',
-        url: process.env.BACKEND_HOST + '/profile/posts',
+        url: process.env.BACKEND_HOST + '/profile/comments/',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
+        date: {},
         success: function (response) {
-            let posts = response;
+            // localStorage.setItem('comments', JSON.stringify(response));
+            console.log(response);
+            for (let i = 0; i < response.length; i++) {
+                let id = response[i]['id'];
+                let postId = response[i]['postId'];
+                let comment = response[i]['comments'];
+                //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
+                let timeComment = new Date(response[i]['createDate'] + '+0900');
+                let nickname = response[i]['nickname'];
+                let timeBefore = time2str(timeComment);
 
-            for (let index = 0; index < posts.length; index++) {
-                let id = posts[index]['id'];
-                let title = posts[index]['title'];
-                let meetingType = posts[index]['meetingType'];
-                let period = posts[index]['period'];
-                let hits = posts[index]['hits'];
-                let recruitmentState = posts[index]['recruitmentState'] ? '모집 완료' : '모집 중';
-
-                let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
-                let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
-
-                let tempHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
-                                    <div class="card-header">
-                                        <p class="card-header-title" onclick="openPost(${id})" >${title}</p>
-                                        <div onclick="deleteBookmark(${id})">
-                                            <button class="delete"></button>
+                let tempHtml = `<article class="media" id="${id}" onclick='openPost(${postId})'>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <span style="font-weight: normal">@${nickname}</span>
+                                                <small>· ${timeBefore}</small>
+                                                <br>
+                                                ${comment}
+                                                <a id="deleteComment${i}" class="button has-text-centered is-rounded is-small")" onclick="deleteComment(${id}, ${false})">삭제</a>
+                                            </p>
                                         </div>
                                     </div>
-
-                                    <div class="card-content" onclick="openPost(${id})">
-                                        <div class="card-content-box">
-                                            <div class="content">
-                                                <span>기간</span>
-                                                <span class="bubble-item bubble">${period}</span>
-                                            </div>
-
-                                            <div class="content">
-                                                <span>모임 방식</span>
-                                                <span class="bubble-item bubble">${meetingType}</span>
-                                            </div>
-
-                                            <div class="content">
-                                            <span>모집 현황</span>
-                                            <span id="recruitmentState" class="bubble-item ${recruitmentStateColor}">${recruitmentState}</span>
-                                        </div>
-
-                                        </div>
-                                        <div class="card-content-box">
-                                        <div>
-                                            <div class="content">
-                                                <i class="fa-regular fa-eye"></i>
-                                                <span>${hits}</span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>`;
-
-                $('#profile-section').append(tempHTML);
+                                </article>`;
+                $('#profile-section').append(tempHtml);
+                // $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
-            // resizeHomeContainer();
+        },
+        error: function (response) {
+            console.log(response);
         }
     });
+}
+
+function time2str(date) {
+    let today = new Date();
+    let time = (today - date) / 1000 / 60;
+    console.log(today, date);
+    if (time < 1) {
+        return '방금전';
+    }
+    if (time < 60) {
+        return parseInt(time) + '분 전';
+    }
+    time = time / 60;
+    if (time < 24) {
+        return parseInt(time) + '시간 전';
+    }
+    time = time / 24;
+    if (time < 7) {
+        return parseInt(time) + '일 전';
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
 }
