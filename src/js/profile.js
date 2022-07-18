@@ -96,7 +96,6 @@ window.withdrawal = () => {
 // 회원 정보 받아서 그리기
 function getProfile() {
     let token = Cookies.get('token');
-    console.log(token);
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
@@ -216,9 +215,12 @@ window.editProfile = () => {
 
     // formData로 바꿔주는 부분.
     // 이미 formData.append로 해줘서 따로 dat:{} 받을 필요없음.
-    if (!nickname == '') {
-        formData.append('nickname', nickname);
-    }
+
+    // if (!nickname == '') {
+    //     formData.append('nickname', nickname);
+    // }
+
+    formData.append('nickname', nickname);
 
     if (!profileImage == '') {
         formData.append('file', profileImage);
@@ -304,7 +306,6 @@ let isNicknameChecked = false;
 
 window.requestEdit = () => {
     let nickname = $('#nickname').val();
-    console.log(nickname);
 
     if (nickname == '') {
         $('#nickname').addClass('is-danger');
@@ -325,15 +326,15 @@ window.requestEdit = () => {
     $('#nickname').removeClass('is-danger');
     $('#profile-modal-help').text('');
 
-    $('#nickname').val('');
+    // $('#nickname').val('');
 
     editProfile(nickname);
 };
 
 //중복확인 버튼 눌렀을 때 작동
 window.checkNicknameDupProfile = () => {
+    let token = Cookies.get('token');
     let nickname = $('#nickname').val();
-    console.log(nickname);
 
     if (nickname == '') {
         $('#nickname').addClass('is-danger');
@@ -346,7 +347,10 @@ window.checkNicknameDupProfile = () => {
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user/check-nickname',
-        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
         data: JSON.stringify({
             nickname: nickname
         }),
@@ -372,8 +376,3 @@ window.checkNicknameDupProfile = () => {
 //     }
 //     $(`#${currentScreen}`).show();
 // }
-
-// 유저 프로필 보기 하는거 보류!
-// window.openMessageModal = () => {
-//     $('#message-create-modal').css('display', 'flex');
-// };
