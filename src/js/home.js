@@ -69,7 +69,7 @@ function getRecrutingPosts() {
 
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
-                                        <p class="card-header-title">${title}</p>
+                                        <p class="card-header-title" onclick="openPost(${id})">${title}</p>
                                         <div class="content bookmark">
                                             <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
@@ -106,7 +106,6 @@ function getRecrutingPosts() {
 
                 $('#home-section-post').append(cardHTML);
             }
-
             resizeHomeContainer();
         }
     });
@@ -135,13 +134,13 @@ function getPosts() {
 
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
-                                        <p class="card-header-title">${title}</p>
+                                        <p class="card-header-title" onclick="openPost(${id})">${title}</p>
                                         <div class="content bookmark" onclick="registerBookmark(${id})">
                                             <i class="fa-regular fa-bookmark"></i>
                                         </div>
                                     </div>
 
-                                    <div class="card-content">
+                                    <div class="card-content" onclick="openPost(${id})">
                                         <div class="card-content-box">
                                             <div class="content">
                                                 <span>기간</span>

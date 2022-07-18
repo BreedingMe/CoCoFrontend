@@ -16,7 +16,7 @@ window.deleteBookmark = (id) => {
 
 // 북마크 저장하기
 function registerBookmark(id) {
-    console.log(id);
+
     let token = Cookies.get('token');
 
     let data = { 'id': id };
@@ -71,7 +71,7 @@ function getBookmarkList() {
 
                 let tempHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
-                                        <p class="card-header-title">${title}</p>
+                                        <p class="card-header-title" onclick="openPost(${postId})">${title}</p>
                                         <div onclick="deleteBookmark(${id})">
                                             <button class="delete"></button>
                                         </div>
