@@ -16,11 +16,10 @@ window.deleteBookmark = (id) => {
 
 // 북마크 저장하기
 function registerBookmark(id) {
-
     console.log(id);
     let token = Cookies.get('token');
 
-    let data = { 'id' : id };
+    let data = { 'id': id };
 
     $.ajax({
         type: 'POST',
@@ -39,8 +38,7 @@ function registerBookmark(id) {
             alert('북마크에 저장되어있는 게시물입니다.');
         }
     });
-};
-
+}
 
 // 북마크 리스트 불러오기
 function getBookmarkList() {
