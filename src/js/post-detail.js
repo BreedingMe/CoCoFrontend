@@ -106,7 +106,6 @@ window.deletePost = () => {
 
 // 게시글 상세 읽기에서 쪽지 보내기
 function getPostingUserNickname() {
-
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     let token = Cookies.get('token');
@@ -130,9 +129,8 @@ function getPostingUserNickname() {
     });
 }
 
-// 게시글 상세 읽기에서 쪽지 보내기
+// 게시글 상세 읽기에서 유저 프로필 보기
 function getPostingUserProfile() {
-
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     let token = Cookies.get('token');
@@ -148,10 +146,13 @@ function getPostingUserProfile() {
         success: function (response) {
             let user = response;
             console.log(response);
+            let profileImage = user['profileImageUrl'];
             let nickname = user['writer'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
+
+            $('#my_image').attr('src', profileImage);
             $('#nickname_post').html(nickname);
             $('#github_post').html(github);
             $('#portfolio_post').html(portfolio);

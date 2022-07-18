@@ -37,7 +37,7 @@
                         <span style="font-size: larger; font-weight: bold">프로젝트 내용</span>
                     </li>
                 </ul>
-                <div id="content_openPost" style="white-space:pre"></div>
+                <div id="content_openPost" class="content-post" style="white-space:break-spaces;"></div>
                             {{!-- <span class="bookmark" onclick="registerBookmark(${postDetailId})"><i class="fa-regular fa-bookmark"></i></span> --}}
             </div>
         </div>
@@ -51,11 +51,15 @@
             </div>
 
         </div style="margin: 0px 60px 0px 60px;">
-        <div style="margin: 0px 60px 0px 60px;">
-            <div id="comment-box" style="margin-top: 30px; margin-bottom: 20px;"></div>
+        <div style="margin: 0px 80px 60px 80px;">
+            <div id="comment-box" style="margin-top: 30px; margin-bottom: 20px;">
+            {{!-- 댓글 Get append 구간 --}}
+            </div>
+
+            {{!-- 댓글 작성 박스 --}}
             <article class="media" style="margin-top: 40px;">
                 <figure class="media-left">
-                    <p class="image is-24x24">
+                    <p class="image is-24x24" name="image">
                         <img src="./static/profile/basicProfile3.png">
                     </p>
                 </figure>

@@ -68,6 +68,7 @@ window.getCommentList = () => {
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
                 let timeComment = new Date(response[i]['createDate'] + '+0900');
+                let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
                 let enableDelete = response[i]['enableDelete'];
@@ -80,7 +81,7 @@ window.getCommentList = () => {
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-24x24">
-                                            <img style="border-radius: 50%" src="./static/profile/basicProfile3.png">
+                                            <img style="border-radius: 50%" src="${profileImage}">
                                         </p>
                                     </figure>
                                     <div class="media-content">
@@ -94,7 +95,8 @@ window.getCommentList = () => {
                                             </p>
                                         </div>
                                     </div>
-                                </article>`;
+                                </article>
+                                `;
                 $('#comment-box').append(tempHtml);
                 // $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
