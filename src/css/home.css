@@ -194,10 +194,6 @@ label.right {
     background-color : #ffffff;
 }
 
-/* #home .is-white {
-    background-color : #ffffff;
-} */
-
 #home .is-pink {
     background-color : #FF869E;
     color: #ffffff;
@@ -214,6 +210,17 @@ label.right {
 #home .is-gray:hover {
     background-color : #ffffff;
 }
+
+#home .bookmark {
+    margin-top: 1%;
+    margin-right: 4%;
+    font-size: 120%;
+}
+
+#home .bookmark:hover {
+    color:coral;
+}
+
 /* Mobile */
 
 @media screen and (max-width: 1263px) {

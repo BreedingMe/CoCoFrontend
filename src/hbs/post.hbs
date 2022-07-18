@@ -1,13 +1,13 @@
 <div id="post-detail" class="page">
-    <div class="container is-max-desktop" id="postingbox">
+    <div class="container is-max-desktop">
         <div class="post-boundary">
             <button id="deletebtn" class="button has-text-centered is-rounded deletebtn" onclick="deletePost()">삭제</button>
             <button id="updatebtn" class="button has-text-centered is-rounded updatebtn" onclick="showPostUpdatePage()">수정</button>
             <p><div style="font-size: xx-large; font-weight: bold;" id="title_openPost"></div></p>
             <br>
-            <span style="float: left; margin-left: 8px;" id="nickname_openPost"></span>
-            <span class="button postbtn is-info is-light" onclick="openMessageModal()">쪽지보내기</span>
-            <span class="button postbtn is-warning is-light" onclick="openProfileModal()">프로필보기</span>
+            <span class="nickname" style="float: left; margin-left: 8px;" id="nickname_openPost"></span>
+            <span class="icon fa-regular fa-id-card" style="font-size: x-large" onclick="getPostingUserProfile()">프로필보기</span>
+            <span class="icon fa-regular fa-envelope" style="font-size: x-large" onclick="getPostingUserNickname()">쪽지보내기</span>
             <div style="float: right">
                 <small id="datestr_openPost"></small>
             </div>
@@ -38,6 +38,7 @@
                     </li>
                 </ul>
                 <div id="content_openPost" style="white-space:pre"></div>
+                            {{!-- <span class="bookmark" onclick="registerBookmark(${postDetailId})"><i class="fa-regular fa-bookmark"></i></span> --}}
             </div>
         </div>
     </div>

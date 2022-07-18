@@ -1,5 +1,6 @@
 
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // user 아이콘 누르면 profile 뜸
 $(document).ready(() => {
@@ -94,8 +95,8 @@ window.withdrawal = () => {
 // /{post_id} -> /post_id
 // 회원 정보 받아서 그리기
 function getProfile() {
-    let token = localStorage.getItem('token');
-
+    let token = Cookies.get('token');
+    console.log(token);
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/user',
@@ -113,11 +114,14 @@ function getProfile() {
             if (portfolio == '' || portfolio == null) {
                 portfolio = '포트폴리오 주소';
             }
+
             let introduction = user['introduction'];
+
             if (introduction == '' || introduction == null) {
                 introduction = '자기소개';
             }
             console.log(profileImage, nickname, github, portfolio, introduction);
+
             let tempHtml = `<article class="media">
                             <figure class="media-left" style="align-self: center;">
                                 <a class="image is-128x128" href="#">
@@ -155,7 +159,8 @@ function getProfile() {
 
 // 회원 정보 수정 모달
 function openEditProfileModal() {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
+
     $('#modal-post').addClass('is-active');
     $.ajax({
         type: 'GET',
@@ -231,7 +236,8 @@ window.editProfile = () => {
         formData.append('introduction', introduction);
     }
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
+
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
@@ -265,7 +271,7 @@ function editProfileContentDelete() {
 
 // 회원 탈퇴
 function withdrawal() {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: process.env.BACKEND_HOST + '/user',
@@ -275,7 +281,7 @@ function withdrawal() {
         },
         success: function (response) {
             console.log(response);
-            localStorage.removeItem('token');
+            Cookies.remove('token');
             alert('회원탈퇴에 성공했습니다.');
             window.location.href = '/home';
         },
@@ -288,7 +294,7 @@ function withdrawal() {
 // 로그아웃
 window.logout = () => {
     alert('로그아웃 되었습니다.');
-    localStorage.removeItem('token');
+    Cookies.remove('token');
     window.location.href = '/home';
 };
 

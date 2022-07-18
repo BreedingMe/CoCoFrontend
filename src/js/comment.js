@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // 댓글 작성
 window.writeComment = () => {
@@ -20,7 +21,7 @@ window.writeComment = () => {
         // 'date_give': today
     };
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'POST',
@@ -49,7 +50,7 @@ window.getCommentList = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'GET',
@@ -139,7 +140,7 @@ window.getCommentList = () => {
 
 // 댓글 삭제
 window.deleteComment = (id, isAdmin) => {
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
 
     $.ajax({
         type: 'DELETE',

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // postupdate 페이지를 띄울 때 실행
 window.initializePostupdate = () => {
@@ -80,7 +81,7 @@ window.updatePost = () => {
     };
     console.log(data);
 
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     console.log(token);
 
     // 게시글 수정 요청

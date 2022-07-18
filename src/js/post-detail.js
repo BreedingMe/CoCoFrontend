@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 // 게시글 상세 읽기
 window.initializePost = () => {
@@ -7,11 +8,23 @@ window.initializePost = () => {
     //다른 js에서(코멘트) 불러오는 거라 넣어줌!
 };
 
+window.getPostingUserNickname = () => {
+    getPostingUserNickname();
+};
+
+window.getPostingUserProfile = () => {
+    getPostingUserProfile();
+};
+
+window.closePostingUserProfile = () => {
+    $('#post-profile-modal').css('display', 'none');
+};
+
 // 게시글 상세 읽기
 function getPost() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/' + params['id'],
@@ -71,7 +84,7 @@ window.deletePost = () => {
     if (memberRole == 'ADMIN') {
         isAdmin = true;
     }
-    let token = localStorage.getItem('token');
+    let token = Cookies.get('token');
     $.ajax({
         type: 'DELETE',
         url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
@@ -90,3 +103,60 @@ window.deletePost = () => {
         }
     });
 };
+
+// 게시글 상세 읽기에서 쪽지 보내기
+function getPostingUserNickname() {
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    let token = Cookies.get('token');
+
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/post/' + params['id'],
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let post = response;
+
+            let nickname = post['writer'];
+
+            $('#message-create-modal').css('display', 'flex');
+            $('input[id=receiver_createMessage]').attr('value', nickname);
+        }
+    });
+}
+
+// 게시글 상세 읽기에서 쪽지 보내기
+function getPostingUserProfile() {
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    let token = Cookies.get('token');
+
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/post/' + params['id'],
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let user = response;
+            console.log(response);
+            let nickname = user['writer'];
+            let github = user['githubUrl'];
+            let portfolio = user['portfolioUrl'];
+            let introduction = user['introduction'];
+            $('#nickname_post').html(nickname);
+            $('#github_post').html(github);
+            $('#portfolio_post').html(portfolio);
+            $('#introduction_post').html(introduction);
+            $('#post-profile-modal').css('display', 'flex');
+        }
+    });
+}
