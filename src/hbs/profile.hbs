@@ -33,12 +33,11 @@
                 </div>
                 <div class="tabs is-large is-centered is-fullwidth" style="margin-top: 80px;">
                     <ul>
-                        <li class="is-active" style="font-size: large;"><a>게시글</a></li>
-                        <li style="font-size: large;"><a>댓글</a></li>
-                        <li style="font-size: large;"><a>북마크</a></li>
-                        <li style="font-size: large;"><a>좋아요</a></li>
+                        <li style="font-size: large;" onclick="readMyPosts()" id="readMyPosts"><a>게시글</a></li>
+                        <li style="font-size: large;" onclick="readMyComments()" id="readMyComments"><a>댓글</a></li>
                     </ul>
                 </div>
+                <section id="profile-section" class="section"></section>
         </section>
         {{!--프로필 모달 --}}
         <div class="modal" id="modal-post">

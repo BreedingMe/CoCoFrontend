@@ -19,7 +19,7 @@ function registerBookmark(id) {
 
     let token = Cookies.get('token');
 
-    let data = { 'id' : id };
+    let data = { 'id': id };
 
     $.ajax({
         type: 'POST',
