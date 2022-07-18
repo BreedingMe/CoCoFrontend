@@ -71,6 +71,11 @@
     margin: 10px 0px;
 }
 
+
+#profile .edit-profile-field > .others-field > .field.has-addons {
+    display: flex;
+    justify-content: flex-start;
+}
 /* #profile .image-field > label, input {
     margin: 0px 10px;
 } */

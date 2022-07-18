@@ -45,7 +45,7 @@
             <div id="edit-profile-modal-background" class="modal-background" onclick="closeEditProfileModal()"></div>
             <div class="modal-content">
                 <div class="box">
-                    <article class="media">
+                    <article>
                         <div class="edit-profile-field">
                             <div class="image-field">
                                 <form enctype="multipart/form-data" id="upload">
@@ -57,7 +57,15 @@
                             </div>
                             <div class="others-field">
                                 {{!-- input태그 쓸 때 DB에서 받아온 정보가 안뿌려져서 개고생했다 ㅠㅠㅠ!!! js에서 받아오는 값을 .val(`${ddd}`)해주면 잘 됨--}}
-                                <input id="nickname" class="input" type="text" placeholder="닉네임">
+                                <div class="field has-addons">
+                                    <div class="has-icons-left" style="width: 100%">
+                                        <input id="nickname" type="text" placeholder="닉네임" class="input">
+                                    </div>
+                                    <div id="btn-check-dup" class="control">
+                                        <button class="button is-sparta" onclick="checkNicknameDupProfile()">중복확인</button>
+                                    </div>
+                                </div>
+                                <p id="profile-modal-help" class="help is-danger"></p>
                                 <input id="githubUrl" class="input" type="text" placeholder="GitHub 주소(https에서 s는 빼고 올려주세요)">
                                 <input id="portfolioUrl" class="input" type="text" placeholder="포트폴리오 주소(https에서 s는 빼고 올려주세요)">
                                 <textarea id="introduction" class="textarea" placeholder="자기소개" style="resize: none;"></textarea>
@@ -68,7 +76,7 @@
                                 </div>
                                 <div class="level-right">
                                     <div class="level-item">
-                                        <a id="edit-profile-btn" class="button is-sparta is-rounded">수정</a>
+                                        <a id="edit-profile-btn" class="button is-sparta is-rounded" onclick="requestEdit()">수정</a>
                                     </div>
                                     <div class="level-item">
                                         <a id="edit-profile-modal-close-btn" class="button is-sparta is-outlined is-rounded"

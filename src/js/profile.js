@@ -145,7 +145,7 @@ function getProfile() {
             $('#edit-profile-modal-open-btn').on('click', openEditProfileModal);
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
-            $('#edit-profile-btn').on('click', editProfile);
+            // $('#edit-profile-btn').on('click', editProfile);
         },
         error: function (response) {
             console.log(response);
@@ -198,7 +198,7 @@ function closeEditProfileModal() {
 }
 
 // TODO: password, iamge, techStacks 보류! => 추후 보완 예정
-// 회원 정보 수정
+// 프로필 정보 수정
 // function editProfile() {
 window.editProfile = () => {
     let nickname = $('#nickname').val();
@@ -210,6 +210,7 @@ window.editProfile = () => {
     console.log(nickname, githubUrl, portfolioUrl, introduction, profileImage);
 
     // formData로 바꿔주는 부분.
+    // 이미 formData.append로 해줘서 따로 dat:{} 받을 필요없음.
     if (!nickname == '') {
         formData.append('nickname', nickname);
     }
@@ -229,14 +230,6 @@ window.editProfile = () => {
     if (!introduction == '') {
         formData.append('introduction', introduction);
     }
-
-    // let data = {
-    //     'nickname': nickname,
-    //     'profileImageUrl': profileImage,
-    //     'githubUrl': githubUrl,
-    //     'portfolioUrl': portfolioUrl,
-    //     'introduction': introduction
-    // };
 
     let token = localStorage.getItem('token');
     $.ajax({
@@ -297,6 +290,74 @@ window.logout = () => {
     alert('로그아웃 되었습니다.');
     localStorage.removeItem('token');
     window.location.href = '/home';
+};
+
+//수정 버튼 눌렀을 때 Edit 전에 검사
+
+let isNicknameChecked = false;
+
+window.requestEdit = () => {
+    let nickname = $('#nickname').val();
+    console.log(nickname);
+
+    if (nickname == '') {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
+
+        return;
+    }
+
+    // 닉네임 중복확인 여부 확인
+    if (isNicknameChecked == false) {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임 중복확인을 해주세요.').removeClass('is-success').addClass('is-danger');
+        return;
+    }
+
+    $('#nickname').removeClass('is-danger');
+    $('#profile-modal-help').text('');
+
+    $('#nickname').val('');
+
+    editProfile(nickname);
+};
+
+//중복확인 버튼 눌렀을 때 작동
+window.checkNicknameDupProfile = () => {
+    let nickname = $('#nickname').val();
+    console.log(nickname);
+
+    if (nickname == '') {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
+
+        return;
+    }
+
+    $.ajax({
+        type: 'PUT',
+        url: process.env.BACKEND_HOST + '/user/check-nickname',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            nickname: nickname
+        }),
+        success: function (response) {
+            if (response['dup']) {
+                $('#nickname').addClass('is-danger');
+                $('#nickname').focus();
+                $('#profile-modal-help').text('중복된 닉네임이 존재합니다.').removeClass('is-success').addClass('is-danger');
+
+                return;
+            }
+            $('#nickname').removeClass('is-danger').addClass('is-safe');
+            $('#nickname').focus();
+            $('#profile-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
+            isNicknameChecked = true;
+        }
+    });
 };
 
 // function changeScreen(currentScreen) {
