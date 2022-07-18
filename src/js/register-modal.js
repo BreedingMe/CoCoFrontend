@@ -1,11 +1,10 @@
 /* Third Party JS */
 
 import $ from 'jquery';
-import Cookies from 'js-cookie';
 
 /* AJAX */
 
-function register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken) {
+function register(id, password, nickname, profileImageUrl, githubURL, portfolioURL, introduction, admin, adminToken) {
     $('#register-modal-help').text('');
     console.log(introduction);
     $.ajax({
@@ -16,6 +15,7 @@ function register(id, password, nickname, githubURL, portfolioURL, introduction,
             email: id,
             password: password,
             nickname: nickname,
+            profileImageUrl: profileImageUrl,
             githubUrl: githubURL,
             portfolioUrl: portfolioURL,
             introduction: introduction,
@@ -62,6 +62,7 @@ window.requestRegister = () => {
     let password = $('#register-modal-input-password').val();
     let confirmPassword = $('#register-modal-input-confirm-password').val();
     let nickname = $('#register-modal-input-nickname').val();
+    let profileImageUrl = './static/profile/basicProfile3.png';
     let githubURL = $('#register-modal-input-github-url').val();
     let portfolioURL = $('#register-modal-input-portfolio-url').val();
     let introduction = '';
@@ -121,7 +122,7 @@ window.requestRegister = () => {
     if (confirmPassword == '') {
         $('#register-modal-input-confirm-password').addClass('is-danger');
         $('#register-modal-input-confirm-password').focus();
-        $('#register-modal-help').text('비밀번호 확인을 입력해 주세요.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('비밀번호 확인을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -135,7 +136,7 @@ window.requestRegister = () => {
         $('#register-modal-input-password').addClass('is-danger');
         $('#register-modal-input-confirm-password').addClass('is-danger');
         $('#register-modal-input-password').focus();
-        $('#register-modal-help').text('비밀번호가 일치하지 않습니다.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('비밀번호가 일치하지 않습니다.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -143,7 +144,7 @@ window.requestRegister = () => {
     if (!isPassword(password)) {
         $('#register-modal-input-password').addClass('is-danger');
         $('#register-modal-input-password').focus();
-        $('#register-modal-help').text('영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -177,7 +178,7 @@ window.requestRegister = () => {
     if (admin == true && adminToken == '') {
         $('#register-modal-input-admin-token').addClass('is-danger');
         $('#register-modal-input-admin-token').focus();
-        $('#register-modal-help').text('관리자 토큰을 입력해 주세요.').removeClass('is-success').addClass('is-danger');;
+        $('#register-modal-help').text('관리자 토큰을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -197,7 +198,7 @@ window.requestRegister = () => {
     $('#register-modal-input-admin-token').val('');
     $('#register-modal-field-admin-token').addClass('is-hidden');
 
-    register(id, password, nickname, githubURL, portfolioURL, introduction, admin, adminToken);
+    register(id, password, nickname, profileImageUrl, githubURL, portfolioURL, introduction, admin, adminToken);
 };
 
 //이메일 규칙
@@ -245,24 +246,14 @@ window.checkEmailDup = () => {
                 $('#register-modal-input-id').focus();
                 $('#register-modal-help').text('중복된 이메일이 존재합니다.');
                 return;
-            } else {
-                $('#register-modal-input-id').removeClass('is-danger').addClass('is-safe');
-                $("#input-username").focus();
-                $('#register-modal-help').text('사용 가능한 이메일입니다.').removeClass('is-danger').addClass('is-success');
-                isEmailChecked = true;
             }
+            $('#register-modal-input-id').removeClass('is-danger').addClass('is-safe');
+            $('#input-username').focus();
+            $('#register-modal-help').text('사용 가능한 이메일입니다.').removeClass('is-danger').addClass('is-success');
+            isEmailChecked = true;
         }
     });
 };
-
-// function isCheckEmailDup() {
-//     // 이메일 중복확인 버튼을 클릭했으면 true / 아니면 false
-
-//     if (checkEmailDup) {
-//         isChecked = true;
-//     }
-//     return isChecked;
-// }
 
 // 닉네임 중복 확인
 window.checkNicknameDup = () => {
@@ -291,12 +282,11 @@ window.checkNicknameDup = () => {
                 $('#register-modal-help').text('중복된 닉네임이 존재합니다.').removeClass('is-success').addClass('is-danger');
 
                 return;
-            } else {
-                $('#register-modal-input-nickname').removeClass('is-danger').addClass('is-safe');
-                $("#register-modal-input-nickname").focus();
-                $('#register-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
-                isNicknameChecked = true;
             }
+            $('#register-modal-input-nickname').removeClass('is-danger').addClass('is-safe');
+            $('#register-modal-input-nickname').focus();
+            $('#register-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
+            isNicknameChecked = true;
         }
     });
 };

@@ -1,3 +1,4 @@
+
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
@@ -18,6 +19,7 @@ window.openEditProfileModal = () => {
 };
 
 //회원 정보 수정 취소 모달
+//이부분이 꼭 필요한지에 대해서 예기해보기(프로필 모달을 받으면 어차피 reload해주면 되니까)
 window.closeEditProfileModal = () => {
     $('#modal-post').css('display', 'none');
     window.location.reload();
@@ -102,52 +104,52 @@ function getProfile() {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        // date: {},
         success: function (response) {
             $('#profile_box').empty();
             let user = response;
+            let profileImage = user['profileImageUrl'];
             let nickname = user['nickname'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
-            if (portfolio == '') {
+            if (portfolio == '' || portfolio == null) {
                 portfolio = '포트폴리오 주소';
             }
+
             let introduction = user['introduction'];
 
-            console.log(introduction);
-            if (introduction == '') {
-                introduction = '자기소개를 입력해주세요';
+            if (introduction == '' || introduction == null) {
+                introduction = '자기소개';
             }
-            console.log(nickname, github, portfolio, introduction);
+            console.log(profileImage, nickname, github, portfolio, introduction);
 
             let tempHtml = `<article class="media">
-                                <figure class="media-left" style="align-self: center;">
-                                    <a class="image is-128x128" href="#">
-                                        <img class="is-rounded" style="border-radius: 50%;"
-                                            src="./static/profile/basicProfile3.png">
-                                    </a>
-                                </figure>
-                            </article>
-                            <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
-                            <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
-                                <span>프로필 수정</span>
-                            </a>
-                            <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
-                                <div class="media-content content">
-                                    <p>
-                                        <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
-                                        <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
-                                                aria-hidden="ture"></i></a><br>
-                                        <a href="${portfolio}">${portfolio}</a><br>
-                                        <span style="font-size: large;">${introduction}</span>
-                                    </p>
-                                </div>
-                            </nav>`;
+                            <figure class="media-left" style="align-self: center;">
+                                <a class="image is-128x128" href="#">
+                                    <img class="is-rounded" style="border-radius: 50%;"
+                                    src="${profileImage}">
+                                </a>
+                            </figure>
+                        </article>
+                        <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
+                        <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
+                            <span>프로필 수정</span>
+                        </a>
+                        <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
+                            <div class="media-content content">
+                                <p>
+                                    <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
+                                    <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
+                                            aria-hidden="ture"></i></a><br>
+                                    <a href="${portfolio}">${portfolio}</a><br>
+                                    <span style="font-size: large;">${introduction}</span>
+                                </p>
+                            </div>
+                        </nav>`;
             $('#profile_box').append(tempHtml);
             $('#edit-profile-modal-open-btn').on('click', openEditProfileModal);
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
-            $('#edit-profile-btn').on('click', editProfile);
+            // $('#edit-profile-btn').on('click', editProfile);
         },
         error: function (response) {
             console.log(response);
@@ -157,8 +159,8 @@ function getProfile() {
 
 // 회원 정보 수정 모달
 function openEditProfileModal() {
-    // alert('되나요~');
     let token = Cookies.get('token');
+
     $('#modal-post').addClass('is-active');
     $.ajax({
         type: 'GET',
@@ -168,18 +170,26 @@ function openEditProfileModal() {
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
         data: {},
-        contentType: 'application/json',
         success: function (response) {
             let user = response;
-            console.log();
             let nickname = user['nickname'];
+            let profileImage = user['profileImageUrl'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
             let introduction = user['introduction'];
-
-            console.log(nickname, github, portfolio, introduction);
+            if (github == '' || github == null) {
+                github = '깃허브 주소';
+            }
+            if (portfolio == '' || portfolio == null) {
+                portfolio = '포트폴리오 주소';
+            }
+            if (introduction == '' || introduction == null) {
+                introduction = '자기소개';
+            }
+            console.log(nickname, profileImage, github, portfolio, introduction);
 
             $('#nickname').val(`${nickname}`);
+            $('#profileImage').val(`${profileImage}`);
             $('#githubUrl').val(`${github}`);
             $('#portfolioUrl').val(`${portfolio}`);
             $('#introduction').val(`${introduction}`);
@@ -193,50 +203,51 @@ function closeEditProfileModal() {
 }
 
 // TODO: password, iamge, techStacks 보류! => 추후 보완 예정
-// 회원 정보 수정
+// 프로필 정보 수정
 // function editProfile() {
 window.editProfile = () => {
     let nickname = $('#nickname').val();
     let githubUrl = $('#githubUrl').val();
     let portfolioUrl = $('#portfolioUrl').val();
     let introduction = $('#introduction').val();
-
-    console.log(nickname, githubUrl, portfolioUrl, introduction);
-
+    let profileImage = $('input[name="image"]').get(0).files[0];
     let formData = new FormData();
+    console.log(nickname, githubUrl, portfolioUrl, introduction, profileImage);
 
+    // formData로 바꿔주는 부분.
+    // 이미 formData.append로 해줘서 따로 dat:{} 받을 필요없음.
     if (!nickname == '') {
         formData.append('nickname', nickname);
     }
 
+    if (!profileImage == '') {
+        formData.append('file', profileImage);
+    }
+
     if (!githubUrl == '') {
-        formData.append('github_url', githubUrl);
+        formData.append('githubUrl', githubUrl);
     }
 
     if (!portfolioUrl == '') {
-        formData.append('portfolio_url', portfolioUrl);
+        formData.append('portfolioUrl', portfolioUrl);
     }
 
     if (!introduction == '') {
         formData.append('introduction', introduction);
     }
 
-    let data = {
-        'nickname': nickname,
-        'githubUrl': githubUrl,
-        'portfolioUrl': portfolioUrl,
-        'introduction': introduction
-    };
     let token = Cookies.get('token');
+
     $.ajax({
         type: 'PUT',
         url: process.env.BACKEND_HOST + '/user',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data',
+        data: formData,
         success: function () {
             alert('수정이 완료되었습니다.');
             window.location.reload();
@@ -252,8 +263,9 @@ window.editProfile = () => {
 
 function editProfileContentDelete() {
     $('#nickname').val('');
-    $('#github-url').val('');
-    $('#portfolio-url').val('');
+    $('#image').val(`${profileImage}`);
+    $('#githubUrl').val('');
+    $('#portfolioUrl').val('');
     $('#introduction').val('');
 }
 
@@ -267,7 +279,6 @@ function withdrawal() {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
         },
-        contentType: 'application/json',
         success: function (response) {
             console.log(response);
             Cookies.remove('token');
@@ -285,6 +296,74 @@ window.logout = () => {
     alert('로그아웃 되었습니다.');
     Cookies.remove('token');
     window.location.href = '/home';
+};
+
+//수정 버튼 눌렀을 때 Edit 전에 검사
+
+let isNicknameChecked = false;
+
+window.requestEdit = () => {
+    let nickname = $('#nickname').val();
+    console.log(nickname);
+
+    if (nickname == '') {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
+
+        return;
+    }
+
+    // 닉네임 중복확인 여부 확인
+    if (isNicknameChecked == false) {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임 중복확인을 해주세요.').removeClass('is-success').addClass('is-danger');
+        return;
+    }
+
+    $('#nickname').removeClass('is-danger');
+    $('#profile-modal-help').text('');
+
+    $('#nickname').val('');
+
+    editProfile(nickname);
+};
+
+//중복확인 버튼 눌렀을 때 작동
+window.checkNicknameDupProfile = () => {
+    let nickname = $('#nickname').val();
+    console.log(nickname);
+
+    if (nickname == '') {
+        $('#nickname').addClass('is-danger');
+        $('#nickname').focus();
+        $('#profile-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
+
+        return;
+    }
+
+    $.ajax({
+        type: 'PUT',
+        url: process.env.BACKEND_HOST + '/user/check-nickname',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            nickname: nickname
+        }),
+        success: function (response) {
+            if (response['dup']) {
+                $('#nickname').addClass('is-danger');
+                $('#nickname').focus();
+                $('#profile-modal-help').text('중복된 닉네임이 존재합니다.').removeClass('is-success').addClass('is-danger');
+
+                return;
+            }
+            $('#nickname').removeClass('is-danger').addClass('is-safe');
+            $('#nickname').focus();
+            $('#profile-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
+            isNicknameChecked = true;
+        }
+    });
 };
 
 // function changeScreen(currentScreen) {
