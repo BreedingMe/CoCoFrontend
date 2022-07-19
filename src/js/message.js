@@ -117,9 +117,9 @@ function getMessageList() {
                 let messageId = messages[index]['id'];
                 let senderNickname = messages[index]['sender'];
                 let title = messages[index]['title'];
-                let date = messages[index]['createDate'];
-                const day = new Date(date + '+0900').toISOString().split('T')[0];
-                const time = new Date(date + '+0900').toTimeString().split(' ')[0];
+                let date = messages[index]['createDate'] + '+0000';
+                const day = new Date(date).toISOString().split('T')[0];
+                const time = new Date(date).toTimeString().split(' ')[0];
                 const datestr = day + ' ' + time;
 
                 let read = messages[index]['readState'] ? '읽음' : '읽지않음';
