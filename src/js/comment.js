@@ -67,7 +67,7 @@ window.getCommentList = () => {
                 let id = response[i]['id'];
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
-                let timeComment = new Date(response[i]['createDate'] + '+0900');
+                let timeComment = new Date(response[i]['createDate'] + '+0000');
                 let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);

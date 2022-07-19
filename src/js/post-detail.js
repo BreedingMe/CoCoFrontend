@@ -44,11 +44,11 @@ function getPost() {
             let contact = post['contact'];
             let period = post['period'];
             let recruitmentState = post['recruitmentState'] ? '모집마감' : '모집중';
-            let date = post['postDate'];
+            let date = post['postDate'] + '+0000';
             let enableUpdate = post['enableUpdate'];
             let enableDelete = post['enableDelete'];
-            const day = new Date(date + '+0900').toISOString().split('T')[0];
-            const time = new Date(date + '+0900').toTimeString().split(' ')[0];
+            const day = new Date(date).toISOString().split('T')[0];
+            const time = new Date(date).toTimeString().split(' ')[0];
             const datestr = day + ' ' + time;
 
             $('#nickname_openPost').html(nickname);
