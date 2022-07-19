@@ -352,7 +352,7 @@ window.checkNicknameDupProfile = () => {
 
     $.ajax({
         type: 'PUT',
-        url: process.env.BACKEND_HOST + '/user/check-nickname',
+        url: process.env.BACKEND_HOST + '/user/profile/check-nickname',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -452,7 +452,7 @@ window.readMyPosts = () => {
             // resizeHomeContainer();
         }
     });
-}
+};
 
 window.readMyComments = () => {
     $('#readMyComments').attr('class', 'is-active');
@@ -470,7 +470,6 @@ window.readMyComments = () => {
         },
         date: {},
         success: function (response) {
-            // localStorage.setItem('comments', JSON.stringify(response));
             console.log(response);
             for (let i = 0; i < response.length; i++) {
                 let id = response[i]['id'];
@@ -502,7 +501,7 @@ window.readMyComments = () => {
             console.log(response);
         }
     });
-}
+};
 
 function time2str(date) {
     let today = new Date();
