@@ -25,7 +25,7 @@ window.writeComment = () => {
 
     $.ajax({
         type: 'POST',
-        url: process.env.BACKEND_HOST + params.id + '/comment/',
+        url: process.env.BACKEND_HOST + '/' + params.id + '/comment/',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -54,7 +54,7 @@ window.getCommentList = () => {
 
     $.ajax({
         type: 'GET',
-        url: process.env.BACKEND_HOST + params.id + '/comment/list/',
+        url: process.env.BACKEND_HOST + '/' + params.id + '/comment/list',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);

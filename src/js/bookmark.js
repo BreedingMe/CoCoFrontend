@@ -23,7 +23,7 @@ function registerBookmark(id) {
 
     $.ajax({
         type: 'POST',
-        url: process.env.BACKEND_HOST + '/bookmark/' + id,
+        url: process.env.BACKEND_HOST + '/' + id + '/bookmark',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -106,6 +106,11 @@ function getBookmarkList() {
                                     </div>
                                 </div>`;
                 $('#bookmark-list').append(tempHTML);
+            }
+        },
+        error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
             }
         }
     });

@@ -158,6 +158,9 @@ function getProfile() {
         },
         error: function (response) {
             console.log(response);
+            if (response.status == 403) {
+                window.openLoginModal();
+            }
         }
     });
 }
@@ -391,7 +394,7 @@ window.readMyPosts = () => {
     let token = Cookies.get('token');
     $.ajax({
         type: 'GET',
-        url: process.env.BACKEND_HOST + '/profile/posts',
+        url: process.env.BACKEND_HOST + '/user/profile/posts',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -413,7 +416,7 @@ window.readMyPosts = () => {
                 let tempHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})" >${title}</p>
-                                        <div onclick="deleteBookmark(${id})">
+                                        <div onclick="deletePost(${id})">
                                             <button class="delete"></button>
                                         </div>
                                     </div>
@@ -463,7 +466,7 @@ window.readMyComments = () => {
 
     $.ajax({
         type: 'GET',
-        url: process.env.BACKEND_HOST + '/profile/comments/',
+        url: process.env.BACKEND_HOST + '/user/profile/comments/',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);

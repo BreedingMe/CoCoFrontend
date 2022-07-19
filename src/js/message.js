@@ -147,6 +147,11 @@ function getMessageList() {
                                     </div>`;
                 $('#message-list').append(messagesHTML);
             }
+        },
+        error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
+            }
         }
     });
 }

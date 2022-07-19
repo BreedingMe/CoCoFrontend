@@ -61,8 +61,12 @@ window.registerPost = () => {
             window.location.href = '/home';
         },
         error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
+            } else {
+                alert('글 저장에 실패하였습니다!');
+            }
             console.log(response);
-            alert('글 저장에 실패하였습니다!');
         }
     });
 };

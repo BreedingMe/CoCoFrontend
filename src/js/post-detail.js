@@ -67,6 +67,11 @@ function getPost() {
             if (enableDelete == false) {
                 $('#deletebtn').attr('class', 'button none');
             }
+        },
+        error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
+            }
         }
     });
 }
