@@ -1,7 +1,6 @@
 #editor .wrapper{
     width: 70%;
-    transform: translate(21%, 8%);
-    margin: 4% 8% 8% 0%;
+    margin: 0 auto;
 }
 #editor .buttonResister:hover {
     background-color: #BDE6F1;

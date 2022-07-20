@@ -221,7 +221,7 @@ window.checkEmailDup = () => {
     if (email == '') {
         $('#register-modal-input-id').addClass('is-danger');
         $('#register-modal-input-id').focus();
-        $('#register-modal-help').text('이메일을 입력해 주세요.');
+        $('#register-modal-help').text('이메일을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
 
         return;
     }
@@ -229,7 +229,7 @@ window.checkEmailDup = () => {
     if (!isEmail(email)) {
         $('#register-modal-input-id').addClass('is-danger');
         $('#register-modal-input-id').focus();
-        $('#register-modal-help').text('정확한 이메일 형식으로 입력해 주세요.');
+        $('#register-modal-help').text('정확한 이메일 형식으로 입력해 주세요.').removeClass('is-success').addClass('is-danger');
         return;
     }
 
