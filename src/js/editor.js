@@ -63,6 +63,8 @@ window.registerPost = () => {
         error: function (response) {
             if (response.status == 403) {
                 window.openLoginModal();
+            } else if (response.status == 400) {
+                alert('본문은 2000자 이내로 작성해주세요.');
             } else {
                 alert('글 저장에 실패하였습니다!');
             }

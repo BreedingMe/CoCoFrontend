@@ -37,7 +37,11 @@ window.writeComment = () => {
         },
         error: function (response) {
             console.log(response);
-            alert('댓글 작성에 실패하였습니다.');
+            if (response.status == 400) {
+                alert('댓글은 255자 이내로 작성해주세요.');
+            } else {
+                alert('댓글 작성에 실패하였습니다.');
+            }
         }
     });
 };
