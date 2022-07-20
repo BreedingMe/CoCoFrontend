@@ -2,6 +2,24 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 
 /* JS */
+function resizeBookmarkContainer() {
+    let body = $('body');
+    let bookmark = $('#bookmark');
+    let bookmarkContainer = $('#bookmark .container');
+
+    if (bookmark.innerHeight() <= body.innerHeight()) {
+        body.css('height', '100%');
+        bookmark.css('height', '100%');
+        bookmarkContainer.css('height', '100%');
+    }
+
+    if (bookmarkContainer.prop('scrollHeight') > body.innerHeight()) {
+        body.css('height', '');
+        bookmark.css('height', '');
+        bookmarkContainer.css('height', '');
+    }
+}
+
 window.initializeBookmark = () => {
     getBookmarkList();
 };
@@ -16,7 +34,6 @@ window.deleteBookmark = (id) => {
 
 // 북마크 저장하기
 function registerBookmark(id) {
-
     let token = Cookies.get('token');
 
     let data = { 'id': id };
@@ -107,6 +124,7 @@ function getBookmarkList() {
                                 </div>`;
                 $('#bookmark-list').append(tempHTML);
             }
+            resizeBookmarkContainer();
         },
         error: function (response) {
             if (response.status == 403) {

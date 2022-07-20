@@ -1,6 +1,24 @@
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
+window.resizePostContainer = () => {
+    let body = $('body');
+    let post = $('#post-detail');
+    let postContainer = $('#post-detail .container');
+
+    if (post.innerHeight() <= body.innerHeight()) {
+        body.css('height', '100%');
+        post.css('height', '100%');
+        postContainer.css('height', '100%');
+    }
+
+    if (postContainer.prop('scrollHeight') > body.innerHeight()) {
+        body.css('height', '');
+        post.css('height', '');
+        postContainer.css('height', '');
+    }
+};
+
 // 게시글 상세 읽기
 window.initializePost = () => {
     getPost();
@@ -67,6 +85,7 @@ function getPost() {
             if (enableDelete == false) {
                 $('#deletebtn').attr('class', 'button none');
             }
+            window.resizePostContainer();
         },
         error: function (response) {
             if (response.status == 403) {

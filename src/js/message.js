@@ -2,6 +2,24 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 
 /* JS */
+function resizeMessageContainer() {
+    let body = $('body');
+    let message = $('#message');
+    let messageContainer = $('#message .container');
+
+    if (message.innerHeight() <= body.innerHeight()) {
+        body.css('height', '100%');
+        message.css('height', '100%');
+        messageContainer.css('height', '100%');
+    }
+
+    if (messageContainer.prop('scrollHeight') > body.innerHeight()) {
+        body.css('height', '');
+        message.css('height', '');
+        messageContainer.css('height', '');
+    }
+}
+
 // 쪽지 리스트 호출
 window.initializeMessage = () => {
     getMessageList();
@@ -53,7 +71,6 @@ window.deleteMessage = (messageId) => {
 /* Ajax */
 // 쪽지 보내기
 function createMessage() {
-
     let receiver = $('#receiver_createMessage').val();
     let title = $('#title_createMessage').val();
     let content = $('#content_createMessage').val();
@@ -93,7 +110,8 @@ function createMessage() {
             console.log(response);
             if (response.status == 400) {
                 alert('쪽지 내용은 255자 이내로 작성해주세요.');
-            } else {
+            }
+            else {
                 alert('쪽지 보내기에 실패하였습니다!');
             }
         }
@@ -151,6 +169,7 @@ function getMessageList() {
                                     </div>`;
                 $('#message-list').append(messagesHTML);
             }
+            resizeMessageContainer();
         },
         error: function (response) {
             if (response.status == 403) {

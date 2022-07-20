@@ -109,3 +109,5 @@
     margin-right: 0px;
     margin-bottom: 16px;
 }
+
+@media screen and (max-width: 1263px) { #message { margin-top: 22px; } }

@@ -39,7 +39,8 @@ window.writeComment = () => {
             console.log(response);
             if (response.status == 400) {
                 alert('댓글은 255자 이내로 작성해주세요.');
-            } else {
+            }
+            else {
                 alert('댓글 작성에 실패하였습니다.');
             }
         }
@@ -91,11 +92,11 @@ window.getCommentList = () => {
                                     <div class="media-content">
                                         <div class="content">
                                             <p>
-                                                <span style="font-weight: normal">@${nickname}</span>
+                                                <span style="font-weight: bold">@${nickname}</span>
                                                 <small>· ${timeBefore}</small>
                                                 <br>
                                                 ${comment}
-                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
+                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" style="float:right;" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
                                             </p>
                                         </div>
                                     </div>
@@ -104,6 +105,7 @@ window.getCommentList = () => {
                 $('#comment-box').append(tempHtml);
                 // $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
+            window.resizePostContainer();
         },
         error: function (response) {
             console.log(response);
