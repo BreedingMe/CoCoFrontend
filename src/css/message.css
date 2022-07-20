@@ -2,8 +2,8 @@
 
 #message .createMessageButton {
     display: flex;
-    float:right;
-    margin: 1% 8% 0% 0%;
+    float: left;
+    margin: 1% 0% 0% 6%;
     font-size: 12px;
 }
 
