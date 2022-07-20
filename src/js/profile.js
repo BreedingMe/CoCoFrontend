@@ -22,7 +22,7 @@ function resizeProfileContainer() {
     if (profileContainer.prop('scrollHeight') > body.innerHeight()) {
         body.css('height', '');
         profile.css('height', '');
-        bookmarkContainer.css('height', '');
+        profileContainer.css('height', '');
     }
 }
 
