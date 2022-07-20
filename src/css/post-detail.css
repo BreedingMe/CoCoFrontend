@@ -118,4 +118,8 @@ background-color: #ffffff;
     height: 100%;
 }
 
-@media screen and (max-width: 1263px) { #post-detail { margin-top: 52px; } }
+@media screen and (max-width: 1263px) {
+    #post-detail {
+        margin-top: 52px;
+    }
+}
