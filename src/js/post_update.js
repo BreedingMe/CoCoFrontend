@@ -101,7 +101,11 @@ window.updatePost = () => {
         },
         error: function (response) {
             console.log(response);
-            alert('글 수정에 실패하였습니다!');
+            if (response.status == 400) {
+                alert('본문은 2000자 이내로 작성해주세요.');
+            } else {
+                alert('글 수정에 실패하였습니다!');
+            }
         }
     });
 };

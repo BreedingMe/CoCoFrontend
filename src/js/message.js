@@ -91,7 +91,11 @@ function createMessage() {
         },
         error: function (response) {
             console.log(response);
-            alert('쪽지 보내기에 실패하였습니다!');
+            if (response.status == 400) {
+                alert('쪽지 내용은 255자 이내로 작성해주세요.');
+            } else {
+                alert('쪽지 보내기에 실패하였습니다!');
+            }
         }
     });
 }
@@ -146,6 +150,11 @@ function getMessageList() {
                                         </div>
                                     </div>`;
                 $('#message-list').append(messagesHTML);
+            }
+        },
+        error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
             }
         }
     });

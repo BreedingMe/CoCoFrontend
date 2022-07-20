@@ -25,7 +25,7 @@ window.writeComment = () => {
 
     $.ajax({
         type: 'POST',
-        url: process.env.BACKEND_HOST + '/comment/' + params.id,
+        url: process.env.BACKEND_HOST + '/' + params.id + '/comment/',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -37,7 +37,11 @@ window.writeComment = () => {
         },
         error: function (response) {
             console.log(response);
-            alert('댓글 작성에 실패하였습니다.');
+            if (response.status == 400) {
+                alert('댓글은 255자 이내로 작성해주세요.');
+            } else {
+                alert('댓글 작성에 실패하였습니다.');
+            }
         }
     });
 };
@@ -54,7 +58,7 @@ window.getCommentList = () => {
 
     $.ajax({
         type: 'GET',
-        url: process.env.BACKEND_HOST + '/comment/list/' + params.id,
+        url: process.env.BACKEND_HOST + '/' + params.id + '/comment/list',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -80,7 +84,7 @@ window.getCommentList = () => {
                 }
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
-                                        <p class="image is-24x24">
+                                        <p class="image is-32x32">
                                             <img style="border-radius: 50%" src="${profileImage}">
                                         </p>
                                     </figure>
