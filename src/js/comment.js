@@ -111,27 +111,29 @@ window.getCommentList = () => {
     });
 };
 
-// 댓글 수정 보류
+// 댓글 수정
 // window.updateComment = (id) => {
 //     let comment = $('#comment').val();
 
-//     if (comment == '') {
-//         alert('댓글을 작성해주세요!');
-//         $('#comment').focus();
-//         return;
-//     }
+//     // if (comment == '') {
+//     //     alert('댓글을 작성해주세요!');
+//     //     $('#comment').focus();
+//     //     return;
+//     // }
 
 //     let data = {
 //         'content': comment
 //     };
 
+//     let token = Cookies.get('token');
+
 //     $.ajax({
 //         type: 'PUT',
 //         url: process.env.BACKEND_HOST + '/comment/' + id,
-//         xhrFields: {
-//             withCredentials: true
+//         beforeSend: function (xhr) {
+//             xhr.setRequestHeader('Content-type', 'application/json');
+//             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 //         },
-//         contentType: 'application/json',
 //         data: JSON.stringify(data),
 //         success: function () {
 //             alert('댓글이 수정되었습니다');
