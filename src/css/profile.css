@@ -209,7 +209,9 @@
     }
 
     #profile .card-content-box:last-child {
-        margin-top: 16px;
+        flex-direction: row-reverse;
+        margin-right: 2%;
+        margin-bottom: -1%;
         justify-content: space-between;
     }
 

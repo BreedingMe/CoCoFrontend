@@ -228,6 +228,21 @@ label.right {
         margin-top: 52px;
     }
 
+    #home .container .slidebox {
+        max-width: 1250px;
+        width: 100%;
+    }
+
+    #home .recruitmentStateCheckbox {
+        margin: 3% 4% -1% 0%;
+        font-size: 15px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #home .section{
+        padding-top: 20px;
+    }
+
     #home .card-content {
         flex-direction: column;
     }
@@ -241,8 +256,10 @@ label.right {
     }
 
     #home .card-content-box:last-child {
-        margin-top: 16px;
         justify-content: space-between;
+        flex-direction: row-reverse;
+        margin-right: 2%;
+        margin-bottom: -1%;
     }
 
     #home .card-content-box:last-child > *:first-child {

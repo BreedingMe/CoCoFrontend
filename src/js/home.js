@@ -187,10 +187,19 @@ window.openPost = (id) => {
     }
 };
 
+window.removeToggle = () => {
+    $('#sidebar-mobile').removeClass('is-active');
+    $('#sidebar-menu-mobile').removeClass('is-active');
+};
+
 /* 사이드바 권한 제한 */
 window.authorizationProfile = () => {
     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
+    }
+    else {
+        $('#sidebar-mobile').removeClass('is-active');
+        $('#sidebar-menu-mobile').removeClass('is-active');
     }
 };
 
@@ -198,16 +207,28 @@ window.authorizationMessage = () => {
     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
+    else {
+        $('#sidebar-mobile').removeClass('is-active');
+        $('#sidebar-menu-mobile').removeClass('is-active');
+    }
 };
 
 window.authorizationBookmark = () => {
     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
     }
+    else {
+        $('#sidebar-mobile').removeClass('is-active');
+        $('#sidebar-menu-mobile').removeClass('is-active');
+    }
 };
 
 window.authorizationEditor = () => {
     if (Cookies.get('token') == undefined || Cookies.get('token') == '') {
         window.openLoginModal();
+    }
+    else {
+        $('#sidebar-mobile').removeClass('is-active');
+        $('#sidebar-menu-mobile').removeClass('is-active');
     }
 };
