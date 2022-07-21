@@ -8,6 +8,24 @@ $(document).ready(() => {
     resizeProfileContainerHeight();
 });
 
+function resizeProfileContainer() {
+    let body = $('body');
+    let profile = $('#profile');
+    let profileContainer = $('#profile .container');
+
+    if (profile.innerHeight() <= body.innerHeight()) {
+        body.css('height', '100%');
+        profile.css('height', '100%');
+        profileContainer.css('height', '100%');
+    }
+
+    if (profileContainer.prop('scrollHeight') > body.innerHeight()) {
+        body.css('height', '');
+        profile.css('height', '');
+        profileContainer.css('height', '');
+    }
+}
+
 window.initializeProfile = () => {
     getProfile();
     readMyPosts();
@@ -155,6 +173,7 @@ function getProfile() {
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
             // $('#edit-profile-btn').on('click', editProfile);
+            resizeProfileContainer();
         },
         error: function (response) {
             console.log(response);
