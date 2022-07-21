@@ -7,7 +7,6 @@ window.writeComment = () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     let comment = $('#comment').val();
-    // let today = new Date().toISOString();
 
     if (comment == '') {
         alert('댓글을 작성해주세요!');
@@ -18,7 +17,6 @@ window.writeComment = () => {
     let data = {
         //에러 났던 이유가 내가 서버에서 comment가 아니라 content로 해놨었음!
         'content': comment
-        // 'date_give': today
     };
 
     let token = Cookies.get('token');
@@ -66,7 +64,6 @@ window.getCommentList = () => {
         },
         date: {},
         success: function (response) {
-            // localStorage.setItem('comments', JSON.stringify(response));
             console.log(response);
             for (let i = 0; i < response.length; i++) {
                 let id = response[i]['id'];
@@ -103,7 +100,6 @@ window.getCommentList = () => {
                                 </article>
                                 `;
                 $('#comment-box').append(tempHtml);
-                // $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
             window.resizePostContainer();
         },
@@ -112,41 +108,6 @@ window.getCommentList = () => {
         }
     });
 };
-
-// 댓글 수정
-// window.updateComment = (id) => {
-//     let comment = $('#comment').val();
-
-//     // if (comment == '') {
-//     //     alert('댓글을 작성해주세요!');
-//     //     $('#comment').focus();
-//     //     return;
-//     // }
-
-//     let data = {
-//         'content': comment
-//     };
-
-//     let token = Cookies.get('token');
-
-//     $.ajax({
-//         type: 'PUT',
-//         url: process.env.BACKEND_HOST + '/comment/' + id,
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader('Content-type', 'application/json');
-//             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-//         },
-//         data: JSON.stringify(data),
-//         success: function () {
-//             alert('댓글이 수정되었습니다');
-//             window.getCommentList();
-//         },
-//         error: function (response) {
-//             console.log(response);
-//             alert('댓글 수정에 실패하였습니다.');
-//         }
-//     });
-// };
 
 // 댓글 삭제
 window.deleteComment = (id, isAdmin) => {
@@ -163,7 +124,6 @@ window.deleteComment = (id, isAdmin) => {
         success: function (response) {
             console.log(response);
             alert('댓글이 삭제되었습니다.');
-            // window.getCommentList();
             window.location.reload();
         },
         error: function (response) {
@@ -192,9 +152,3 @@ function time2str(date) {
     }
     return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
 }
-
-// function changeScreen(currentScreen) {
-//     for (let screen in SCREEN) {
-//         $(`#${SCREEN[screen]}`).hide();
-//     } $(`#${currentScreen}`).show();
-// }
