@@ -106,10 +106,3 @@ function resizeEditorContainerHeight() {
         editorContainer.css('height', '');
     }
 }
-
-// function changeScreen(currentScreen) {
-//     for (let screen in SCREEN) {
-//         $(`#${SCREEN[screen]}`).hide();
-//     }
-//     $(`#${currentScreen}`).show();
-// }
