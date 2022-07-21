@@ -69,16 +69,7 @@ window.requestRegister = () => {
     let admin = $('#register-modal-checkbox-admin').prop('checked');
     let adminToken = $('#register-modal-input-admin-token').val();
 
-    // if (githubURL == '') {
-    //     githubURL = null;
-    // }
-
-    // if (portfolioURL == '') {
-    //     portfolioURL = null;
-    // }
-
     // 이메일 입력 여부 검증
-
     if (id == '') {
         $('#register-modal-input-id').addClass('is-danger');
         $('#register-modal-input-id').focus();
@@ -106,7 +97,6 @@ window.requestRegister = () => {
     $('#register-modal-help').text('');
 
     // 비밀번호 입력 여부 검증
-
     if (password == '') {
         $('#register-modal-input-password').addClass('is-danger');
         $('#register-modal-input-password').focus();

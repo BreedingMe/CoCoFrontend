@@ -31,11 +31,6 @@ window.initializeProfile = () => {
     readMyPosts();
 };
 
-// window.initializePost = () => {
-//     getPost();
-//     window.getCommentList();
-//     //다른 js에서(코멘트) 불러오는 거라 넣어줌!
-// };
 /* JS */
 // 회원 정보 수정 열기 모달
 window.openEditProfileModal = () => {
@@ -76,47 +71,7 @@ window.withdrawal = () => {
     withdrawal();
 };
 
-// /* 창이 닫히면 자동으로 로그아웃 */
-// let closingWindow = false;
-// $(window).on('focus', function () {
-//     closingWindow = false;
-//     //if the user interacts with the window, then the window is not being
-//     //closed
-// });
-
-// // $(window).on('blur', function () {
-// //     closingWindow = true;
-// //     if (!document.hidden) { //when the window is being minimized
-// //         closingWindow = false;
-// //     }
-// //     $(window).on('resize', function (e) { //when the window is being maximized
-// //         closingWindow = false;
-// //     });
-// //     $(window).off('resize'); //avoid multiple listening
-// // });
-
-// $('html').on('mouseleave', function () {
-//     closingWindow = true;
-//     //if the user is leaving html, we have more reasons to believe that he's
-//     //leaving or thinking about closing the window
-// });
-
-// $('html').on('mouseenter', function () {
-//     closingWindow = false;
-//     //if the user's mouse its on the page, it means you don't need to logout
-//     //them, didn't it?
-// });
-
-// // 웹 브러우저 윈도우 창 종료 직전 발생하는 이벤트
-// window.addEventListener('beforeunload', function () {
-//     if (closingWindow) {
-//         Cookies.remove('token');
-//         window.location.href = '/home';
-//     }
-// });
-
 /* AJAX */
-// /{post_id} -> /post_id
 // 회원 정보 받아서 그리기
 function getProfile() {
     let token = Cookies.get('token');
@@ -172,7 +127,6 @@ function getProfile() {
             $('#edit-profile-modal-open-btn').on('click', openEditProfileModal);
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
-            // $('#edit-profile-btn').on('click', editProfile);
             resizeProfileContainer();
         },
         error: function (response) {
@@ -244,10 +198,6 @@ window.editProfile = () => {
     // formData로 바꿔주는 부분.
     // 이미 formData.append로 해줘서 따로 dat:{} 받을 필요없음.
 
-    // if (!nickname == '') {
-    //     formData.append('nickname', nickname);
-    // }
-
     formData.append('nickname', nickname);
 
     if (!profileImage == '') {
@@ -288,7 +238,6 @@ window.editProfile = () => {
             alert('프로필 수정에 실패하였습니다.');
         }
     });
-    // window.location.href = '/profile';
 };
 
 function editProfileContentDelete() {
@@ -398,13 +347,6 @@ window.checkNicknameDupProfile = () => {
     });
 };
 
-// function changeScreen(currentScreen) {
-//     for (let screen in SCREEN) {
-//         $(`#${SCREEN[screen]}`).hide();
-//     }
-//     $(`#${currentScreen}`).show();
-// }
-
 window.readMyPosts = () => {
     $('#readMyPosts').attr('class', 'is-active');
     $('#readMyComments').attr('class', '');
@@ -471,7 +413,6 @@ window.readMyPosts = () => {
 
                 $('#profile-section').append(tempHTML);
             }
-            // resizeHomeContainer();
         }
     });
 };
@@ -516,7 +457,6 @@ window.readMyComments = () => {
                                     </div>
                                 </article>`;
                 $('#profile-section').append(tempHtml);
-                // $(document).on('click', `#deleteComment${i}`, { 'id_comment': commentId }, deleteComment);
             }
         },
         error: function (response) {

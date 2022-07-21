@@ -6,10 +6,6 @@ window.initializePostupdate = () => {
     showPostInfo();
 };
 
-// $(document).ready(function () {
-//     showPostInfo();
-// });
-
 // 게시글 수정 화면을 띄울 때, 현재 게시글 정보 (제목, 모임방식, 문의방법, 예상기간, 본문)를 띄워놓음
 function showPostInfo() {
     let post = JSON.parse(localStorage.getItem('post'));
@@ -87,7 +83,6 @@ window.updatePost = () => {
     // 게시글 수정 요청
     $.ajax({
         type: 'PUT',
-        // 게시글 ID는 어떻게 얻어오나?
         url: process.env.BACKEND_HOST + '/post/' + post.id,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
@@ -96,7 +91,6 @@ window.updatePost = () => {
         data: JSON.stringify(data),
         success: function () {
             alert('글 수정이 완료되었습니다!');
-            // 게시글 상세페이지로 이동해야 함
             window.location.href = '/post?id=' + post.id;
         },
         error: function (response) {
@@ -114,17 +108,8 @@ window.updatePost = () => {
 /* 게시글 수정 취소 (게시글 상세 페이지로 이동하고, 저장 위해 입력한 값 지움) */
 window.cancelUpdate = () => {
     let post = JSON.parse(localStorage.getItem('post'));
-    // 게시글 상세페이지로 이동해야 함
     window.location.href = '/post?id=' + post.id;
 };
-
-// function updatePostContentDelete() {
-//     $('#title-input').val('');
-//     $('input:radio[name="btnradio"]:input[value=ONLINE]').attr('checked', true);
-//     $('#period-input').val('');
-//     $('#contact-input').val('');
-//     $('#content-input').val('');
-// }
 
 $(document).ready(() => {
     resizeEditorHeight();
@@ -152,10 +137,3 @@ function resizeEditorContainerHeight() {
         editorContainer.css('height', '');
     }
 }
-
-// function changeScreen(currentScreen) {
-//     for (let screen in SCREEN) {
-//         $(`#${SCREEN[screen]}`).hide();
-//     }
-//     $(`#${currentScreen}`).show();
-// }
