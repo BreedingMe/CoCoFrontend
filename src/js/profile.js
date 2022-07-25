@@ -116,9 +116,9 @@ function getProfile() {
                             <div class="media-content content">
                                 <p>
                                     <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
-                                    <a href="${github}"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
+                                    <a href="${github}" target="_blank"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
                                             aria-hidden="ture"></i></a><br>
-                                    <a href="${portfolio}">${portfolio}</a><br>
+                                    <a href="${portfolio}" target="_blank">${portfolio}</a><br>
                                     <span style="font-size: large;">${introduction}</span>
                                 </p>
                             </div>
@@ -241,7 +241,6 @@ window.editProfile = () => {
             else {
                 alert('프로필 수정에 실패하였습니다.');
             }
-
         }
     });
 };

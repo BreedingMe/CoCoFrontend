@@ -177,11 +177,13 @@ function getPostingUserProfile() {
             let introduction = user['introduction'];
 
             $('#my_image').attr('src', profileImage);
-            $('#nickname_post').html(nickname);
-            $('#github_post').html(github);
-            $('#portfolio_post').html(portfolio);
-            $('#introduction_post').html(introduction);
             $('#post-profile-modal').css('display', 'flex');
+            let htmlTemp = `<span style="font-weight: bold; font-size: x-large"> @<span id="nickname_post" style="font-weight: bold; font-size: x-large">${nickname}</span></span><br>
+                            <span style="font-weight: bold;">Github   </span><a id="github_post" href="${github}" target="_blank">${github}</a><br>
+                            <span style="font-weight: bold;">Portfolio  </span><a id="portfolio_post" href="${portfolio}"  target="_blank">${portfolio}</a><br>
+                            <span style="font-weight: bold;">Introduction  </span><br>
+                            <span id="introduction_post" style="font-size: medium;">${introduction}</span>`;
+            $('#aTag').append(htmlTemp);
         }
     });
 }
