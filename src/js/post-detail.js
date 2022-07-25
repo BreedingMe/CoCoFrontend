@@ -91,6 +91,10 @@ function getPost() {
             if (response.status == 403) {
                 window.openLoginModal();
             }
+            else if (response.status == 400) {
+                alert('해당 게시글이 존재하지 않습니다.');
+                window.location.href = '/home';
+            }
         }
     });
 }
