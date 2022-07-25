@@ -4,6 +4,11 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 
 /* AJAX */
+window.enterkey = () => {
+    if (window.event.keyCode == 13) {
+        requestLogin();
+    }
+};
 
 function login(id, password) {
     $('#login-modal-help').text('');

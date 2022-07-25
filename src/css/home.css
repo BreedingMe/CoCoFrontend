@@ -18,17 +18,17 @@ ul, li {
 만약 슬라이드 빠르게 or 느리게 넘기고 싶으면 animation 숫자 작게 or 크게 바꿔주면 됨 */
 #home [id="slide01"]:checked ~ .slidelist .slideitem {
     transform: translateX(0);
-    animation: slide01 5s infinite;
+    animation: slide01 12s infinite;
 }
 
 #home [id="slide02"]:checked ~ .slidelist .slideitem {
     transform: translateX(-100%);
-    animation: slide01 5s infinite;
+    animation: slide01 12s infinite;
 }
 
 #home [id="slide03"]:checked ~ .slidelist .slideitem {
     transform: translateX(-200%);
-    animation: slide01 5s infinite;
+    animation: slide01 12s infinite;
 }
 
 @keyframes slide01 {
