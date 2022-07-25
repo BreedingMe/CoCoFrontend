@@ -25,6 +25,15 @@ window.initializeMessage = () => {
     getMessageList();
 };
 
+// 쪽지 리스트 불러오기
+window.getMessageList = () => {
+    getMessageList();
+};
+
+window.getCreateMessageList = () => {
+    getCreateMessageList();
+};
+
 // 쪽지 보내는 모달
 window.openCreateMessageModal = () => {
     $('#message-create-modal').css('display', 'flex');
@@ -108,18 +117,20 @@ function createMessage() {
         },
         error: function (response) {
             console.log(response);
-            if (response.status == 400) {
-                alert('쪽지 내용은 255자 이내로 작성해주세요.');
+            if (response.responseJSON.status == 'Unknown receiver') {
+                alert('존재하지 않는 회원입니다.');
             }
-            else {
-                alert('쪽지 보내기에 실패하였습니다!');
+            if (response.responseJSON.status == 'Bad request') {
+                alert('쪽지 내용은 255자 이내로 작성해주세요.');
             }
         }
     });
 }
 
-// 쪽지 리스트 불러오기
+// 받은 쪽지 리스트 불러오기
 function getMessageList() {
+    $('#getMessageList').attr('class', 'is-active');
+    $('#getCreateMessageList').attr('class', '');
     $('#message-list').empty();
 
     let token = Cookies.get('token');
@@ -162,6 +173,69 @@ function getMessageList() {
                                                 </div>
                                                 <div class="content">
                                                     <div class="tag">받은 시간</div>
+                                                    <div class="getMessage">${datestr}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                $('#message-list').append(messagesHTML);
+            }
+            resizeMessageContainer();
+        },
+        error: function (response) {
+            if (response.status == 403) {
+                window.openLoginModal();
+            }
+        }
+    });
+}
+
+// 보낸 쪽지 리스트 불러오기
+function getCreateMessageList() {
+    $('#message-list').empty();
+    $('#getCreateMessageList').attr('class', 'is-active');
+    $('#getMessageList').attr('class', '');
+
+    let token = Cookies.get('token');
+
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/message/list/send',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let messages = response;
+
+            for (let index = 0; index < messages.length; index++) {
+                let messageId = messages[index]['id'];
+                let receiverNickname = messages[index]['receiver'];
+                let title = messages[index]['title'];
+                let date = messages[index]['createDate'] + '+0000';
+                const day = new Date(date).toISOString().split('T')[0];
+                const time = new Date(date).toTimeString().split(' ')[0];
+                const datestr = day + ' ' + time;
+
+                let read = messages[index]['readState'] ? '읽음' : '읽지않음';
+
+                let messagesHTML = `<div class="card" id=${messageId} >
+                                        <div class="card-header">
+                                            <p class="card-header-title">${title}</p>
+                                            <button class="button is-light read">${read}</button>
+                                            <div onclick="deleteMessage(${messageId})">
+                                            <button class="delete"></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-content" onclick="getMessage(${messageId})">
+                                            <div class="card-content-box">
+                                                <div class="content">
+                                                    <div class="tag">받는 사람</div>
+                                                    <div class="getMessage">${receiverNickname}</div>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="tag">보낸 시간</div>
                                                     <div class="getMessage">${datestr}</div>
                                                 </div>
                                             </div>

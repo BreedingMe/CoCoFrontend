@@ -2,8 +2,13 @@
 
 #message .createMessageButton {
     display: flex;
-    float: left;
-    margin: 1% 0% 0% 6%;
+    margin: 0% 0% 0% 6%;
+    font-size: 12px;
+}
+
+#message .tabs {
+    display: flex;
+    padding-top: 4%;
     font-size: 12px;
 }
 

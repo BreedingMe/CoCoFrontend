@@ -1,8 +1,16 @@
 <div id="message" class="page">
     <div class="container is-max-desktop">
     {{!-- 쪽지쓰기 버튼 --}}
-        <button id="createMessageButton" onclick="openCreateMessageModal()" class="button createMessageButton is-warning is-light is-rounded is-inline-block">쪽지보내기</button>
+    <div style="padding-top:1%;">
+        <button id="createMessageButton" onclick="openCreateMessageModal()" class="button createMessageButton is-warning is-light is-rounded">쪽지보내기</button>
+    </div>
     {{!-- 쪽지 리스트 --}}
-        <section id="message-list" class="section"></section>
+        <div class="tabs is-large  is-fullwidth">
+            <ul>
+                <li style="font-size: large;" onclick="getMessageList()" id="getMessageList"><a>받은 쪽지함</a></li>
+                <li style="font-size: large;" onclick="getCreateMessageList()" id="getCreateMessageList"><a>보낸 쪽지함</a></li>
+            </ul>
+        </div>
+            <section id="message-list" class="section"></section>
     </div>
 </div>
