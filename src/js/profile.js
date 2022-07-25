@@ -241,7 +241,6 @@ window.editProfile = () => {
             else {
                 alert('프로필 수정에 실패하였습니다.');
             }
-
         }
     });
 };
@@ -383,9 +382,6 @@ window.readMyPosts = () => {
                 let tempHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})" >${title}</p>
-                                        <div onclick="deletePost(${id})">
-                                            <button class="delete"></button>
-                                        </div>
                                     </div>
 
                                     <div class="card-content" onclick="openPost(${id})">
