@@ -235,7 +235,13 @@ window.editProfile = () => {
         },
         error: function (response) {
             console.log(response);
-            alert('프로필 수정에 실패하였습니다.');
+            if (response.status == 400) {
+                alert('이미지 파일만 첨부해주세요!');
+            }
+            else {
+                alert('프로필 수정에 실패하였습니다.');
+            }
+
         }
     });
 };
