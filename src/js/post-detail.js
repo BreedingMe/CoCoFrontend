@@ -46,6 +46,9 @@ function getPost() {
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/post/' + params['id'],
+        xhrFields: {
+            withCredentials: true
+        },
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
