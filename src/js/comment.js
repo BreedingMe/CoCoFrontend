@@ -82,11 +82,11 @@ window.getCommentList = () => {
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
                 let timeComment = new Date(response[i]['createDate'] + '+0000');
-                let timeEditComment = new Date(response[i]['modifyDate'] + '+0000');
+                let t = response[i]['createDate'];
+                let tEdit = response[i]['modifyDate'];
                 let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
-                let timeEditBefore = time2str(timeEditComment);
                 let enableDelete = response[i]['enableDelete'];
                 let memberRole = response[i]['memberRole'];
                 let isAdmin = false;
@@ -105,7 +105,7 @@ window.getCommentList = () => {
                                         <div class="content">
                                             <span style="font-weight: bold" onclick="getCommentUserMessage('${nickname}')">@${nickname}</span>
                                             <small id="${id}-time">· ${timeBefore}</small>
-                                            <small id="${id}-timeEdit">· ${timeEditBefore} (편집됨)</small>
+                                            <small id="${id}-timeEdit"> (편집됨)</small>
                                             <br>
                                             <div class="contents style="word-wrap:break-word word-break:break-all">
                                                 <div id="${id}-comment" class="text">${comment}</div>
@@ -122,13 +122,12 @@ window.getCommentList = () => {
                                 </article>
                                 `;
                 $('#comment-box').append(tempHtml);
-
-                if (timeBefore == timeEditBefore) {
+                if (t == tEdit) {
                     $(`#${id}-time`).show();
                     $(`#${id}-timeEdit`).hide();
                 }
                 else {
-                    $(`#${id}-time`).hide();
+                    $(`#${id}-time`).show();
                     $(`#${id}-timeEdit`).show();
                 }
             }
