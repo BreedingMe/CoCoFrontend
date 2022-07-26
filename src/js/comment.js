@@ -54,7 +54,6 @@ window.getCommentList = () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     let token = Cookies.get('token');
-
     $.ajax({
         type: 'GET',
         url: process.env.BACKEND_HOST + '/' + params.id + '/comment/list',
@@ -70,9 +69,11 @@ window.getCommentList = () => {
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
                 let timeComment = new Date(response[i]['createDate'] + '+0000');
+                let timeEditComment = new Date(response[i]['modifyDate'] + '+0000');
                 let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
+                let timeEditBefore = time2str(timeEditComment);
                 let enableDelete = response[i]['enableDelete'];
                 let memberRole = response[i]['memberRole'];
                 let isAdmin = false;
@@ -80,6 +81,7 @@ window.getCommentList = () => {
                 if (memberRole == 'ADMIN') {
                     isAdmin = true;
                 }
+
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-32x32">
@@ -88,23 +90,110 @@ window.getCommentList = () => {
                                     </figure>
                                     <div class="media-content">
                                         <div class="content">
-                                            <p>
-                                                <span style="font-weight: bold">@${nickname}</span>
-                                                <small>· ${timeBefore}</small>
-                                                <br>
-                                                ${comment}
-                                                <a id="deleteComment${i}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small")" style="float:right;" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
-                                            </p>
+                                            <span style="font-weight: bold">@${nickname}</span>
+                                            <small id="${id}-time">· ${timeBefore}</small>
+                                            <small id="${id}-timeEdit">· ${timeEditBefore} (편집됨)</small>
+                                            <br>
+                                            <div class="contents style="word-wrap:break-word word-break:break-all">
+                                                <div id="${id}-comment" class="text">${comment}</div>
+                                                <div id="${id}-editarea" class="edit" style="display:none">
+                                                    <textarea id="${id}-textarea" class="te-edit" rows="5" maxlength="255"></textarea>
+                                                </div>
+                                            </div>
+                                            <a id="delete${id}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
+                                            <a id="edit${id}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="editComment(${id})">수정</a>
+                                            <a id="submit${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="updateComment(${id})">수정완료</a>
+                                            <a id="cancel${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="hideEdits(${id})">취소</a>
                                         </div>
                                     </div>
                                 </article>
                                 `;
                 $('#comment-box').append(tempHtml);
+
+                if (timeBefore == timeEditBefore) {
+                    $(`#${id}-time`).show();
+                    $(`#${id}-timeEdit`).hide();
+                }
+                else {
+                    $(`#${id}-time`).hide();
+                    $(`#${id}-timeEdit`).show();
+                }
             }
             window.resizePostContainer();
         },
         error: function (response) {
             console.log(response);
+        }
+    });
+};
+
+//댓글 수정 버튼
+window.editComment = (id) => {
+    showEdits(id);
+    let comment = $(`#${id}-comment`).text();
+    console.log(comment);
+    $(`#${id}-textarea`).val(comment);
+};
+
+//댓글 수정창
+window.showEdits = (id) => {
+    $(`#${id}-editarea`).show();
+    $(`#submit${id}`).show();
+    $(`#cancel${id}`).show();
+
+    $(`#${id}-comment`).hide();
+    $(`#delete${id}`).hide();
+    $(`#edit${id}`).hide();
+};
+
+//댓글 수정 취소 버튼
+window.hideEdits = (id) => {
+    $(`#${id}-editarea`).hide();
+    $(`#submit${id}`).hide();
+    $(`#cancel${id}`).hide();
+
+    $(`#${id}-comment`).show();
+    $(`#delete${id}`).show();
+    $(`#edit${id}`).show();
+};
+
+// 댓글 수정완료 버튼 -> 댓글 수정
+window.updateComment = (id) => {
+    let comment = $(`#${id}-textarea`).val();
+
+    if (comment == '') {
+        alert('댓글을 작성해주세요!');
+        $('#comment').focus();
+        return;
+    }
+
+    let data = {
+        //에러 났던 이유가 내가 서버에서 comment가 아니라 content로 해놨었음!
+        'content': comment
+    };
+
+    let token = Cookies.get('token');
+
+    $.ajax({
+        type: 'PUT',
+        url: process.env.BACKEND_HOST + '/comment/' + id,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: JSON.stringify(data),
+        success: function () {
+            alert('댓글이 수정되었습니다');
+            window.location.reload();
+        },
+        error: function (response) {
+            console.log(response);
+            if (response.status == 400) {
+                alert('댓글은 255자 이내로 작성해주세요.');
+            }
+            else {
+                alert('댓글 작성에 실패하였습니다.');
+            }
         }
     });
 };

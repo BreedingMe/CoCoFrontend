@@ -74,6 +74,12 @@
     font-size: 12px;
 } */
 
+#post-detail .edit .te-edit {
+    width: 98%;
+    resize: none;
+    padding: calc(0.75em - 1px);
+}
+
 #post-detail .nickname {
     font-size: large;
 }
