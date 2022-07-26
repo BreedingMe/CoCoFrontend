@@ -44,22 +44,30 @@ window.closeCreateMessageModal = () => {
     $('#title_createMessage').val('');
     $('#content_createMessage').val('');
     $('#message-create-modal').css('display', 'none');
-    window.initializeMessage();
+    window.location.reload();
 };
 
 // 쪽지 상세보기 모달
-window.openDetailMessageModal = () => {
-    $('#message-detail-modal').css('display', 'flex');
+window.openReadDetailMessageModal = () => {
+    $('#message-read-detail-modal').css('display', 'flex');
+};
+
+window.openSendDetailMessageModal = () => {
+    $('#message-send-detail-modal').css('display', 'flex');
 };
 
 window.closeDetailMessageModal = () => {
-    $('#message-detail-modal').css('display', 'none');
-    window.initializeMessage();
+    $('#message-read-detail-modal').css('display', 'none');
+    $('#message-send-detail-modal').css('display', 'none');
 };
 
 // 쪽지 보내기 버튼
 window.createMessageButton = () => {
     createMessage();
+};
+
+window.createReplyMessage = () => {
+    createReplyMessage();
 };
 
 // 글 상세페이지에서 쪽지 보내기 버튼
@@ -159,7 +167,7 @@ function getMessageList() {
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
-                                            <p class="card-header-title">${title}</p>
+                                            <p class="card-header-title" onclick="getMessage(${messageId})">${title}</p>
                                             <button class="button is-light read">${read}</button>
                                             <div onclick="deleteMessage(${messageId})">
                                             <button class="delete"></button>
@@ -222,7 +230,7 @@ function getCreateMessageList() {
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
-                                            <p class="card-header-title">${title}</p>
+                                            <p class="card-header-title" onclick="getMessage(${messageId})">${title}</p>
                                             <button class="button is-light read">${read}</button>
                                             <div onclick="deleteMessage(${messageId})">
                                             <button class="delete"></button>
@@ -269,14 +277,47 @@ function getMessage(messageId) {
 
         success: function (response) {
             let message = response;
+            localStorage.setItem('message', JSON.stringify(message));
 
             let title = message['title'];
             let content = message['content'];
 
-            $('#title').html(title);
-            $('#content').html(content);
+            if (message['sender'] == message['member']) {
+                window.openSendDetailMessageModal();
+                $('#title-send').html(title);
+                $('#content-send').html(content);
+            }
+            else {
+                window.openReadDetailMessageModal();
+                $('#title-read').html(title);
+                $('#content-read').html(content);
+            }
+        }
+    });
+}
 
-            window.openDetailMessageModal();
+// 쪽지 답장하기
+function createReplyMessage() {
+    $('#message-read-detail-modal').css('display', 'none');
+    $('#message-create-modal').css('display', 'flex');
+    let token = Cookies.get('token');
+    let message = JSON.parse(localStorage.getItem('message'));
+
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/message/' + message.id,
+
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let message = response;
+            let nickname = message['sender'];
+
+            $('#message-create-modal').css('display', 'flex');
+            $('input[id=receiver_createMessage]').attr('value', nickname);
         }
     });
 }
