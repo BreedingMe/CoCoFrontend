@@ -54,7 +54,6 @@ window.openDetailMessageModal = () => {
 
 window.closeDetailMessageModal = () => {
     $('#message-detail-modal').css('display', 'none');
-    window.initializeMessage();
 };
 
 // 쪽지 보내기 버튼
@@ -159,7 +158,7 @@ function getMessageList() {
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
-                                            <p class="card-header-title">${title}</p>
+                                            <p class="card-header-title" onclick="getMessage(${messageId})">${title}</p>
                                             <button class="button is-light read">${read}</button>
                                             <div onclick="deleteMessage(${messageId})">
                                             <button class="delete"></button>
@@ -222,7 +221,7 @@ function getCreateMessageList() {
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
-                                            <p class="card-header-title">${title}</p>
+                                            <p class="card-header-title" onclick="getMessage(${messageId})">${title}</p>
                                             <button class="button is-light read">${read}</button>
                                             <div onclick="deleteMessage(${messageId})">
                                             <button class="delete"></button>
