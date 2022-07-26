@@ -1,6 +1,6 @@
 <div id="home" class="page">
     <div class="container is-max-desktop">
-        <div class="slidebox">
+        <div class="slidebox" style="cursor:pointer;" onclick="refreshHome()">
             <input type="radio" name="slide" id="slide01" checked>
             <input type="radio" name="slide" id="slide02">
             <input type="radio" name="slide" id="slide03">
@@ -28,10 +28,23 @@
                 </li>
             </ul>
         </div>
-        {{!-- 게시글 섹션--}}
+        {{!-- 필터 --}}
         <span class="recruitmentStateCheckbox">
             <input id="recruitmentStateCheckbox" style="margin: 0 11px 0 5px;" onclick="recruitmentStateCheckbox()" type="checkbox"> 모집 완료된 프로젝트 포함
         </span>
+        {{!-- 검색창 --}}
+        <div id="search-field" class="field has-addons">
+            <div class="control has-icons-left" style=" 100%;">
+                <input id="search-input" class="input" type="input" placeholder="Search" onkeyup="enterkeySearch()">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <div id="btn-search-post" class="control" onclick="searchPost()">
+                <button class="button is-sparta">검색</button>
+            </div>
+        </div>
+        {{!-- 게시글 섹션--}}
         <section id="home-section-post" class="section"></section>
     </div>
 </div>
