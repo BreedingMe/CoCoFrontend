@@ -123,7 +123,7 @@ window.getCommentList = () => {
                                 `;
                 $('#comment-box').append(tempHtml);
 
-                if (timeBefore == timeEditBefore) {
+                if (timeComment == timeEditComment) {
                     $(`#${id}-time`).show();
                     $(`#${id}-timeEdit`).hide();
                 }
