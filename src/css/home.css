@@ -116,6 +116,11 @@ label.right {
     margin: 2% 4% -3% 0%;
 }
 
+#home #search-field {
+    display: flex;
+    margin: 2% 0% -3% 5%;
+}
+
 #home .card {
     margin-bottom: 16px;
     border: 1px solid #E0E0E0;
@@ -237,6 +242,11 @@ label.right {
         margin: 3% 4% -1% 0%;
         font-size: 15px;
         font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #home #search-field {
+        display: flex;
+        margin: 3% 0% 0% 1.5rem;
     }
 
     #home .section{
