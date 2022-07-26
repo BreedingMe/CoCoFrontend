@@ -162,6 +162,7 @@ function getPostingUserNickname() {
 
 // 게시글 상세 읽기에서 유저 프로필 보기
 function getPostingUserProfile() {
+    $('#aTag').empty();
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     let token = Cookies.get('token');
