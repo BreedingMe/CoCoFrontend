@@ -1,6 +1,19 @@
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
+window.getCommentUserProfile = () => {
+    getCommentUserProfile();
+};
+
+window.getCommentUserMessage = () => {
+    getCommentUserMessage();
+};
+
+window.initializeComment = () => {
+    $('input[id=receiver_createMessage]').empty();
+    getCommentUserMessage();
+};
+
 // 댓글 작성
 window.writeComment = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -85,12 +98,12 @@ window.getCommentList = () => {
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img style="border-radius: 50%" src="${profileImage}">
+                                            <img style="border-radius: 50%" src="${profileImage}" onclick="getCommentUserProfile(${id})">
                                         </p>
                                     </figure>
                                     <div class="media-content">
                                         <div class="content">
-                                            <span style="font-weight: bold">@${nickname}</span>
+                                            <span style="font-weight: bold" onclick="getCommentUserMessage('${nickname}')">@${nickname}</span>
                                             <small id="${id}-time">· ${timeBefore}</small>
                                             <small id="${id}-timeEdit">· ${timeEditBefore} (편집됨)</small>
                                             <br>
@@ -241,3 +254,48 @@ function time2str(date) {
     }
     return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
 }
+
+// 댓글 유저한테 쪽지 보내기
+window.getCommentUserMessage = (nickname) => {
+    $('#message-create-modal').css('display', 'flex');
+    $('input[id=receiver_createMessage]').val(nickname);
+    // 더티 플래그(?) html 돔중에 html 요소가 바뀌는 더티 플래그(변경되었다라는 의미)가 생기게된다.
+    // attr은 더티플래그를 더럽다고 생각해서 안받아오지만, .val은 더티플래그가 찍혀서 html 변경되는 값을 받아온다.
+};
+
+// 댓글 유저 프로필 보기
+window.getCommentUserProfile = (id) => {
+    let token = Cookies.get('token');
+
+    $('#aTag').empty();
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/comment/' + id,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let user = response;
+            let id = user['id'];
+            //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
+            let profileImage = user['profileImageUrl'];
+            let nickname = user['nickname'];
+            let github = user['githubUrl'];
+            let portfolio = user['portfolioUrl'];
+            let introduction = user['introduction'];
+
+            $('#my_image').attr('src', profileImage);
+            $('#post-profile-modal').css('display', 'flex');
+            let htmlTemp = `<div id="${id}">
+                                <span style="font-weight: bold; font-size: x-large"> @<span id="nickname_post" style="font-weight: bold; font-size: x-large">${nickname}</span></span><br>
+                                <span style="font-weight: bold;">Github   </span><a id="github_post" href="${github}" target="_blank">${github}</a><br>
+                                <span style="font-weight: bold;">Portfolio  </span><a id="portfolio_post" href="${portfolio}"  target="_blank">${portfolio}</a><br>
+                                <span style="font-weight: bold;">Introduction  </span><br>
+                                <span id="introduction_post" style="font-size: medium;">${introduction}</span>
+                            </div>`;
+            $('#aTag').append(htmlTemp);
+        }
+    });
+};
