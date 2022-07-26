@@ -82,13 +82,11 @@ window.getCommentList = () => {
                 let comment = response[i]['comments'];
                 //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
                 let timeComment = new Date(response[i]['createDate'] + '+0000');
-                let timeEditComment = new Date(response[i]['modifyDate'] + '+0000');
                 let t = response[i]['createDate'];
                 let tEdit = response[i]['modifyDate'];
                 let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
                 let timeBefore = time2str(timeComment);
-                let timeEditBefore = time2str(timeEditComment);
                 let enableDelete = response[i]['enableDelete'];
                 let memberRole = response[i]['memberRole'];
                 let isAdmin = false;
