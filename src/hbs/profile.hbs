@@ -4,31 +4,7 @@
             <button id="withdrawalbtn" class="button withdrawalbtn has-text-centered is-rounded" onclick="withdrawal()">회원 탈퇴</button>
             <div class="hero-body" style="padding-bottom:1rem; margin-top: 10%; min-width: 400px">
                 <div id="profile_box">
-                    {{!-- profile_box 에 html.append--}}
-                    <article class="media">
-                        <figure class="media-left" style="align-self: center;">
-                            <a class="image is-128x128" href="#">
-                                <img class="is-rounded" style="border-radius: 50%;"
-                                    src="">
-                            </a>
-                        </figure>
-                    </article>
-                    <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
-                    <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;"
-                        onclick="openEditProfileModal()">
-                        <span>프로필 수정</span>
-                    </a>
-                    <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
-                        <div class="media-content content" style="line-height: 50px;">
-                            <p>
-                                <strong style="font-weight: bold; font-size: x-large">@닉네임</strong><br><br>
-                                <a href="#"><i class="fa-brands fa-github-alt" style="font-size: xx-large"
-                                        aria-hidden="true"></i></a><br>
-                                <span style="font-size: medium;">포트폴리오 주소</span><br>
-                                <span style="font-size: medium;">자기소개</span>
-                            </p>
-                        </div>
-                    </nav>
+                    {{!-- 프로필 모달 --}}
                 </div>
                 <div class="tabs is-large is-centered is-fullwidth" style="margin-top: 80px;">
                     <ul>
@@ -57,16 +33,16 @@
                                 {{!-- input태그 쓸 때 DB에서 받아온 정보가 안뿌려져서 개고생했다 ㅠㅠㅠ!!! js에서 받아오는 값을 .val(`${ddd}`)해주면 잘 됨--}}
                                 <div class="field has-addons">
                                     <div class="has-icons-left" style="width: 100%">
-                                        <input id="nickname" type="text" placeholder="닉네임" class="input">
+                                        <input id="nickname" type="text" placeholder="닉네임" class="input" name="" id="">
                                     </div>
                                     <div id="btn-check-dup" class="control">
-                                        <button class="button is-sparta" onclick="checkNicknameDupProfile()">중복확인</button>
+                                        <button id="nicknameDup" class="button is-sparta" onclick="checkNicknameDupProfile()" abled>중복확인</button>
                                     </div>
                                 </div>
                                 <p id="profile-modal-help" class="help is-danger"></p>
                                 <input id="githubUrl" class="input" type="text" placeholder="GitHub 주소를 입력해주세요">
                                 <input id="portfolioUrl" class="input" type="text" placeholder="포트폴리오 주소를 입력해주세요">
-                                <textarea id="introduction" class="textarea" placeholder="자기소개" style="resize: none;"></textarea>
+                                <textarea id="introduction" class="textarea" placeholder="자기소개를 입력해주세요" style="resize: none;"></textarea>
                             </div>
 
                             <nav class="level is-mobile">
@@ -74,7 +50,7 @@
                                 </div>
                                 <div class="level-right">
                                     <div class="level-item">
-                                        <a id="edit-profile-btn" class="button is-sparta is-rounded" onclick="requestEdit()">수정</a>
+                                        <a id="edit-profile-btn" class="button is-sparta is-rounded" onclick="requestEdit()" abled>수정</a>
                                     </div>
                                     <div class="level-item">
                                         <a id="edit-profile-modal-close-btn" class="button is-sparta is-outlined is-rounded"

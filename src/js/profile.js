@@ -89,14 +89,18 @@ function getProfile() {
             let nickname = user['nickname'];
             let github = user['githubUrl'];
             let portfolio = user['portfolioUrl'];
-            if (portfolio == '' || portfolio == null) {
-                portfolio = '포트폴리오 주소';
-            }
-
             let introduction = user['introduction'];
 
+            if (github == '' || github == null) {
+                github = '';
+            }
+
+            if (portfolio == '' || portfolio == null) {
+                portfolio = '';
+            }
+
             if (introduction == '' || introduction == null) {
-                introduction = '자기소개';
+                introduction = '';
             }
             console.log(profileImage, nickname, github, portfolio, introduction);
 
@@ -109,13 +113,11 @@ function getProfile() {
                             </figure>
                         </article>
                         <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" onclick="logout()">로그아웃</button>
-                        <a id="edit-profile-modal-open-btn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;">
-                            <span>프로필 수정</span>
-                        </a>
+                        <button id="logoutbtn" class="button buttonDefault has-text-centered is-rounded" aria-label="edit" style="float: right;" onclick="openEditProfileModal('${profileImage}','${nickname}','${github}','${portfolio}','${introduction}')">프로필 수정</button>
                         <nav class="level is-mobile" style="margin-top:2rem; font-size: x-large">
                             <div class="media-content content">
                                 <p>
-                                    <strong style="font-weight: bold; font-size: x-large">@${nickname}</strong><br><br>
+                                    <span><strong style="font-weight: bold; font-size: x-large">@${nickname}</strong></span><br><br>
                                     <a href="${github}" target="_blank"><i class="fa-brands fa-github-alt" style="font-size: xxx-large"
                                             aria-hidden="ture"></i></a><br>
                                     <a href="${portfolio}" target="_blank">${portfolio}</a><br>
@@ -124,9 +126,9 @@ function getProfile() {
                             </div>
                         </nav>`;
             $('#profile_box').append(tempHtml);
-            $('#edit-profile-modal-open-btn').on('click', openEditProfileModal);
             $('#edit-profile-modal-background').on('click', closeEditProfileModal);
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
+            $('#nickname').text(nickname);
             resizeProfileContainer();
         },
         error: function (response) {
@@ -139,44 +141,24 @@ function getProfile() {
 }
 
 // 회원 정보 수정 모달
-function openEditProfileModal() {
-    let token = Cookies.get('token');
+window.openEditProfileModal = (profileImage, nickname, github, portfolio, introduction) => {
+    if (github == '' || github == null) {
+        github = '';
+    }
+    if (portfolio == '' || portfolio == null) {
+        portfolio = '';
+    }
+    if (introduction == '' || introduction == null) {
+        introduction = '';
+    }
 
     $('#modal-post').addClass('is-active');
-    $.ajax({
-        type: 'GET',
-        url: process.env.BACKEND_HOST + '/user',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            let user = response;
-            let nickname = user['nickname'];
-            let profileImage = user['profileImageUrl'];
-            let github = user['githubUrl'];
-            let portfolio = user['portfolioUrl'];
-            let introduction = user['introduction'];
-            if (github == '' || github == null) {
-                github = '깃허브 주소';
-            }
-            if (portfolio == '' || portfolio == null) {
-                portfolio = '포트폴리오 주소';
-            }
-            if (introduction == '' || introduction == null) {
-                introduction = '자기소개';
-            }
-            console.log(nickname, profileImage, github, portfolio, introduction);
-
-            $('#nickname').val(`${nickname}`);
-            $('#profileImage').val(`${profileImage}`);
-            $('#githubUrl').val(`${github}`);
-            $('#portfolioUrl').val(`${portfolio}`);
-            $('#introduction').val(`${introduction}`);
-        }
-    });
-}
+    $('#nickname').val(`${nickname}`);
+    $('#profileImage').val(`${profileImage}`);
+    $('#githubUrl').val(`${github}`);
+    $('#portfolioUrl').val(`${portfolio}`);
+    $('#introduction').val(`${introduction}`);
+};
 
 function closeEditProfileModal() {
     $('#modal-post').removeClass('is-active');
@@ -197,7 +179,6 @@ window.editProfile = () => {
 
     // formData로 바꿔주는 부분.
     // 이미 formData.append로 해줘서 따로 dat:{} 받을 필요없음.
-
     formData.append('nickname', nickname);
 
     if (!profileImage == '') {
@@ -286,8 +267,9 @@ window.logout = () => {
 
 let isNicknameChecked = false;
 
-window.requestEdit = (nickname) => {
-    let nicknameEdit = $('#nickname').val();
+window.requestEdit = () => {
+    let nickname = $('#nickname').val();
+    let nicknameDB = $('#nickname').text();
 
     if (nickname == '') {
         $('#nickname').addClass('is-danger');
@@ -298,8 +280,11 @@ window.requestEdit = (nickname) => {
     }
 
     // 닉네임 중복확인 여부 확인
-    if (nicknameEdit == nickname) {
-        return;
+    if (nickname == nicknameDB) {
+        $('#nickname').removeClass('is-danger');
+        $('#profile-modal-help').text('');
+
+        isNicknameChecked == true;
     }
     else if (isNicknameChecked == false) {
         $('#nickname').addClass('is-danger');
@@ -311,8 +296,6 @@ window.requestEdit = (nickname) => {
     $('#nickname').removeClass('is-danger');
     $('#profile-modal-help').text('');
 
-    // $('#nickname').val('');
-
     editProfile(nickname);
 };
 
@@ -320,12 +303,28 @@ window.requestEdit = (nickname) => {
 window.checkNicknameDupProfile = () => {
     let token = Cookies.get('token');
     let nickname = $('#nickname').val();
+    let nicknameDB = $('#nickname').text();
+
+    console.log(nickname, nicknameDB, 'gg');
+    $('#nickname').on('change keyup paste', function () {
+        let currentVal = $(this).val();
+        if (currentVal != nickname) {
+            $('#nickname').addClass('is-danger');
+            $('#nickname').focus();
+            $('#profile-modal-help').text('닉네임 중복확인을 해주세요.').removeClass('is-success').addClass('is-danger');
+            isNicknameChecked = false;
+        }
+        else if (nickname == nicknameDB) {
+            $('#nickname').removeClass('is-danger').addClass('is-safe');
+            $('#profile-modal-help').text('사용 가능한 닉네임입니다.').removeClass('is-danger').addClass('is-success');
+            isNicknameChecked = true;
+        }
+    });
 
     if (nickname == '') {
         $('#nickname').addClass('is-danger');
         $('#nickname').focus();
         $('#profile-modal-help').text('닉네임을 입력해 주세요.').removeClass('is-success').addClass('is-danger');
-
         return;
     }
 
@@ -344,7 +343,6 @@ window.checkNicknameDupProfile = () => {
                 $('#nickname').addClass('is-danger');
                 $('#nickname').focus();
                 $('#profile-modal-help').text('중복된 닉네임이 존재합니다.').removeClass('is-success').addClass('is-danger');
-
                 return;
             }
             $('#nickname').removeClass('is-danger').addClass('is-safe');
