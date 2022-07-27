@@ -271,7 +271,7 @@ window.getCommentUserMessage = (nickname) => {
 window.getCommentUserProfile = (profileImage, nickname, github, portfolio, introduction) => {
     $('#my_image').attr('src', profileImage);
     $('#post-profile-modal').css('display', 'flex');
-    $('#commentNickname').text(nickname);
+    $('#nickname_post').text(nickname);
     $('#github_post').text(github);
     $('#portfolio_post').text(portfolio);
     $('#github_post').attr('href', github);
