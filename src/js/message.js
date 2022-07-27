@@ -44,7 +44,6 @@ window.closeCreateMessageModal = () => {
     $('#title_createMessage').val('');
     $('#content_createMessage').val('');
     $('#message-create-modal').css('display', 'none');
-    window.location.reload();
 };
 
 // 쪽지 상세보기 모달
@@ -67,7 +66,8 @@ window.createMessageButton = () => {
 };
 
 window.createReplyMessage = () => {
-    createReplyMessage();
+    $('#message-read-detail-modal').css('display', 'none');
+    $('#message-create-modal').css('display', 'flex');
 };
 
 // 글 상세페이지에서 쪽지 보내기 버튼
@@ -226,7 +226,7 @@ function getCreateMessageList() {
                 const time = new Date(date).toTimeString().split(' ')[0];
                 const datestr = day + ' ' + time;
 
-                let read = messages[index]['readState'] ? '읽음' : '읽지않음';
+                let read = messages[index]['readState'] ? '확인' : '미확인';
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
@@ -279,6 +279,7 @@ function getMessage(messageId) {
             let message = response;
             localStorage.setItem('message', JSON.stringify(message));
 
+            let sender = message['sender'];
             let title = message['title'];
             let content = message['content'];
 
@@ -292,32 +293,7 @@ function getMessage(messageId) {
                 $('#title-read').html(title);
                 $('#content-read').html(content);
             }
-        }
-    });
-}
-
-// 쪽지 답장하기
-function createReplyMessage() {
-    $('#message-read-detail-modal').css('display', 'none');
-    $('#message-create-modal').css('display', 'flex');
-    let token = Cookies.get('token');
-    let message = JSON.parse(localStorage.getItem('message'));
-
-    $.ajax({
-        type: 'GET',
-        url: process.env.BACKEND_HOST + '/message/' + message.id,
-
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            let message = response;
-            let nickname = message['sender'];
-
-            $('#message-create-modal').css('display', 'flex');
-            $('input[id=receiver_createMessage]').attr('value', nickname);
+            $('input[id=receiver_createMessage]').val(sender);
         }
     });
 }

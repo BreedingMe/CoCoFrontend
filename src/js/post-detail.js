@@ -26,12 +26,12 @@ window.initializePost = () => {
     //다른 js에서(코멘트) 불러오는 거라 넣어줌!
 };
 
-window.getPostingUserNickname = () => {
-    getPostingUserNickname();
+window.getPostingUserMessage = () => {
+    $('#message-create-modal').css('display', 'flex');
 };
 
 window.getPostingUserProfile = () => {
-    getPostingUserProfile();
+    $('#post-profile-modal').css('display', 'flex');
 };
 
 window.closePostingUserProfile = () => {
@@ -69,6 +69,9 @@ function getPost() {
             let enableUpdate = post['enableUpdate'];
             let enableDelete = post['enableDelete'];
             let profileImage = post['profileImageUrl'];
+            let githubUrl = post['githubUrl'];
+            let portfolioUrl = post['portfolioUrl'];
+            let introduction = post['introduction'];
             const day = new Date(date).toISOString().split('T')[0];
             const time = new Date(date).toTimeString().split(' ')[0];
             const datestr = day + ' ' + time;
@@ -91,6 +94,18 @@ function getPost() {
                 $('#deletebtn').attr('class', 'button none');
             }
             window.resizePostContainer();
+
+            // 게시글 쪽지 모달에 데이터 넘겨주기
+            $('input[id=receiver_createMessage]').val(nickname);
+            // 게시글 프로필 모달에 데이터 넘겨주기
+            $('#my_image').attr('src', profileImage);
+            $('#nickname_post').text(nickname);
+            $('#portfolio_post').text(portfolioUrl);
+            $('#github_post').text(githubUrl);
+            $('#portfolio_post').text(portfolioUrl);
+            $('#github_post').attr('href', githubUrl);
+            $('#portfolio_post').attr('href', portfolioUrl);
+            $('#introduction_post').text(introduction);
         },
         error: function (response) {
             if (response.status == 403) {
@@ -138,64 +153,3 @@ window.deletePost = () => {
         });
     }
 };
-
-// 게시글 상세 읽기에서 쪽지 보내기
-function getPostingUserNickname() {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    let token = Cookies.get('token');
-
-    $.ajax({
-        type: 'GET',
-        url: process.env.BACKEND_HOST + '/post/' + params['id'],
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            let post = response;
-
-            let nickname = post['writer'];
-
-            $('#message-create-modal').css('display', 'flex');
-            $('input[id=receiver_createMessage]').attr('value', nickname);
-        }
-    });
-}
-
-// 게시글 상세 읽기에서 유저 프로필 보기
-function getPostingUserProfile() {
-    $('#aTag').empty();
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    let token = Cookies.get('token');
-
-    $.ajax({
-        type: 'GET',
-        url: process.env.BACKEND_HOST + '/post/' + params['id'],
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            let user = response;
-            console.log(response);
-            let profileImage = user['profileImageUrl'];
-            let nickname = user['writer'];
-            let github = user['githubUrl'];
-            let portfolio = user['portfolioUrl'];
-            let introduction = user['introduction'];
-
-            $('#my_image').attr('src', profileImage);
-            $('#post-profile-modal').css('display', 'flex');
-            let htmlTemp = `<span style="font-weight: bold; font-size: x-large"> @<span id="nickname_post" style="font-weight: bold; font-size: x-large">${nickname}</span></span><br>
-                            <span style="font-weight: bold;">Github   </span><a id="github_post" href="${github}" target="_blank">${github}</a><br>
-                            <span style="font-weight: bold;">Portfolio  </span><a id="portfolio_post" href="${portfolio}"  target="_blank">${portfolio}</a><br>
-                            <span style="font-weight: bold;">Introduction  </span><br>
-                            <span id="introduction_post" style="font-size: medium;">${introduction}</span>`;
-            $('#aTag').append(htmlTemp);
-        }
-    });
-}
