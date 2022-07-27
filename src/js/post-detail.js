@@ -111,30 +111,32 @@ window.showPostUpdatePage = () => {
 
 // 게시글 삭제
 window.deletePost = () => {
-    let post = JSON.parse(localStorage.getItem('post'));
-    let memberRole = post.memberRole;
-    let isAdmin = false;
-    if (memberRole == 'ADMIN') {
-        isAdmin = true;
-    }
-    let token = Cookies.get('token');
-    $.ajax({
-        type: 'DELETE',
-        url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function () {
-            alert('글 삭제가 완료되었습니다.');
-            window.location.href = '/home';
-        },
-        error: function (response) {
-            console.log(response);
-            alert('글 삭제에 실패하였습니다!');
+    if (confirm('정말 삭제하시겠습니까?')) {
+        let post = JSON.parse(localStorage.getItem('post'));
+        let memberRole = post.memberRole;
+        let isAdmin = false;
+        if (memberRole == 'ADMIN') {
+            isAdmin = true;
         }
-    });
+        let token = Cookies.get('token');
+        $.ajax({
+            type: 'DELETE',
+            url: isAdmin ? process.env.BACKEND_HOST + '/admin/post/' + post.id : process.env.BACKEND_HOST + '/post/' + post.id,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            data: {},
+            success: function () {
+                alert('글 삭제가 완료되었습니다.');
+                window.location.href = '/home';
+            },
+            error: function (response) {
+                console.log(response);
+                alert('글 삭제에 실패하였습니다!');
+            }
+        });
+    }
 };
 
 // 게시글 상세 읽기에서 쪽지 보내기
