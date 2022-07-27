@@ -286,8 +286,8 @@ window.logout = () => {
 
 let isNicknameChecked = false;
 
-window.requestEdit = () => {
-    let nickname = $('#nickname').val();
+window.requestEdit = (nickname) => {
+    let nicknameEdit = $('#nickname').val();
 
     if (nickname == '') {
         $('#nickname').addClass('is-danger');
@@ -298,7 +298,10 @@ window.requestEdit = () => {
     }
 
     // 닉네임 중복확인 여부 확인
-    if (isNicknameChecked == false) {
+    if (nicknameEdit == nickname) {
+        return;
+    }
+    else if (isNicknameChecked == false) {
         $('#nickname').addClass('is-danger');
         $('#nickname').focus();
         $('#profile-modal-help').text('닉네임 중복확인을 해주세요.').removeClass('is-success').addClass('is-danger');
