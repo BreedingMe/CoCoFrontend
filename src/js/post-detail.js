@@ -68,6 +68,7 @@ function getPost() {
             let date = post['postDate'] + '+0000';
             let enableUpdate = post['enableUpdate'];
             let enableDelete = post['enableDelete'];
+            let profileImage = post['profileImageUrl'];
             const day = new Date(date).toISOString().split('T')[0];
             const time = new Date(date).toTimeString().split(' ')[0];
             const datestr = day + ' ' + time;
@@ -80,6 +81,7 @@ function getPost() {
             $('#period_openPost').html(period);
             $('#recruitmentState_openPost').html(recruitmentState);
             $('#datestr_openPost').html(datestr);
+            $('#commentImage').attr('src', profileImage);
 
             if (enableUpdate == false) {
                 $('#updatebtn').attr('class', 'button none');

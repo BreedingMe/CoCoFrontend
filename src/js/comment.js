@@ -86,6 +86,9 @@ window.getCommentList = () => {
                 let tEdit = response[i]['modifyDate'];
                 let profileImage = response[i]['profileImageUrl'];
                 let nickname = response[i]['nickname'];
+                let github = response[i]['githubUrl'];
+                let portfolio = response[i]['portfolioUrl'];
+                let introduction = response[i]['introduction'];
                 let timeBefore = time2str(timeComment);
                 let enableDelete = response[i]['enableDelete'];
                 let memberRole = response[i]['memberRole'];
@@ -98,7 +101,7 @@ window.getCommentList = () => {
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img style="border-radius: 50%" src="${profileImage}" onclick="getCommentUserProfile(${id})">
+                                            <img style="border-radius: 50%" src="${profileImage}" onclick="getCommentUserProfile('${profileImage}','${nickname}','${github}','${portfolio}','${introduction}')">
                                         </p>
                                     </figure>
                                     <div class="media-content">
@@ -263,38 +266,13 @@ window.getCommentUserMessage = (nickname) => {
 };
 
 // 댓글 유저 프로필 보기
-window.getCommentUserProfile = (id) => {
-    let token = Cookies.get('token');
-
-    $('#aTag').empty();
-    $.ajax({
-        type: 'GET',
-        url: process.env.BACKEND_HOST + '/comment/' + id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            let user = response;
-            let id = user['id'];
-            //서버에서 서비스에서 comments로 리턴해주도록 해놨음!
-            let profileImage = user['profileImageUrl'];
-            let nickname = user['nickname'];
-            let github = user['githubUrl'];
-            let portfolio = user['portfolioUrl'];
-            let introduction = user['introduction'];
-
-            $('#my_image').attr('src', profileImage);
-            $('#post-profile-modal').css('display', 'flex');
-            let htmlTemp = `<div id="${id}">
-                                <span style="font-weight: bold; font-size: x-large"> @<span id="nickname_post" style="font-weight: bold; font-size: x-large">${nickname}</span></span><br>
-                                <span style="font-weight: bold;">Github   </span><a id="github_post" href="${github}" target="_blank">${github}</a><br>
-                                <span style="font-weight: bold;">Portfolio  </span><a id="portfolio_post" href="${portfolio}"  target="_blank">${portfolio}</a><br>
-                                <span style="font-weight: bold;">Introduction  </span><br>
-                                <span id="introduction_post" style="font-size: medium;">${introduction}</span>
-                            </div>`;
-            $('#aTag').append(htmlTemp);
-        }
-    });
+window.getCommentUserProfile = (profileImage, nickname, github, portfolio, introduction) => {
+    $('#my_image').attr('src', profileImage);
+    $('#post-profile-modal').css('display', 'flex');
+    $('#commentNickname').text(nickname);
+    $('#github_post').text(github);
+    $('#portfolio_post').text(portfolio);
+    $('#github_post').attr('href', github);
+    $('#portfolio_post').attr('href', portfolio);
+    $('#introduction_post').text(introduction);
 };
