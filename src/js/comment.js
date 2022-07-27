@@ -215,25 +215,27 @@ window.updateComment = (id) => {
 
 // 댓글 삭제
 window.deleteComment = (id, isAdmin) => {
-    let token = Cookies.get('token');
+    if (confirm('정말 삭제하시겠습니까?')) {
+        let token = Cookies.get('token');
 
-    $.ajax({
-        type: 'DELETE',
-        url: isAdmin ? process.env.BACKEND_HOST + '/admin/comment/' + id : process.env.BACKEND_HOST + '/comment/' + id,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        data: {},
-        success: function (response) {
-            console.log(response);
-            alert('댓글이 삭제되었습니다.');
-            window.location.reload();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+        $.ajax({
+            type: 'DELETE',
+            url: isAdmin ? process.env.BACKEND_HOST + '/admin/comment/' + id : process.env.BACKEND_HOST + '/comment/' + id,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            data: {},
+            success: function (response) {
+                console.log(response);
+                alert('댓글이 삭제되었습니다.');
+                window.location.reload();
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
 };
 
 function time2str(date) {

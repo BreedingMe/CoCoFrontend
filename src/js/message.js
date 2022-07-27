@@ -324,23 +324,25 @@ function createReplyMessage() {
 
 // 쪽지 삭제
 function deleteMessage(messageId) {
-    let token = Cookies.get('token');
-    $.ajax({
-        type: 'DELETE',
-        url: process.env.BACKEND_HOST + '/message/' + messageId,
+    if (confirm('정말 삭제하시겠습니까?')) {
+        let token = Cookies.get('token');
+        $.ajax({
+            type: 'DELETE',
+            url: process.env.BACKEND_HOST + '/message/' + messageId,
 
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
 
-        success: function (response) {
-            console.log(response);
-            alert('쪽지를 삭제했습니다.');
-            window.initializeMessage();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+            success: function (response) {
+                console.log(response);
+                alert('쪽지를 삭제했습니다.');
+                window.initializeMessage();
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
 }

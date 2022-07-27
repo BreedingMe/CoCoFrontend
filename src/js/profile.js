@@ -255,31 +255,35 @@ function editProfileContentDelete() {
 
 // 회원 탈퇴
 function withdrawal() {
-    let token = Cookies.get('token');
-    $.ajax({
-        type: 'DELETE',
-        url: process.env.BACKEND_HOST + '/user',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        },
-        success: function (response) {
-            console.log(response);
-            Cookies.remove('token');
-            alert('회원탈퇴에 성공했습니다.');
-            window.location.href = '/home';
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    if (confirm('정말 탈퇴하시겠습니까?')) {
+        let token = Cookies.get('token');
+        $.ajax({
+            type: 'DELETE',
+            url: process.env.BACKEND_HOST + '/user',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            success: function (response) {
+                console.log(response);
+                Cookies.remove('token');
+                alert('회원탈퇴에 성공했습니다.');
+                window.location.href = '/home';
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
 }
 
 // 로그아웃
 window.logout = () => {
-    alert('로그아웃 되었습니다.');
-    Cookies.remove('token');
-    window.location.href = '/home';
+    if (confirm('로그아웃하시겠습니까?')) {
+        alert('로그아웃 되었습니다.');
+        Cookies.remove('token');
+        window.location.href = '/home';
+    }
 };
 
 //수정 버튼 눌렀을 때 Edit 전에 검사
