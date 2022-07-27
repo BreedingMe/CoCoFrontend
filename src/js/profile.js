@@ -305,7 +305,6 @@ window.checkNicknameDupProfile = () => {
     let nickname = $('#nickname').val();
     let nicknameDB = $('#nickname').text();
 
-    console.log(nickname, nicknameDB, 'gg');
     $('#nickname').on('change keyup paste', function () {
         let currentVal = $(this).val();
         if (currentVal != nickname) {
