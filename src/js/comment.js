@@ -91,6 +91,7 @@ window.getCommentList = () => {
                 let introduction = response[i]['introduction'];
                 let timeBefore = time2str(timeComment);
                 let enableDelete = response[i]['enableDelete'];
+                let enableUpdate = response[i]['enableUpdate'];
                 let memberRole = response[i]['memberRole'];
                 let isAdmin = false;
 
@@ -98,6 +99,17 @@ window.getCommentList = () => {
                     isAdmin = true;
                 }
 
+                if (github == '' || github == null) {
+                    github = '';
+                }
+
+                if (portfolio == '' || portfolio == null) {
+                    portfolio = '';
+                }
+
+                if (introduction == '' || introduction == null) {
+                    introduction = '';
+                }
                 let tempHtml = `<article class="media" id="${id}">
                                     <figure class="media-left">
                                         <p class="image is-32x32">
@@ -117,7 +129,7 @@ window.getCommentList = () => {
                                                 </div>
                                             </div>
                                             <a id="delete${id}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
-                                            <a id="edit${id}" class=" button has-text-centered is-rounded is-small" style="float:right;" onclick="editComment(${id})">수정</a>
+                                            <a id="edit${id}" class=" ${enableUpdate == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="editComment(${id})">수정</a>
                                             <a id="submit${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="updateComment(${id})">수정완료</a>
                                             <a id="cancel${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="hideEdits(${id})">취소</a>
                                         </div>
@@ -269,6 +281,17 @@ window.getCommentUserMessage = (nickname) => {
 
 // 댓글 유저 프로필 보기
 window.getCommentUserProfile = (profileImage, nickname, github, portfolio, introduction) => {
+    if (github == '' || github == null) {
+        github = '';
+    }
+
+    if (portfolio == '' || portfolio == null) {
+        portfolio = '';
+    }
+
+    if (introduction == '' || introduction == null) {
+        introduction = '';
+    }
     $('#my_image').attr('src', profileImage);
     $('#post-profile-modal').css('display', 'flex');
     $('#nickname_post').text(nickname);
