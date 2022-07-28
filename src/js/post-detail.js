@@ -71,6 +71,7 @@ function getPost() {
             let profileImage = post['profileImageUrl'];
             let githubUrl = post['githubUrl'];
             let portfolioUrl = post['portfolioUrl'];
+            let loginProfileImage = post['loginProfileImage'];
             let introduction = post['introduction'];
             const day = new Date(date).toISOString().split('T')[0];
             const time = new Date(date).toTimeString().split(' ')[0];
@@ -84,7 +85,7 @@ function getPost() {
             $('#period_openPost').html(period);
             $('#recruitmentState_openPost').html(recruitmentState);
             $('#datestr_openPost').html(datestr);
-            $('#commentImage').attr('src', profileImage);
+            $('#commentImage').attr('src', loginProfileImage);
 
             if (enableUpdate == false) {
                 $('#updatebtn').attr('class', 'button none');
