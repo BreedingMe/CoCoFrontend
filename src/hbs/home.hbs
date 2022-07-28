@@ -32,18 +32,24 @@
         <span class="recruitmentStateCheckbox">
             <input id="recruitmentStateCheckbox" style="margin: 0 11px 0 5px;" onclick="recruitmentStateCheckbox()" type="checkbox"> 모집 완료된 프로젝트 포함
         </span>
-        {{!-- 검색창 --}}
-        <div id="search-field" class="field has-addons">
-            <div class="control has-icons-left" style=" 100%;">
-                <input id="search-input" class="input" type="input" placeholder="Search" onkeyup="enterkeySearch()">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-search"></i>
-                </span>
+        <div class="filter">
+            <div class="control select is-info">
+                <select id="sort-post" name="sort-post" class="sort-post" onchange="sortPost()">
+                    <option value="1">최신순</option>
+                    <option value="2">인기순</option>
+                    <option value="3">댓글순</option>
+                </select>
             </div>
-            <div id="btn-search-post" class="control" onclick="searchPost()">
-                <button class="button is-sparta">검색</button>
+            <div class="field search has-addons">
+                <div class="has-icons-left">
+                    <input id="search-input" type="input" placeholder="Search" class="input" onkeyup="enterkeySearch()">
+                </div>
+                <div id="btn-check-dup" class="control">
+                    <button class="button is-sparta" onclick="searchPost()">검색</button>
+                </div>
             </div>
         </div>
+
         {{!-- 게시글 섹션--}}
         <section id="home-section-post" class="section"></section>
     </div>
