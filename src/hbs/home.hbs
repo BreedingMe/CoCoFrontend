@@ -1,0 +1,56 @@
+<div id="home" class="page">
+    <div class="container is-max-desktop">
+        <div class="slidebox" style="cursor:pointer;" onclick="refreshHome()">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
+            <ul class="slidelist">
+                <li class="slideitem">
+                    <div>
+                        <label for="slide03" class="left"></label>
+                        <label for="slide02" class="right"></label>
+                        <img src="./static/banner/banner01.jpg">
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide01" class="left"></label>
+                        <label for="slide03" class="right"></label>
+                        <img src="./static/banner/banner02.jpg">
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide02" class="left"></label>
+                        <label for="slide01" class="right"></label>
+                        <img src="./static/banner/banner03.jpg">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {{!-- 필터 --}}
+        <span class="recruitmentStateCheckbox">
+            <input id="recruitmentStateCheckbox" style="margin: 0 11px 0 5px;" onclick="recruitmentStateCheckbox()" type="checkbox"> 모집 완료된 프로젝트 포함
+        </span>
+        <div class="filter">
+            <div class="control select is-info">
+                <select id="sort-post" name="sort-post" class="sort-post" onchange="sortPost()">
+                    <option value="1">최신순</option>
+                    <option value="2">인기순</option>
+                    <option value="3">댓글순</option>
+                </select>
+            </div>
+            <div class="field search has-addons">
+                <div class="has-icons-left">
+                    <input id="search-input" type="input" placeholder="Search" class="input" onkeyup="enterkeySearch()">
+                </div>
+                <div id="btn-check-dup" class="control">
+                    <button class="button is-sparta" onclick="searchPost()">검색</button>
+                </div>
+            </div>
+        </div>
+
+        {{!-- 게시글 섹션--}}
+        <section id="home-section-post" class="section"></section>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+#post {
+    width: 100%;
+}
+
+#post .post-page {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+#post .area {
+    display: table;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    line-height: 40px;
+}
+
+#post .component {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+#post .button {
+    transition-duration: 0.2s;
+    border: 2px solid #e7e7e7;
+    padding: 10px 10px 10px 10px;
+    float: right;
+}
+
+#post .button:hover {
+    background-color: #e7e7e7;
+}
+
+#post .none {
+    display: none;
+}
+
+#post .image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}

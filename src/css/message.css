@@ -1,0 +1,144 @@
+/* 쪽지 쓰기 버튼 CSS */
+
+#message .createMessageButton {
+    display: flex;
+    margin: 0% 0% 0% 6%;
+    font-size: 12px;
+}
+
+#message .tabs {
+    display: flex;
+    padding-top: 4%;
+    font-size: 12px;
+}
+
+/* 메시지 리스트 CSS */
+#message .card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 85%;
+    transform: translate(5.5%, 8%);
+    }
+
+#message .card:hover {
+    background : #F6F6F6;
+}
+
+#message .card-header-title {
+    margin-left: 8px;
+}
+
+#message .getMessage {
+    margin: -8px 0px -8px 0px;
+}
+
+
+#message .tag{
+    float:left;
+    margin: 0px 12px 0px 0px;
+    background-color: #F6F6F6;
+}
+
+#message .read{
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    font-size: 12px;
+    size: 15px;
+    text-align: center;
+    background-color: #FFEEEE;
+}
+
+/* 쪽지 보내기 모달 CSS */
+#message-create-modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-create-modal .modal-card-head {
+    background-color: #FFFFFF;
+}
+
+#message-create-modal .modal-card-title {
+    font-size: 20px;
+}
+
+#message-create-modal .modal-card-foot {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#message-create-modal .modal-card-foot .button:not(:last-child) {
+    margin-right: 0px;
+    margin-bottom: 16px;
+}
+
+/* 쪽지 상세보기 모달 CSS */
+/* 받은 쪽지 */
+#message-read-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-read-detail-modal .modal-card-head {
+    background-color: #FFFFFF;
+}
+
+#message-read-detail-modal .modal-card-title {
+    font-size: 20px;
+}
+
+#message-read-detail-modal .modal-card-foot {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#message-read-detail-modal .modal-card-foot .button:not(:last-child) {
+    margin-right: 0px;
+    margin-bottom: 16px;
+}
+
+/* 보낸 쪽지 */
+#message-send-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#message-send-detail-modal .modal-card-head {
+    background-color: #FFFFFF;
+}
+
+#message-send-detail-modal .modal-card-title {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1263px) {
+    #message {
+        margin-top: 22px;
+    }
+}

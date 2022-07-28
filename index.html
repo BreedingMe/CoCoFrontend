@@ -4,9 +4,29 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta property="og:title" content="[Co-work,Coding] 사이드 프로젝트 동료 찾기 서비스"/>
+        <meta property="og:description" content="꿈꿔왔던 사이드 프로젝트가 시작되는 곳, Coco에서 마음이 맞는 팀원을 만나보세요"/>
+        <meta property="og:image" content="./static/meta/meta.png"/>
 
         <link rel="shortcut icon" type="image/png" href="./static/favicon/favicon.png"/>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap">
         <title>CoCo</title>
     </head>
+    <body>
+        <div id="app"></div>
+
+        <include src="./src/html/login-modal.html"></include>
+        <include src="./src/html/register-modal.html"></include>
+        <include src="./src/html/message-create-modal.html"></include>
+        <include src="./src/html/message-read-detail-modal.html"></include>
+        <include src="./src/html/message-send-detail-modal.html"></include>
+        <include src="./src/html/post-profile.html"></include>
+        <include src="./src/html/sidebar.html"></include>
+        <include src="./src/html/footer.html"></include>
+    </body>
 </html>

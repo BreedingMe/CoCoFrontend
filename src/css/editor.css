@@ -1,0 +1,14 @@
+#editor .wrapper{
+    width: 80%;
+    margin: 0 auto;
+    padding: 80px 0 80px 0;
+}
+#editor .buttonResister:hover {
+    background-color: #BDE6F1;
+    font-weight: bold;
+    border: solid #BDE6F1;
+}
+#editor .container-box {
+    column-count: 2;
+    column-gap: 2%;
+}

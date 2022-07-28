@@ -6,6 +6,7 @@ const portfinder = require('portfinder');
 const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -34,6 +35,10 @@ const config = {
                 options: {
                     preprocessor: htmlLoaderPreprocessor.nestedHtmlPreprocessor
                 }
+            },
+            {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
             },
             {
                 test: /\.js$/,
@@ -74,6 +79,9 @@ const config = {
                 ignore: ['.*']
             }
         ]),
+        new Dotenv({
+            path: './.env/development.env'
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
@@ -83,7 +91,7 @@ const config = {
 };
 
 module.exports = new Promise((resolve, reject) => {
-    portfinder.basePort = 8080;
+    portfinder.basePort = 5000;
 
     portfinder.getPort((error, port) => {
         if (error == null) {

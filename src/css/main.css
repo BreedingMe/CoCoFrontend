@@ -1,0 +1,31 @@
+/* Common */
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+/* Side line */
+.container {
+    border-right: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1263px) {
+    .container {
+        max-width: 100%;
+        border: none;
+    }
+}

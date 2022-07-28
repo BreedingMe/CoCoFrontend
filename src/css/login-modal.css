@@ -1,0 +1,31 @@
+/* Common */
+
+#login-modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-modal .modal-card-head {
+    background-color: #FFFFFF;
+}
+
+#login-modal .modal-card-title {
+    font-size: 20px;
+}
+
+#login-modal .modal-card-foot {
+    display: flex;
+    flex-direction: column;
+}
+
+#login-modal .modal-card-foot .button:not(:last-child) {
+    margin-right: 0px;
+    margin-bottom: 16px;
+}

@@ -1,0 +1,115 @@
+/* Common */
+
+#sidebar {
+    position: fixed;
+    z-index: 0;
+}
+
+#sidebar .navbar {
+    display: block;
+}
+
+#sidebar .nav-item {
+    cursor: pointer;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1263px) {
+    #sidebar {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    #sidebar #sidebar-desktop {
+        display: none;
+    }
+
+    #sidebar #sidebar-mobile {
+        display: block;
+    }
+
+    #sidebar #sidebar-menu-mobile {
+        display: none;
+    }
+
+    #sidebar #sidebar-menu-mobile.is-active {
+        display: block;
+        padding: 16px 96px 16px 24px;
+        border: 1px solid #E0E0E0;
+        box-shadow: none;
+    }
+
+    #sidebar #sidebar-menu-mobile .navbar-end {
+        display: block;
+    }
+
+    #sidebar #sidebar-menu-mobile .nav-item {
+        margin-bottom: 16px;
+    }
+
+    #sidebar #sidebar-menu-mobile .nav-item:last-child {
+        margin-bottom: 0px;
+    }
+
+    #sidebar #sidebar-menu-mobile .nav-item:hover {
+        color: #808080;
+    }
+
+    #sidebar #sidebar-menu-mobile .nav-item:active {
+        color: #606060;
+    }
+
+    #sidebar #sidebar-menu-mobile .navbar-footer {
+        margin-top: 16px;
+        font-size: 12px;
+    }
+}
+
+/* Desktop */
+
+@media screen and (min-width: 1264px) {
+    #sidebar {
+        top: 48px;
+        right: calc(50% - 584px);
+    }
+
+    #sidebar #sidebar-desktop {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #sidebar #sidebar-desktop .nav-item {
+        display: flex;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 16px;
+        border: 1px solid #E0E0E0;
+        border-radius: 100%;
+        font-size: 28px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #sidebar #sidebar-desktop .nav-item:last-child {
+        margin-bottom: 0px;
+    }
+
+    #sidebar #sidebar-desktop .nav-item:hover {
+        background-color: #E0E0E0;
+    }
+
+    #sidebar #sidebar-desktop .nav-item:active {
+        border: 1px solid #D0D0D0;
+        background-color: #D0D0D0;
+    }
+
+    #sidebar #sidebar-mobile {
+        display: none;
+    }
+
+    #sidebar #sidebar-menu-mobile {
+        display: none;
+    }
+}

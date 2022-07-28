@@ -1,0 +1,93 @@
+<div id="post-update" class="page">
+    <div class="container is-max-desktop">
+        <div class="wrapper">
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">제목</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" id="title-update-input" placeholder="제목">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">모집 여부</label>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio-recruitment" value="true" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio1">모집 마감</label>
+
+                    <input type="radio" class="btn-check" name="btnradio-recruitment" value="false" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio2">모집 중</label>
+                </div>
+            </div>
+
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">모임 방식</label>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio-update" id="ONLINE" value="ONLINE" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">ONLINE</label>
+
+                    <input type="radio" class="btn-check" name="btnradio-update" id="OFFLINE" value="OFFLINE" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">OFFLINE</label>
+                </div>
+            </div>
+            <div class="field is-vertical" >
+                    <div class="field-label is-normal has-text-left m-1">
+                        <label class="label">문의 방법</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control select is-info">
+                                <select id="contact" name="contact" class="contact">
+                                    <option value="카카오톡">카카오톡</option>
+                                    <option value="이메일">이메일</option>
+                                    <option value="쪽지">쪽지</option>
+                                    <option value="기타">기타(본문에 기재)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">예상 기간</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control select is-info">
+                            <select id="period" name="period" class="period">
+                                {{!-- name.value 가 되는건데 value 값이 넘어감 select에 넣어줘도 되고,--}}
+                                <option value="1개월">1개월</option>
+                                <option value="2개월">2개월</option>
+                                <option value="3개월">3개월</option>
+                                <option value="4개월">4개월</option>
+                                <option value="5개월">5개월</option>
+                                <option value="6개월">6개월</option>
+                                <option value="6개월이상">6개월 이상</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-vertical">
+                <div class="field-label is-normal has-text-left m-1">
+                    <label class="label">본문</label>
+                </div>
+                <div class="field-body">
+                    &nbsp&nbsp<textarea class="textarea" id="content-update-input" style="resize: none; placeholder="본문을 적어주세요."></textarea>
+                </div>
+            </div>
+            <div class="has-text-right">
+                <button id="update" class="button is-rounded is-warning is-small" onclick="updatePost()">저장</button>
+                <button id="cancel" class="button is-rounded is-small" onclick="cancelUpdate()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>

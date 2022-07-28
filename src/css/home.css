@@ -1,0 +1,298 @@
+/* Common */
+/* 배너추가 - 성언 */
+#home {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul, li {
+    list-style: none;
+}
+
+#home [name="slide"] {
+    display: none;
+}
+
+/* 슬라이드 - 성언
+만약 슬라이드 빠르게 or 느리게 넘기고 싶으면 animation 숫자 작게 or 크게 바꿔주면 됨 */
+#home [id="slide01"]:checked ~ .slidelist .slideitem {
+    transform: translateX(0);
+    animation: slide01 12s infinite;
+}
+
+#home [id="slide02"]:checked ~ .slidelist .slideitem {
+    transform: translateX(-100%);
+    animation: slide01 12s infinite;
+}
+
+#home [id="slide03"]:checked ~ .slidelist .slideitem {
+    transform: translateX(-200%);
+    animation: slide01 12s infinite;
+}
+
+@keyframes slide01 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+@keyframes slide02 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+@keyframes slide03 {
+    0% {left: 0%;}
+    30% {left: 0%;}
+    33% {left: -100%;}
+    63% {left: -100%;}
+    66% {left: -200%;}
+    97% {left: -200%;}
+    100%  {left: 0%;}
+}
+
+#home .container .slidebox {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#home .container .slidebox img {
+    max-width: 100%;
+}
+
+#home .container .slidebox .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+}
+
+#home .container .slidebox .slideitem {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .35s;
+}
+
+#home .container .slidebox .slideitem label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+label.left {
+    left: 20px;
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+label.right {
+    right: 20px;
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+/* 기존에있던 코드들 */
+#home .search {
+    width: 55%;
+}
+
+#home .recruitmentStateCheckbox {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 2% 4% -3% 0%;
+}
+
+#home .filter {
+    margin: 5% 5% 0% 5%;
+}
+
+#home .select {
+    z-index:0;
+    float: right;
+}
+
+#home .card {
+    margin-bottom: 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#home .card:last-child {
+    margin-bottom: 0px;
+}
+
+#home .card-header {
+    box-shadow: none;
+}
+
+#home .card-header-icon {
+    cursor: auto;
+}
+
+#home .card-header-icon .tech-stack-icon {
+    margin-right: 8px;
+}
+
+#home .card-header-icon .tech-stack-icon:last-child {
+    margin-right: 0px;
+}
+
+#home .card-content {
+    display: flex;
+    padding: 12px 16px;
+    justify-content: space-between;
+}
+
+#home .card-content-box {
+    display: flex;
+    flex-direction: row;
+}
+
+#home .card-content-box:last-child > *:first-child {
+    display: flex;
+    flex-direction: row;
+    margin-right: 24px;
+}
+
+#home .card-content-box .content {
+    margin-right: 24px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+#home .card-content-box .content:last-child {
+    margin-right: 0px;
+}
+
+#home .card-content-box .content > *:first-child {
+    margin-right: 4px;
+}
+
+#home .card-content-box .content > *:last-child {
+    margin-right: 0px;
+}
+
+#home .card-content-box .is-default{
+    padding: 4px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    font-size: 12px;
+}
+
+#home .card-content-box .bubble{
+    padding: 4px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    font-size: 12px;
+    background-color : #ffffff;
+}
+
+#home .is-pink {
+    background-color : #FF869E;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#home .is-gray {
+    background-color : #f9f8f8a7;
+}
+
+#home .is-gray:hover {
+    background-color : #ffffff;
+}
+
+#home .bookmark {
+    margin-top: 1%;
+    margin-right: 4%;
+    font-size: 120%;
+}
+
+#home .bookmark:hover {
+    color:coral;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1263px) {
+    #home {
+        margin-top: 52px;
+    }
+
+    #home .container .slidebox {
+        max-width: 1250px;
+        width: 100%;
+    }
+
+    #home .recruitmentStateCheckbox {
+        margin: 3% 4% -1% 0%;
+        font-size: 15px;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #home .field {
+        width: 55%;
+    }
+
+    #home .select {
+        z-index:0;
+        float: right;
+    }
+
+    #home .filter {
+        margin: 3% 1.5rem 0% 1.5rem;
+    }
+
+    #home .section{
+        padding-top: 20px;
+    }
+
+    #home .card-content {
+        flex-direction: column;
+    }
+
+    #home .card-content-box:first-child {
+        flex-direction: column;
+    }
+
+    #home .card-content-box:first-child > *:first-child {
+        margin-bottom: 12px;
+    }
+
+    #home .card-content-box:last-child {
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        margin-right: 2%;
+        margin-bottom: -1%;
+    }
+
+    #home .card-content-box:last-child > *:first-child {
+        margin-right: 0px;
+    }
+
+    #home .card-content-box .content > span:first-child {
+        margin-bottom: 8px;
+    }
+}

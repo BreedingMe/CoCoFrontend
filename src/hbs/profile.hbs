@@ -1,0 +1,71 @@
+<div id="profile" class="page" style="display:flex">
+    <div class="container is-max-desktop">
+        <section>
+            <button id="withdrawalbtn" class="button withdrawalbtn has-text-centered is-rounded" onclick="withdrawal()">회원 탈퇴</button>
+            <div class="hero-body" style="padding-bottom:1rem; margin-top: 10%; min-width: 400px">
+                <div id="profile_box">
+                    {{!-- 프로필 모달 --}}
+                </div>
+                <div class="tabs is-large is-centered is-fullwidth" style="margin-top: 80px;">
+                    <ul>
+                        <li style="font-size: large;" onclick="readMyPosts()" id="readMyPosts"><a>게시글</a></li>
+                        <li style="font-size: large;" onclick="readMyComments()" id="readMyComments"><a>댓글</a></li>
+                    </ul>
+                </div>
+                <section id="profile-section" class="section"></section>
+        </section>
+        {{!--프로필 모달 --}}
+        <div class="modal" id="modal-post">
+            <div id="edit-profile-modal-background" class="modal-background" onclick="closeEditProfileModal()"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article>
+                        <div class="edit-profile-field">
+                            <div class="image-field">
+                                <form enctype="multipart/form-data" id="upload">
+                                    {{!-- <label class="custom-file-label" for="image">프로필 사진 선택하기</label> --}}
+                                    <input type="file" class="custom-file-input" name="image" accept="image/*">
+                                    {{!-- image file은 img태그로 따로 파일을 받아야함. --}}
+                                    <img id="profileImage">
+                                </form>
+                            </div>
+                            <div class="others-field">
+                                {{!-- input태그 쓸 때 DB에서 받아온 정보가 안뿌려져서 개고생했다 ㅠㅠㅠ!!! js에서 받아오는 값을 .val(`${ddd}`)해주면 잘 됨--}}
+                                <div class="field has-addons">
+                                    <div class="has-icons-left" style="width: 100%">
+                                        <input id="nickname" type="text" placeholder="닉네임" class="input" name="" id="">
+                                    </div>
+                                    <div id="btn-check-dup" class="control">
+                                        <button id="nicknameDup" class="button is-sparta" onclick="checkNicknameDupProfile()">중복확인</button>
+                                    </div>
+                                </div>
+                                <p id="profile-modal-help" class="help is-danger"></p>
+                                <input id="githubUrl" class="input" type="text" placeholder="GitHub 주소를 입력해주세요">
+                                <input id="portfolioUrl" class="input" type="text" placeholder="포트폴리오 주소를 입력해주세요">
+                                <textarea id="introduction" class="textarea" placeholder="자기소개를 입력해주세요" style="resize: none;"></textarea>
+                            </div>
+
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                </div>
+                                <div class="level-right">
+                                    <div class="level-item">
+                                        <a id="edit-profile-btn" class="button is-sparta is-rounded" onclick="requestEdit()">수정</a>
+                                    </div>
+                                    <div class="level-item">
+                                        <a id="edit-profile-modal-close-btn" class="button is-sparta is-outlined is-rounded"
+                                        onclick="closeEditProfileModal()">취소</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="modal-close is-large" aria-label="close"
+                                onclick="closeEditProfileModal()"></button>
+                        </div>
+                            </nav>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

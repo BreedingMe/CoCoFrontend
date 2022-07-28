@@ -1,0 +1,139 @@
+#bookmark .card {
+    margin-bottom: 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#bookmark .card:last-child {
+    margin-bottom: 0px;
+}
+
+#bookmark .card-header {
+    box-shadow: none;
+}
+
+#bookmark .card-header-icon {
+    cursor: auto;
+}
+
+#bookmark .card-header-icon .tech-stack-icon {
+    margin-right: 8px;
+}
+
+#bookmark .card-header-icon .tech-stack-icon:last-child {
+    margin-right: 0px;
+}
+
+#bookmark .card-content {
+    display: flex;
+    padding: 12px 16px;
+    justify-content: space-between;
+}
+
+#bookmark .card-content-box {
+    display: flex;
+    flex-direction: row;
+}
+
+#bookmark .card-content-box:last-child > *:first-child {
+    display: flex;
+    flex-direction: row;
+    margin-right: 24px;
+}
+
+#bookmark .card-content-box .content {
+    margin-right: 24px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+#bookmark .card-content-box .content:last-child {
+    margin-right: 0px;
+}
+
+#bookmark .card-content-box .content > *:first-child {
+    margin-right: 4px;
+}
+
+#bookmark .card-content-box .content > *:last-child {
+    margin-right: 0px;
+}
+
+#bookmark .card-content-box .is-default{
+    padding: 4px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    font-size: 12px;
+}
+
+#bookmark .card-content-box .bubble{
+    padding: 4px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    font-size: 12px;
+    background-color : #ffffff;
+}
+
+#bookmark .is-pink {
+    background-color : coral;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#bookmark .is-gray {
+    background-color : #f9f8f8a7;
+}
+
+#bookmark .is-gray:hover {
+    background-color : #ffffff;
+}
+
+#bookmark .bookmark {
+    margin-top: 1%;
+    margin-right: 4%;
+    font-size: 120%;
+}
+
+#bookmark .bookmark:hover {
+    color:coral;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1263px) {
+    #bookmark {
+        margin-top: 52px;
+    }
+
+    #bookmark .card-content {
+        flex-direction: column;
+    }
+
+    #bookmark .card-content-box:first-child {
+        flex-direction: column;
+    }
+
+    #bookmark .card-content-box:first-child > *:first-child {
+        margin-bottom: 12px;
+    }
+
+    #bookmark .card-content-box:last-child {
+        flex-direction: row-reverse;
+        margin-right: 2%;
+        margin-bottom: -1%;
+        justify-content: space-between;
+    }
+
+    #bookmark .card-content-box:last-child > *:first-child {
+        margin-right: 0px;
+    }
+
+    #bookmark .card-content-box .content > span:first-child {
+        margin-bottom: 8px;
+    }
+}
