@@ -117,7 +117,7 @@ window.getCommentList = () => {
                                                 </div>
                                             </div>
                                             <a id="delete${id}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="deleteComment(${id}, ${isAdmin})">삭제</a>
-                                            <a id="edit${id}" class=" ${enableDelete == true ? '' : 'none'}  button has-text-centered is-rounded is-small" style="float:right;" onclick="editComment(${id})">수정</a>
+                                            <a id="edit${id}" class=" button has-text-centered is-rounded is-small" style="float:right;" onclick="editComment(${id})">수정</a>
                                             <a id="submit${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="updateComment(${id})">수정완료</a>
                                             <a id="cancel${id}" class=" button has-text-centered is-rounded is-small" style="display:none" onclick="hideEdits(${id})">취소</a>
                                         </div>
