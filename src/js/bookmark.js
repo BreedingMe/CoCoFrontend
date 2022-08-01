@@ -32,6 +32,23 @@ window.deleteBookmark = (id) => {
     deleteBookmark(id);
 };
 
+window.getBookmarkList = () => {
+    getBookmarkList();
+};
+
+window.myBookmark = () => {
+    getBookmarkList();
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    console.log(bookmarks);
+    for (let index = 0; index < bookmarks.length; index++) {
+        let bookmarkId = bookmarks[index]['postId'];
+        let bookmarkState = bookmarks[index]['bookmarkState'];
+        if (bookmarkState == true) {
+            $(`#bookmarkColor-${bookmarkId}`).css('color', 'coral');
+        }
+    }
+};
+
 // 북마크 저장하기
 function registerBookmark(id) {
     let token = Cookies.get('token');
@@ -49,6 +66,8 @@ function registerBookmark(id) {
         data: JSON.stringify(data),
         success: function () {
             alert('북마크 저장이 완료되었습니다!');
+            getBookmarkList();
+            $(`#bookmarkColor-${id}`).css('color', 'coral');
         },
         error: function (response) {
             console.log(response);
@@ -73,6 +92,7 @@ function getBookmarkList() {
         data: {},
         success: function (response) {
             let bookmarks = response;
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 
             for (let index = 0; index < bookmarks.length; index++) {
                 let id = bookmarks[index]['id'];
@@ -81,6 +101,7 @@ function getBookmarkList() {
                 let meetingType = bookmarks[index]['meetingType'];
                 let period = bookmarks[index]['period'];
                 let hits = bookmarks[index]['hits'];
+                let bookmarkState = bookmarks[index]['bookmarkState'];
                 let recruitmentState = bookmarks[index]['recruitmentState'] ? '모집 완료' : '모집 중';
 
                 let recruitmentStateColor = bookmarks[index]['recruitmentState'] ? 'is-default' : 'is-pink';
@@ -127,9 +148,7 @@ function getBookmarkList() {
             resizeBookmarkContainer();
         },
         error: function (response) {
-            if (response.status == 403) {
-                window.openLoginModal();
-            }
+            console.log(response);
         }
     });
 }

@@ -74,6 +74,11 @@ function resizeHomeContainer() {
     }
 }
 
+// 북마크 불러오기
+window.getPosts = () => {
+    getPosts();
+};
+
 // 필터 (Select) 변경 감지
 window.sortPost = () => {
     $('#home-section-post').empty();
@@ -126,8 +131,8 @@ window.sortRecruitingHitsPost = () => {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -163,13 +168,13 @@ window.sortRecruitingHitsPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 };
 
 // 인기순 정렬 (모집 완료 포함)
 window.sortHitsPost = () => {
-    // let check = localStorage.getItem('check');
     $('#home-section-post').empty();
     $.ajax({
         type: 'GET',
@@ -192,8 +197,8 @@ window.sortHitsPost = () => {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -229,6 +234,7 @@ window.sortHitsPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 };
@@ -256,8 +262,8 @@ window.sortRecruitingCommentsSizePost = () => {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -293,6 +299,7 @@ window.sortRecruitingCommentsSizePost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 };
@@ -321,8 +328,8 @@ window.sortCommentsSizePost = () => {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -358,6 +365,7 @@ window.sortCommentsSizePost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 };
@@ -392,8 +400,8 @@ window.searchPost = () => {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -429,6 +437,7 @@ window.searchPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 };
@@ -457,8 +466,8 @@ function getRecrutingPosts() {
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark">
-                                            <i class="fa-regular fa-bookmark" onclick="registerBookmark(${id})"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}">
+                                            <i class="fa-solid fa-bookmark" onclick="registerBookmark(${id})"></i>
                                         </div>
                                     </div>
 
@@ -494,13 +503,13 @@ function getRecrutingPosts() {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 }
 
 // 모집 중 & 모집완료 게시글 모두
 function getPosts() {
-    // let check = localStorage.getItem('check');
     $('#home-section-post').empty();
 
     $.ajax({
@@ -516,15 +525,14 @@ function getPosts() {
                 let period = posts[index]['period'];
                 let hits = posts[index]['hits'];
                 let recruitmentState = posts[index]['recruitmentState'] ? '모집 완료' : '모집 중';
-
                 let recruitmentStateColor = posts[index]['recruitmentState'] ? 'is-default' : 'is-pink';
                 let recruitmentStateColorBack = posts[index]['recruitmentState'] ? 'is-white' : 'is-gray';
 
                 let cardHTML = `<div id=${id} class="card ${recruitmentStateColorBack}">
                                     <div class="card-header">
                                         <p class="card-header-title" onclick="openPost(${id})">${title}</p>
-                                        <div class="content bookmark" onclick="registerBookmark(${id})">
-                                            <i class="fa-regular fa-bookmark"></i>
+                                        <div class="content bookmark" id="bookmarkColor-${id}" onclick="registerBookmark(${id})">
+                                            <i class="fa-solid fa-bookmark"></i>
                                         </div>
                                     </div>
 
@@ -560,6 +568,7 @@ function getPosts() {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
+            myBookmark();
         }
     });
 }

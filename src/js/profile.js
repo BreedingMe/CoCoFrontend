@@ -1,4 +1,3 @@
-
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
@@ -130,6 +129,7 @@ function getProfile() {
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
             $('#nickname').text(nickname);
             resizeProfileContainer();
+            getPosts();
         },
         error: function (response) {
             console.log(response);
@@ -137,7 +137,8 @@ function getProfile() {
                 window.openLoginModal();
             }
         }
-    });
+    }
+    );
 }
 
 // 회원 정보 수정 모달
@@ -248,6 +249,7 @@ function withdrawal() {
             success: function (response) {
                 console.log(response);
                 Cookies.remove('token');
+                localStorage.clear();
                 alert('회원탈퇴에 성공했습니다.');
                 window.location.href = '/home';
             },
@@ -263,6 +265,7 @@ window.logout = () => {
     if (confirm('로그아웃하시겠습니까?')) {
         alert('로그아웃 되었습니다.');
         Cookies.remove('token');
+        localStorage.clear();
         window.location.href = '/home';
     }
 };
