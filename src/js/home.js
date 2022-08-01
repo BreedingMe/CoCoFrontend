@@ -74,7 +74,7 @@ function resizeHomeContainer() {
     }
 }
 
-// 북마크 불러오기
+// 다른 페이지에서 북마크 불러오기
 window.getPosts = () => {
     getPosts();
 };

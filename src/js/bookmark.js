@@ -71,7 +71,16 @@ function registerBookmark(id) {
         },
         error: function (response) {
             console.log(response);
-            alert('북마크에 저장되어있는 게시물입니다.');
+            if (response.status == 403) {
+                alert('로그인이 필요합니다.');
+                window.openLoginModal();
+            }
+            if (response.responseJSON.status == 'Bad request') {
+                alert('게시글이 존재하지 않습니다.');
+            }
+            if (response.responseJSON.status == 'Duplicated bookmark') {
+                alert('북마크에 저장되어있는 게시물입니다.');
+            }
         }
     });
 }
