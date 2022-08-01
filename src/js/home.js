@@ -168,7 +168,7 @@ window.sortRecruitingHitsPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 };
@@ -234,7 +234,7 @@ window.sortHitsPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 };
@@ -299,7 +299,7 @@ window.sortRecruitingCommentsSizePost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 };
@@ -365,7 +365,7 @@ window.sortCommentsSizePost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 };
@@ -437,7 +437,7 @@ window.searchPost = () => {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 };
@@ -503,7 +503,7 @@ function getRecrutingPosts() {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 }
@@ -568,7 +568,7 @@ function getPosts() {
                 $('#home-section-post').append(cardHTML);
             }
             resizeHomeContainer();
-            myBookmark();
+            getMyBookmarkList();
         }
     });
 }

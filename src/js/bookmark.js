@@ -32,29 +32,54 @@ window.deleteBookmark = (id) => {
     deleteBookmark(id);
 };
 
-window.getBookmarkList = () => {
-    getBookmarkList();
+window.getMyBookmarkList = () => {
+    getMyBookmarkList();
 };
 
-window.myBookmark = () => {
-    getBookmarkList();
-    let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    console.log(bookmarks);
-    for (let index = 0; index < bookmarks.length; index++) {
-        let bookmarkId = bookmarks[index]['postId'];
-        let bookmarkState = bookmarks[index]['bookmarkState'];
-        if (bookmarkState == true) {
-            $(`#bookmarkColor-${bookmarkId}`).css('color', 'coral');
+// window.myBookmark = () => {
+//     getBookmarkList();
+//     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+//     console.log(bookmarks);
+//     for (let index = 0; index < bookmarks.length; index++) {
+//         let bookmarkId = bookmarks[index]['postId'];
+//         // let bookmarkState = bookmarks[index]['bookmarkState'];
+//         if (bookmarkState == true) {
+//             $(`#bookmarkColor-${bookmarkId}`).css('color', 'coral');
+//         }
+//     }
+// };
+
+// 북마크 색칠
+function getMyBookmarkList() {
+    let token = Cookies.get('token');
+    $.ajax({
+        type: 'GET',
+        url: process.env.BACKEND_HOST + '/bookmark/list',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        data: {},
+        success: function (response) {
+            let bookmarks = response;
+
+            for (let index = 0; index < bookmarks.length; index++) {
+                let postId = bookmarks[index]['postId'];
+                $(`#bookmarkColor-${postId}`).css('color', 'coral');
+                console.log(postId);
+            }
+        },
+        error: function (response) {
+            console.log(response);
         }
-    }
-};
+    });
+}
 
 // 북마크 저장하기
 function registerBookmark(id) {
     let token = Cookies.get('token');
 
     let data = { 'id': id };
-
     $.ajax({
         type: 'POST',
         url: process.env.BACKEND_HOST + '/' + id + '/bookmark',
@@ -110,7 +135,6 @@ function getBookmarkList() {
                 let meetingType = bookmarks[index]['meetingType'];
                 let period = bookmarks[index]['period'];
                 let hits = bookmarks[index]['hits'];
-                let bookmarkState = bookmarks[index]['bookmarkState'];
                 let recruitmentState = bookmarks[index]['recruitmentState'] ? '모집 완료' : '모집 중';
 
                 let recruitmentStateColor = bookmarks[index]['recruitmentState'] ? 'is-default' : 'is-pink';
