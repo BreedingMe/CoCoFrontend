@@ -23,7 +23,6 @@ function resizeMessageContainer() {
 // 쪽지 리스트 호출
 window.initializeMessage = () => {
     getMessageList();
-    getPosts();
 };
 
 // 쪽지 리스트 불러오기
@@ -57,10 +56,15 @@ window.openSendDetailMessageModal = () => {
     $('#message-send-detail-modal').css('display', 'flex');
 };
 
-window.closeDetailMessageModal = () => {
+// 쪽지 상세보기 받은 쪽지 닫기
+window.closeReadDetailMessageModal = () => {
     $('#message-read-detail-modal').css('display', 'none');
-    $('#message-send-detail-modal').css('display', 'none');
     window.location.reload();
+};
+
+// 쪽지 상세보기 보낸 쪽지 닫기
+window.closeSendDetailMessageModal = () => {
+    $('#message-send-detail-modal').css('display', 'none');
 };
 
 // 쪽지 보내기 버튼
@@ -130,6 +134,9 @@ function createMessage() {
             console.log(response);
             if (response.responseJSON.status == 'Unknown receiver') {
                 alert('존재하지 않는 회원입니다.');
+            }
+            if (response.responseJSON.status == 'Invalid param') {
+                alert('본인에게 쪽지를 보낼 수 없습니다.');
             }
             if (response.responseJSON.status == 'Bad request') {
                 alert('쪽지 내용은 255자 이내로 작성해주세요.');
@@ -224,7 +231,6 @@ function getCreateMessageList() {
                 let messageId = messages[index]['id'];
                 let receiverNickname = messages[index]['receiver'];
                 let title = messages[index]['title'];
-                let content = messages[index]['content'];
                 let date = messages[index]['createDate'] + '+0000';
                 const day = new Date(date).toISOString().split('T')[0];
                 const time = new Date(date).toTimeString().split(' ')[0];
@@ -234,13 +240,13 @@ function getCreateMessageList() {
 
                 let messagesHTML = `<div class="card" id=${messageId} >
                                         <div class="card-header">
-                                            <p class="card-header-title" onclick="openSendDetailMessageModal(${messageId})">${title}</p>
+                                            <p class="card-header-title" onclick="getMessage(${messageId})">${title}</p>
                                             <button class="button is-light read">${read}</button>
                                             <div onclick="deleteMessage(${messageId})">
                                             <button class="delete"></button>
                                             </div>
                                         </div>
-                                        <div class="card-content" onclick="openSendDetailMessageModal(${messageId})">
+                                        <div class="card-content" onclick="getMessage(${messageId})">
                                             <div class="card-content-box">
                                                 <div class="content">
                                                     <div class="tag">받는 사람</div>
@@ -254,8 +260,6 @@ function getCreateMessageList() {
                                         </div>
                                     </div>`;
                 $('#message-list').append(messagesHTML);
-                $('#title-send').text(title);
-                $('#content-send').text(content);
             }
             resizeMessageContainer();
         },
@@ -283,7 +287,6 @@ function getMessage(messageId) {
 
         success: function (response) {
             let message = response;
-            localStorage.setItem('message', JSON.stringify(message));
 
             let member = message['member'];
             let sender = message['sender'];

@@ -129,7 +129,6 @@ function getProfile() {
             $('#edit-profile-modal-close-btn').on('click', closeEditProfileModal);
             $('#nickname').text(nickname);
             resizeProfileContainer();
-            getPosts();
         },
         error: function (response) {
             console.log(response);
