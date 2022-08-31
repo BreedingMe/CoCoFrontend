@@ -135,7 +135,7 @@ function createMessage() {
             if (response.responseJSON.status == 'Unknown receiver') {
                 alert('존재하지 않는 회원입니다.');
             }
-            if (response.responseJSON.status == 'Invalid param') {
+            if (response.responseJSON.status == 'Not allowed receiver') {
                 alert('본인에게 쪽지를 보낼 수 없습니다.');
             }
             if (response.responseJSON.status == 'Bad request') {
