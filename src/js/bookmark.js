@@ -36,19 +36,6 @@ window.getMyBookmarkList = () => {
     getMyBookmarkList();
 };
 
-// window.myBookmark = () => {
-//     getBookmarkList();
-//     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-//     console.log(bookmarks);
-//     for (let index = 0; index < bookmarks.length; index++) {
-//         let bookmarkId = bookmarks[index]['postId'];
-//         // let bookmarkState = bookmarks[index]['bookmarkState'];
-//         if (bookmarkState == true) {
-//             $(`#bookmarkColor-${bookmarkId}`).css('color', 'coral');
-//         }
-//     }
-// };
-
 // 북마크 색칠
 function getMyBookmarkList() {
     let token = Cookies.get('token');
